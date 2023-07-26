@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Xplorist">
+    
+    <title>
+        
+            2017-04-13-Tomcat部署-html初识 |
+        
+        Xplorist
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.svg">
+    
+<link rel="stylesheet" href="/fontawesome/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/brands.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"zh-CN","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","logo":"/images/logo.svg","favicon":"/images/logo.svg","avatar":"/images/Water.jpg","left_side_width":"300px","content_max_width":"1080px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"header_transparent":true,"background_img":"/images/dawn-in-the-valley.jpg","description":"Exploration, a journey that never ends。","font_color":null,"hitokoto":{"enable":false}},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":false},"code_copy":{},"code_block_tools":{"enable":true,"style":"mac"},"side_tools":{},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.8"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"};
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="/images/logo.svg">
+                </a>
+            
+            <a class="logo-title" href="/">
+               Xplorist
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                分类
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                友链
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                关于
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">分类</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">标签</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links">友链</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">关于</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">2017-04-13-Tomcat部署-html初识</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/Water.jpg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Xplorist</span>
+                        
+                            <span class="author-label">Lv6</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2017-04-13 14:23:01</span>
+        <span class="mobile">2017-04-13 14:23</span>
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/ShareLearn/">ShareLearn</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/ShareLearn/">ShareLearn</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="2017-04-13-Tomcat部署-html初识"><a href="#2017-04-13-Tomcat部署-html初识" class="headerlink" title="2017-04-13-Tomcat部署-html初识"></a>2017-04-13-Tomcat部署-html初识</h1><p>知识点1：</p>
+<p>tomcat服务器的配置</p>
+<p>先将jdk安装好</p>
+<p>配置好jdk的环境变量</p>
+<p>1、将jdk的bin目录复制到环境变量中的path中</p>
+<p>2、将jdk的目录复制到添加的新环境变量JAVA_HOME中</p>
+<p>3、将jre的目录复制到添加的新环境变量JRE_HOME中</p>
+<p>配置tomcat的环境变量</p>
+<p>1、将tomcat的bin目录复制到环境变量path中</p>
+<p>2、将tomcat的目录复制到添加的新环境变量CATALINA_BASE中</p>
+<p>3、将tomcat的目录复制到添加的新环境变量CATALINA_HOME中</p>
+<p>注册安装tomcat服务</p>
+<p>1、在tomcat的bin目录下输入cmd调用命令行，输入service.bat install(如果失败了需要通过service.bat remove来移除注销tomcat服务)</p>
+<p>2、在tomcat的bin目录下点击tomcat8w.exe来开启tomcat服务器</p>
+<p>知识点2：</p>
+<p>在eclipse中创建一个JavaWeb项目</p>
+<p>将编辑配置设置为JavaEE，右键创建一个新的项目，选择Dynamic Web Project设置工程名，更改运行时环境为上面安装的tomcat服务器，最后勾选xml的选项改变目录为WebRoot</p>
+<p>知识点3：</p>
+<p>将JavaWeb项目部署到tomcat服务器上</p>
+<p>添加新的tomcat服务器，将JavaWeb项目添加到tomcat服务器配置中</p>
+<p>再双击tomcat服务器设置overview中serverlocations中的使用tomcat安装路径的控制</p>
+<p>再右键点击tomcat服务器开启服务器（如果端口被占用，直接到任务管理器中去将服务器停掉）</p>
+<p>再在浏览器中访问网址就行了</p>
+<p>知识点4：</p>
+<p>html</p>
+<p>html文档结构</p>
+<p>1、<html></html></p>
+<p>2、<head></head></p>
+<p>3、<title></title></p>
+<p>4、<body></body></p>
+<p>html文字显示标签</p>
+<p>1-<b></p>
+<p>2-<br></p>
+<p>3-<p></p>
+<p>4-<h1>~<h6></p>
+<p>5-<center></p>
+<p>6-<ul> UnorderList无序文字列表标记（<li>）</p>
+<p>7-<ol> OrderList有序文字列表标记（<li>）</p>
+<p>8-<div>文档分区标记</p>
+<p>html表格标记</p>
+<p>1-<table></p>
+<p>2-<caption></p>
+<p>3-<th> TableHead</p>
+<p>4-<tr> TableRow</p>
+<p>5-<td> TableDataCell</p>
+<p>（<td rowspan="2"  colspan="2"></td></p>
+<p>row行 从左往右占格数</p>
+<p>col列column从上往下占格数</p>
+<p>）</p>
+<p>html布局标签</p>
+<p>1-<div></p>
+<p>2-<table></p>
+<p>实例1：</p>
+<p>显示一个科学计算器的界面</p>
+<p>核心代码：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span>科学计算器<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">table</span>  <span class="attr">width</span>=<span class="string">&quot;400&quot;</span> <span class="attr">height</span>=<span class="string">&quot;500&quot;</span> <span class="attr">border</span>=<span class="string">&quot;1&quot;</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span> <span class="attr">bgcolor</span>=<span class="string">&quot;#CECEFF&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">caption</span>&gt;</span>科学计算器<span class="tag">&lt;/<span class="name">caption</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">td</span> <span class="attr">align</span>=<span class="string">&quot;right&quot;</span> <span class="attr">valign</span>=<span class="string">&quot;center&quot;</span> <span class="attr">colspan</span>=<span class="string">&quot;5&quot;</span> <span class="attr">rowspan</span>=<span class="string">&quot;3&quot;</span> &gt;</span><span class="tag">&lt;<span class="name">font</span> <span class="attr">size</span>=<span class="string">&quot;10&quot;</span> <span class="attr">color</span>=<span class="string">&quot;black&quot;</span>&gt;</span>0<span class="tag">&lt;/<span class="name">font</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">td</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span> <span class="attr">valign</span>=<span class="string">&quot;middle&quot;</span>&gt;</span>MC<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">td</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span> <span class="attr">valign</span>=<span class="string">&quot;middle&quot;</span>&gt;</span>MR<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">td</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span> <span class="attr">valign</span>=<span class="string">&quot;middle&quot;</span>&gt;</span>MS<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">td</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span> <span class="attr">valign</span>=<span class="string">&quot;middle&quot;</span>&gt;</span>M+<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">td</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span> <span class="attr">valign</span>=<span class="string">&quot;middle&quot;</span>&gt;</span>M-<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">td</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span> <span class="attr">valign</span>=<span class="string">&quot;middle&quot;</span>&gt;</span>←<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">td</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span> <span class="attr">valign</span>=<span class="string">&quot;middle&quot;</span>&gt;</span>CE<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">td</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span> <span class="attr">valign</span>=<span class="string">&quot;middle&quot;</span>&gt;</span>C<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">td</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span> <span class="attr">valign</span>=<span class="string">&quot;middle&quot;</span>&gt;</span>±<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">td</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span> <span class="attr">valign</span>=<span class="string">&quot;middle&quot;</span>&gt;</span>√<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">td</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span> <span class="attr">valign</span>=<span class="string">&quot;middle&quot;</span>&gt;</span>7<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">td</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span> <span class="attr">valign</span>=<span class="string">&quot;middle&quot;</span>&gt;</span>8<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">td</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span> <span class="attr">valign</span>=<span class="string">&quot;middle&quot;</span>&gt;</span>9<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">td</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span> <span class="attr">valign</span>=<span class="string">&quot;middle&quot;</span>&gt;</span>/<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">td</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span> <span class="attr">valign</span>=<span class="string">&quot;middle&quot;</span>&gt;</span>%<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">td</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span> <span class="attr">valign</span>=<span class="string">&quot;middle&quot;</span>&gt;</span>4<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">td</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span> <span class="attr">valign</span>=<span class="string">&quot;middle&quot;</span>&gt;</span>5<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">td</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span> <span class="attr">valign</span>=<span class="string">&quot;middle&quot;</span>&gt;</span>6<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">td</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span> <span class="attr">valign</span>=<span class="string">&quot;middle&quot;</span>&gt;</span>*<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">td</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span> <span class="attr">valign</span>=<span class="string">&quot;middle&quot;</span>&gt;</span>1/x<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">td</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span> <span class="attr">valign</span>=<span class="string">&quot;middle&quot;</span>&gt;</span>1<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">td</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span> <span class="attr">valign</span>=<span class="string">&quot;middle&quot;</span>&gt;</span>2<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">td</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span> <span class="attr">valign</span>=<span class="string">&quot;middle&quot;</span>&gt;</span>3<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">td</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span> <span class="attr">valign</span>=<span class="string">&quot;middle&quot;</span>&gt;</span>-<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">td</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span> <span class="attr">valign</span>=<span class="string">&quot;middle&quot;</span> <span class="attr">rowspan</span>=<span class="string">&quot;2&quot;</span>&gt;</span>=<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">td</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span> <span class="attr">valign</span>=<span class="string">&quot;middle&quot;</span> <span class="attr">colspan</span>=<span class="string">&quot;2&quot;</span>&gt;</span>0<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">td</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span> <span class="attr">valign</span>=<span class="string">&quot;middle&quot;</span>&gt;</span>.<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">td</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span> <span class="attr">valign</span>=<span class="string">&quot;middle&quot;</span>&gt;</span>+<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">            </span><br><span class="line">        <span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line">    </span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+<p>实例2：</p>
+<p>各种练习</p>
+<p>核心代码：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span>古诗<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">center</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">h1</span>&gt;</span>古诗三百首<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">b</span>&gt;</span>静夜思<span class="tag">&lt;/<span class="name">b</span>&gt;</span><span class="tag">&lt;/<span class="name">br</span>&gt;</span></span><br><span class="line">                李白</span><br><span class="line">            <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">                窗前明月光，<span class="tag">&lt;/<span class="name">br</span>&gt;</span></span><br><span class="line">                疑似地上霜。<span class="tag">&lt;/<span class="name">br</span>&gt;</span></span><br><span class="line">                举头望明月，<span class="tag">&lt;/<span class="name">br</span>&gt;</span></span><br><span class="line">                低头思故乡。<span class="tag">&lt;/<span class="name">br</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">b</span>&gt;</span>清明<span class="tag">&lt;/<span class="name">b</span>&gt;</span><span class="tag">&lt;/<span class="name">br</span>&gt;</span></span><br><span class="line">                杜牧</span><br><span class="line">            <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">                清明时节雨纷纷，<span class="tag">&lt;/<span class="name">br</span>&gt;</span></span><br><span class="line">                路上行人欲断魂。<span class="tag">&lt;/<span class="name">br</span>&gt;</span></span><br><span class="line">                欲问酒家何处寻，<span class="tag">&lt;/<span class="name">br</span>&gt;</span></span><br><span class="line">                牧童遥指杏花村。<span class="tag">&lt;/<span class="name">br</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">center</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">li</span>&gt;</span>李白<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">                    杜牧</span><br><span class="line">                    苏轼</span><br><span class="line">                <span class="tag">&lt;<span class="name">li</span>&gt;</span>杜甫<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">ol</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">li</span>&gt;</span>李白<span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">                    杜牧</span><br><span class="line">                    苏轼</span><br><span class="line">                    <span class="comment">&lt;!--这些诗人不是一个朝代的--&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">li</span>&gt;</span>杜甫<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">ol</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">table</span> <span class="attr">width</span>=<span class="string">&quot;318&quot;</span> <span class="attr">height</span>=<span class="string">&quot;167&quot;</span> <span class="attr">border</span>=<span class="string">&quot;10&quot;</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span> <span class="attr">bgcolor</span>=<span class="string">&quot;#ccff33&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">caption</span>&gt;</span><span class="tag">&lt;<span class="name">b</span>&gt;</span>诗人表格<span class="tag">&lt;/<span class="name">b</span>&gt;</span><span class="tag">&lt;/<span class="name">caption</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">td</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span> <span class="attr">valign</span>=<span class="string">&quot;middle&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">b</span>&gt;</span>姓名<span class="tag">&lt;/<span class="name">b</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">td</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span> <span class="attr">valign</span>=<span class="string">&quot;middle&quot;</span>&gt;</span>朝代<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">td</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span> <span class="attr">valign</span>=<span class="string">&quot;middle&quot;</span>&gt;</span>称号<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">td</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span> <span class="attr">valign</span>=<span class="string">&quot;middle&quot;</span>&gt;</span>代表作品<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">td</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span> <span class="attr">valign</span>=<span class="string">&quot;middle&quot;</span>&gt;</span>李白<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">td</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span> <span class="attr">valign</span>=<span class="string">&quot;middle&quot;</span>&gt;</span>唐代<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">td</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span> <span class="attr">valign</span>=<span class="string">&quot;middle&quot;</span>&gt;</span>诗仙<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">td</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span> <span class="attr">valign</span>=<span class="string">&quot;middle&quot;</span>&gt;</span>《静夜思》<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">td</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span> <span class="attr">valign</span>=<span class="string">&quot;middle&quot;</span>&gt;</span>杜甫<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">td</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span> <span class="attr">valign</span>=<span class="string">&quot;middle&quot;</span>&gt;</span>唐代<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">td</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span> <span class="attr">valign</span>=<span class="string">&quot;middle&quot;</span>&gt;</span>诗圣<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">td</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span> <span class="attr">valign</span>=<span class="string">&quot;middle&quot;</span>&gt;</span>《绝句》<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">br</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">table</span> <span class="attr">border</span>=<span class="string">&quot;10&quot;</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span> <span class="attr">bgcolor</span>=<span class="string">&quot;#E0E0E0&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">caption</span>&gt;</span><span class="tag">&lt;<span class="name">b</span>&gt;</span>表格<span class="tag">&lt;/<span class="name">b</span>&gt;</span><span class="tag">&lt;/<span class="name">caption</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">th</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">p</span>&gt;</span>表格1<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">td</span>&gt;</span>第一格<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">td</span>&gt;</span>第二格<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">td</span>&gt;</span>第三格<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">td</span>&gt;</span>第四格<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">td</span>&gt;</span>第一格<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">td</span>&gt;</span>第二格<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">td</span> <span class="attr">colspan</span>=<span class="string">&quot;2&quot;</span>&gt;</span>第三格<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">                </span><br><span class="line">                <span class="tag">&lt;<span class="name">th</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">p</span>&gt;</span>表格2<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">td</span>&gt;</span>第一格<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">td</span>&gt;</span>第二格<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">td</span>&gt;</span>第三格<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">td</span>&gt;</span>第四格<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">td</span> <span class="attr">rowspan</span>=<span class="string">&quot;2&quot;</span>&gt;</span>第五格<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">td</span>&gt;</span>第一格<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">td</span>&gt;</span>第二格<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">td</span>&gt;</span>第三格<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">td</span>&gt;</span>第四格<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">td</span>&gt;</span>第一格<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">td</span>&gt;</span>第二格<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">td</span>&gt;</span>第三格<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">td</span>&gt;</span>第四格<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">td</span>&gt;</span>第五格<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">td</span>&gt;</span>第六格<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul class="copyright-info-content">
+        <li>本文标题：2017-04-13-Tomcat部署-html初识</li>
+        <li>本文作者：Xplorist</li>
+        <li>创建时间：2017-04-13 14:23:01</li>
+        <li>
+            本文链接：https://xplorist.tech/2017/04/13/1e512924e0e7/
+        </li>
+        <li>
+            版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/ShareLearn/">#ShareLearn</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2017/04/14/420eca7d070b/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">2017-04-14-html进阶-正则表达式</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2017/04/12/b6261558d021/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">2017-04-12-读写excel</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments"></i>&nbsp;评论
+    </div>
+    
+
+        
+            
+
+
+    <div id="gitalk-container"></div>
+    <script 
+            src="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js"></script>
+    <script >
+
+      function loadGitalk() {
+        let __gitalk__pathname = decodeURI(location.pathname);
+        const __gitalk__pathnameLength = __gitalk__pathname.length;
+        const __gitalk__pathnameMaxLength = 50;
+        if (__gitalk__pathnameLength > __gitalk__pathnameMaxLength) {
+          __gitalk__pathname = __gitalk__pathname.substring(0, __gitalk__pathnameMaxLength - 3) + '...';
+        }
+
+        try {
+
+          Gitalk && new Gitalk({
+            clientID: '24c227c71f9bb758a554',
+            clientSecret: '724a45a68d355acb27c19a61d15fbb7dee34db4e',
+            repo: 'hexo-site-comments',
+            owner: 'Xplorist',
+            admin: 'Xplorist',
+            id: __gitalk__pathname,
+            language: 'zh-CN'
+          }).render('gitalk-container');
+
+        } catch (e) {
+          window.Gitalk = null;
+        }
+      }
+
+      if ('false') {
+        const loadGitalkTimeout = setTimeout(() => {
+          loadGitalk();
+          clearTimeout(loadGitalkTimeout);
+        }, 1000);
+      } else {
+        window.addEventListener('DOMContentLoaded', loadGitalk);
+      }
+    </script>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            
+<footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+                <span>2020</span> -
+            
+            2023
+            
+                &nbsp;<i class="fas fa-heart icon-animate"></i>
+                &nbsp;<a href="/">Xplorist</a>
+            
+        </div>
+        
+            <script async 
+                    src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    访问人数&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                
+                
+                    总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题
+            &nbsp;
+            <a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.8</a>
+        </div>
+        
+            <div class="icp-info info-item">
+                <a target="_blank" rel="nofollow"
+                   href="https://beian.miit.gov.cn"
+                >
+                    蜀ICP备20002343号
+                </a>
+            </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-up-right-and-down-left-from-center"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#2017-04-13-Tomcat%E9%83%A8%E7%BD%B2-html%E5%88%9D%E8%AF%86"><span class="nav-number">1.</span> <span class="nav-text">2017-04-13-Tomcat部署-html初识</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">~
+5-
+6- UnorderList无序文字列表标记（）
+7- OrderList有序文字列表标记（）
+8-文档分区标记
+html表格标记
+1-
+2-
+3- TableHead
+4- TableRow
+5- TableDataCell
+（
+row行 从左往右占格数
+col列column从上往下占格数
+）
+html布局标签
+1-
+2-
+实例1：
+显示一个科学计算器的界面
+核心代码：
+123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960&lt;html&gt;    &lt;head&gt;        &lt;title&gt;科学计算器&lt;&#x2F;title&gt;    &lt;&#x2F;head&gt;        &lt;body&gt;        &lt;table  width&#x3D;&quot;400&quot; height&#x3D;&quot;500&quot; border&#x3D;&quot;1&quot; align&#x3D;&quot;center&quot; bgcolor&#x3D;&quot;#CECEFF&quot;&gt;            &lt;caption&gt;科学计算器&lt;&#x2F;caption&gt;                &lt;tr&gt;                    &lt;td align&#x3D;&quot;right&quot; valign&#x3D;&quot;center&quot; colspan&#x3D;&quot;5&quot; rowspan&#x3D;&quot;3&quot; &gt;&lt;font size&#x3D;&quot;10&quot; color&#x3D;&quot;black&quot;&gt;0&lt;&#x2F;font&gt;&lt;&#x2F;td&gt;                &lt;&#x2F;tr&gt;                &lt;tr&gt;                &lt;&#x2F;tr&gt;                &lt;tr&gt;                &lt;&#x2F;tr&gt;                &lt;tr&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;MC&lt;&#x2F;td&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;MR&lt;&#x2F;td&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;MS&lt;&#x2F;td&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;M+&lt;&#x2F;td&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;M-&lt;&#x2F;td&gt;                &lt;&#x2F;tr&gt;                &lt;tr&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;←&lt;&#x2F;td&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;CE&lt;&#x2F;td&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;C&lt;&#x2F;td&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;±&lt;&#x2F;td&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;√&lt;&#x2F;td&gt;                &lt;&#x2F;tr&gt;                &lt;tr&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;7&lt;&#x2F;td&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;8&lt;&#x2F;td&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;9&lt;&#x2F;td&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;&#x2F;&lt;&#x2F;td&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;%&lt;&#x2F;td&gt;                &lt;&#x2F;tr&gt;                &lt;tr&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;4&lt;&#x2F;td&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;5&lt;&#x2F;td&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;6&lt;&#x2F;td&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;*&lt;&#x2F;td&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;1&#x2F;x&lt;&#x2F;td&gt;                &lt;&#x2F;tr&gt;                &lt;tr&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;1&lt;&#x2F;td&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;2&lt;&#x2F;td&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;3&lt;&#x2F;td&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;-&lt;&#x2F;td&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot; rowspan&#x3D;&quot;2&quot;&gt;&#x3D;&lt;&#x2F;td&gt;                &lt;&#x2F;tr&gt;                &lt;tr&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot; colspan&#x3D;&quot;2&quot;&gt;0&lt;&#x2F;td&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;.&lt;&#x2F;td&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;+&lt;&#x2F;td&gt;                &lt;&#x2F;tr&gt;                    &lt;&#x2F;table&gt;    &lt;&#x2F;body&gt;    &lt;&#x2F;html&gt;
+
+
+实例2：
+各种练习
+核心代码：
+123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109&lt;html&gt;    &lt;head&gt;        &lt;title&gt;古诗&lt;&#x2F;title&gt;    &lt;&#x2F;head&gt;    &lt;body&gt;        &lt;center&gt;            &lt;h1&gt;古诗三百首&lt;&#x2F;h1&gt;            &lt;b&gt;静夜思&lt;&#x2F;b&gt;&lt;&#x2F;br&gt;                李白            &lt;p&gt;                窗前明月光，&lt;&#x2F;br&gt;                疑似地上霜。&lt;&#x2F;br&gt;                举头望明月，&lt;&#x2F;br&gt;                低头思故乡。&lt;&#x2F;br&gt;            &lt;&#x2F;p&gt;            &lt;b&gt;清明&lt;&#x2F;b&gt;&lt;&#x2F;br&gt;                杜牧            &lt;p&gt;                清明时节雨纷纷，&lt;&#x2F;br&gt;                路上行人欲断魂。&lt;&#x2F;br&gt;                欲问酒家何处寻，&lt;&#x2F;br&gt;                牧童遥指杏花村。&lt;&#x2F;br&gt;            &lt;&#x2F;p&gt;        &lt;&#x2F;center&gt;        &lt;p&gt;            &lt;ul&gt;                &lt;li&gt;李白&lt;&#x2F;li&gt;                    杜牧                    苏轼                &lt;li&gt;杜甫&lt;&#x2F;li&gt;            &lt;&#x2F;ul&gt;        &lt;&#x2F;p&gt;        &lt;p&gt;            &lt;ol&gt;                &lt;li&gt;李白&lt;li&gt;                    杜牧                    苏轼                    &lt;!--这些诗人不是一个朝代的--&gt;                &lt;li&gt;杜甫&lt;&#x2F;li&gt;            &lt;&#x2F;ol&gt;        &lt;&#x2F;p&gt;        &lt;p&gt;            &lt;table width&#x3D;&quot;318&quot; height&#x3D;&quot;167&quot; border&#x3D;&quot;10&quot; align&#x3D;&quot;center&quot; bgcolor&#x3D;&quot;#ccff33&quot;&gt;                &lt;caption&gt;&lt;b&gt;诗人表格&lt;&#x2F;b&gt;&lt;&#x2F;caption&gt;                &lt;tr&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;&lt;b&gt;姓名&lt;&#x2F;b&gt;&lt;&#x2F;td&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;朝代&lt;&#x2F;td&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;称号&lt;&#x2F;td&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;代表作品&lt;&#x2F;td&gt;                &lt;&#x2F;tr&gt;                &lt;tr&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;李白&lt;&#x2F;td&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;唐代&lt;&#x2F;td&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;诗仙&lt;&#x2F;td&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;《静夜思》&lt;&#x2F;td&gt;                &lt;&#x2F;tr&gt;                &lt;tr&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;杜甫&lt;&#x2F;td&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;唐代&lt;&#x2F;td&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;诗圣&lt;&#x2F;td&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;《绝句》&lt;&#x2F;td&gt;                &lt;&#x2F;tr&gt;            &lt;&#x2F;table&gt;            &lt;&#x2F;br&gt;            &lt;table border&#x3D;&quot;10&quot; align&#x3D;&quot;center&quot; bgcolor&#x3D;&quot;#E0E0E0&quot;&gt;                &lt;caption&gt;&lt;b&gt;表格&lt;&#x2F;b&gt;&lt;&#x2F;caption&gt;                &lt;th&gt;                    &lt;p&gt;表格1&lt;&#x2F;p&gt;                    &lt;tr&gt;                        &lt;td&gt;第一格&lt;&#x2F;td&gt;                        &lt;td&gt;第二格&lt;&#x2F;td&gt;                        &lt;td&gt;第三格&lt;&#x2F;td&gt;                        &lt;td&gt;第四格&lt;&#x2F;td&gt;                    &lt;&#x2F;tr&gt;                    &lt;tr&gt;                        &lt;td&gt;第一格&lt;&#x2F;td&gt;                        &lt;td&gt;第二格&lt;&#x2F;td&gt;                        &lt;td colspan&#x3D;&quot;2&quot;&gt;第三格&lt;&#x2F;td&gt;                    &lt;&#x2F;tr&gt;                &lt;&#x2F;th&gt;                                &lt;th&gt;                    &lt;p&gt;表格2&lt;&#x2F;p&gt;                    &lt;tr&gt;                        &lt;td&gt;第一格&lt;&#x2F;td&gt;                        &lt;td&gt;第二格&lt;&#x2F;td&gt;                        &lt;td&gt;第三格&lt;&#x2F;td&gt;                        &lt;td&gt;第四格&lt;&#x2F;td&gt;                        &lt;td rowspan&#x3D;&quot;2&quot;&gt;第五格&lt;&#x2F;td&gt;                    &lt;&#x2F;tr&gt;                    &lt;tr&gt;                        &lt;td&gt;第一格&lt;&#x2F;td&gt;                        &lt;td&gt;第二格&lt;&#x2F;td&gt;                        &lt;td&gt;第三格&lt;&#x2F;td&gt;                        &lt;td&gt;第四格&lt;&#x2F;td&gt;                    &lt;&#x2F;tr&gt;                    &lt;tr&gt;                        &lt;td&gt;第一格&lt;&#x2F;td&gt;                        &lt;td&gt;第二格&lt;&#x2F;td&gt;                        &lt;td&gt;第三格&lt;&#x2F;td&gt;                        &lt;td&gt;第四格&lt;&#x2F;td&gt;                        &lt;td&gt;第五格&lt;&#x2F;td&gt;                        &lt;td&gt;第六格&lt;&#x2F;td&gt;                    &lt;&#x2F;tr&gt;                &lt;&#x2F;th&gt;            &lt;&#x2F;table&gt;        &lt;&#x2F;p&gt;    &lt;&#x2F;body&gt;&lt;&#x2F;html&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link"><span class="nav-number">2.0.0.0.0.1.</span> <span class="nav-text">
+5-
+6- UnorderList无序文字列表标记（）
+7- OrderList有序文字列表标记（）
+8-文档分区标记
+html表格标记
+1-
+2-
+3- TableHead
+4- TableRow
+5- TableDataCell
+（
+row行 从左往右占格数
+col列column从上往下占格数
+）
+html布局标签
+1-
+2-
+实例1：
+显示一个科学计算器的界面
+核心代码：
+123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960&lt;html&gt;    &lt;head&gt;        &lt;title&gt;科学计算器&lt;&#x2F;title&gt;    &lt;&#x2F;head&gt;        &lt;body&gt;        &lt;table  width&#x3D;&quot;400&quot; height&#x3D;&quot;500&quot; border&#x3D;&quot;1&quot; align&#x3D;&quot;center&quot; bgcolor&#x3D;&quot;#CECEFF&quot;&gt;            &lt;caption&gt;科学计算器&lt;&#x2F;caption&gt;                &lt;tr&gt;                    &lt;td align&#x3D;&quot;right&quot; valign&#x3D;&quot;center&quot; colspan&#x3D;&quot;5&quot; rowspan&#x3D;&quot;3&quot; &gt;&lt;font size&#x3D;&quot;10&quot; color&#x3D;&quot;black&quot;&gt;0&lt;&#x2F;font&gt;&lt;&#x2F;td&gt;                &lt;&#x2F;tr&gt;                &lt;tr&gt;                &lt;&#x2F;tr&gt;                &lt;tr&gt;                &lt;&#x2F;tr&gt;                &lt;tr&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;MC&lt;&#x2F;td&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;MR&lt;&#x2F;td&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;MS&lt;&#x2F;td&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;M+&lt;&#x2F;td&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;M-&lt;&#x2F;td&gt;                &lt;&#x2F;tr&gt;                &lt;tr&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;←&lt;&#x2F;td&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;CE&lt;&#x2F;td&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;C&lt;&#x2F;td&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;±&lt;&#x2F;td&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;√&lt;&#x2F;td&gt;                &lt;&#x2F;tr&gt;                &lt;tr&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;7&lt;&#x2F;td&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;8&lt;&#x2F;td&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;9&lt;&#x2F;td&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;&#x2F;&lt;&#x2F;td&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;%&lt;&#x2F;td&gt;                &lt;&#x2F;tr&gt;                &lt;tr&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;4&lt;&#x2F;td&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;5&lt;&#x2F;td&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;6&lt;&#x2F;td&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;*&lt;&#x2F;td&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;1&#x2F;x&lt;&#x2F;td&gt;                &lt;&#x2F;tr&gt;                &lt;tr&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;1&lt;&#x2F;td&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;2&lt;&#x2F;td&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;3&lt;&#x2F;td&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;-&lt;&#x2F;td&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot; rowspan&#x3D;&quot;2&quot;&gt;&#x3D;&lt;&#x2F;td&gt;                &lt;&#x2F;tr&gt;                &lt;tr&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot; colspan&#x3D;&quot;2&quot;&gt;0&lt;&#x2F;td&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;.&lt;&#x2F;td&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;+&lt;&#x2F;td&gt;                &lt;&#x2F;tr&gt;                    &lt;&#x2F;table&gt;    &lt;&#x2F;body&gt;    &lt;&#x2F;html&gt;
+
+
+实例2：
+各种练习
+核心代码：
+123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109&lt;html&gt;    &lt;head&gt;        &lt;title&gt;古诗&lt;&#x2F;title&gt;    &lt;&#x2F;head&gt;    &lt;body&gt;        &lt;center&gt;            &lt;h1&gt;古诗三百首&lt;&#x2F;h1&gt;            &lt;b&gt;静夜思&lt;&#x2F;b&gt;&lt;&#x2F;br&gt;                李白            &lt;p&gt;                窗前明月光，&lt;&#x2F;br&gt;                疑似地上霜。&lt;&#x2F;br&gt;                举头望明月，&lt;&#x2F;br&gt;                低头思故乡。&lt;&#x2F;br&gt;            &lt;&#x2F;p&gt;            &lt;b&gt;清明&lt;&#x2F;b&gt;&lt;&#x2F;br&gt;                杜牧            &lt;p&gt;                清明时节雨纷纷，&lt;&#x2F;br&gt;                路上行人欲断魂。&lt;&#x2F;br&gt;                欲问酒家何处寻，&lt;&#x2F;br&gt;                牧童遥指杏花村。&lt;&#x2F;br&gt;            &lt;&#x2F;p&gt;        &lt;&#x2F;center&gt;        &lt;p&gt;            &lt;ul&gt;                &lt;li&gt;李白&lt;&#x2F;li&gt;                    杜牧                    苏轼                &lt;li&gt;杜甫&lt;&#x2F;li&gt;            &lt;&#x2F;ul&gt;        &lt;&#x2F;p&gt;        &lt;p&gt;            &lt;ol&gt;                &lt;li&gt;李白&lt;li&gt;                    杜牧                    苏轼                    &lt;!--这些诗人不是一个朝代的--&gt;                &lt;li&gt;杜甫&lt;&#x2F;li&gt;            &lt;&#x2F;ol&gt;        &lt;&#x2F;p&gt;        &lt;p&gt;            &lt;table width&#x3D;&quot;318&quot; height&#x3D;&quot;167&quot; border&#x3D;&quot;10&quot; align&#x3D;&quot;center&quot; bgcolor&#x3D;&quot;#ccff33&quot;&gt;                &lt;caption&gt;&lt;b&gt;诗人表格&lt;&#x2F;b&gt;&lt;&#x2F;caption&gt;                &lt;tr&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;&lt;b&gt;姓名&lt;&#x2F;b&gt;&lt;&#x2F;td&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;朝代&lt;&#x2F;td&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;称号&lt;&#x2F;td&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;代表作品&lt;&#x2F;td&gt;                &lt;&#x2F;tr&gt;                &lt;tr&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;李白&lt;&#x2F;td&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;唐代&lt;&#x2F;td&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;诗仙&lt;&#x2F;td&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;《静夜思》&lt;&#x2F;td&gt;                &lt;&#x2F;tr&gt;                &lt;tr&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;杜甫&lt;&#x2F;td&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;唐代&lt;&#x2F;td&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;诗圣&lt;&#x2F;td&gt;                    &lt;td align&#x3D;&quot;center&quot; valign&#x3D;&quot;middle&quot;&gt;《绝句》&lt;&#x2F;td&gt;                &lt;&#x2F;tr&gt;            &lt;&#x2F;table&gt;            &lt;&#x2F;br&gt;            &lt;table border&#x3D;&quot;10&quot; align&#x3D;&quot;center&quot; bgcolor&#x3D;&quot;#E0E0E0&quot;&gt;                &lt;caption&gt;&lt;b&gt;表格&lt;&#x2F;b&gt;&lt;&#x2F;caption&gt;                &lt;th&gt;                    &lt;p&gt;表格1&lt;&#x2F;p&gt;                    &lt;tr&gt;                        &lt;td&gt;第一格&lt;&#x2F;td&gt;                        &lt;td&gt;第二格&lt;&#x2F;td&gt;                        &lt;td&gt;第三格&lt;&#x2F;td&gt;                        &lt;td&gt;第四格&lt;&#x2F;td&gt;                    &lt;&#x2F;tr&gt;                    &lt;tr&gt;                        &lt;td&gt;第一格&lt;&#x2F;td&gt;                        &lt;td&gt;第二格&lt;&#x2F;td&gt;                        &lt;td colspan&#x3D;&quot;2&quot;&gt;第三格&lt;&#x2F;td&gt;                    &lt;&#x2F;tr&gt;                &lt;&#x2F;th&gt;                                &lt;th&gt;                    &lt;p&gt;表格2&lt;&#x2F;p&gt;                    &lt;tr&gt;                        &lt;td&gt;第一格&lt;&#x2F;td&gt;                        &lt;td&gt;第二格&lt;&#x2F;td&gt;                        &lt;td&gt;第三格&lt;&#x2F;td&gt;                        &lt;td&gt;第四格&lt;&#x2F;td&gt;                        &lt;td rowspan&#x3D;&quot;2&quot;&gt;第五格&lt;&#x2F;td&gt;                    &lt;&#x2F;tr&gt;                    &lt;tr&gt;                        &lt;td&gt;第一格&lt;&#x2F;td&gt;                        &lt;td&gt;第二格&lt;&#x2F;td&gt;                        &lt;td&gt;第三格&lt;&#x2F;td&gt;                        &lt;td&gt;第四格&lt;&#x2F;td&gt;                    &lt;&#x2F;tr&gt;                    &lt;tr&gt;                        &lt;td&gt;第一格&lt;&#x2F;td&gt;                        &lt;td&gt;第二格&lt;&#x2F;td&gt;                        &lt;td&gt;第三格&lt;&#x2F;td&gt;                        &lt;td&gt;第四格&lt;&#x2F;td&gt;                        &lt;td&gt;第五格&lt;&#x2F;td&gt;                        &lt;td&gt;第六格&lt;&#x2F;td&gt;                    &lt;&#x2F;tr&gt;                &lt;&#x2F;th&gt;            &lt;&#x2F;table&gt;        &lt;&#x2F;p&gt;    &lt;&#x2F;body&gt;&lt;&#x2F;html&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-block-tools.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>

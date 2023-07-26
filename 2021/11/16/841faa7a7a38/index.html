@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Xplorist">
+    
+    <title>
+        
+            Hexo修改永久链接 |
+        
+        Xplorist
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.svg">
+    
+<link rel="stylesheet" href="/fontawesome/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/brands.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"zh-CN","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","logo":"/images/logo.svg","favicon":"/images/logo.svg","avatar":"/images/Water.jpg","left_side_width":"300px","content_max_width":"1080px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"header_transparent":true,"background_img":"/images/dawn-in-the-valley.jpg","description":"Exploration, a journey that never ends。","font_color":null,"hitokoto":{"enable":false}},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":false},"code_copy":{},"code_block_tools":{"enable":true,"style":"mac"},"side_tools":{},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.8"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"};
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="/images/logo.svg">
+                </a>
+            
+            <a class="logo-title" href="/">
+               Xplorist
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                分类
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                友链
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                关于
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">分类</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">标签</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links">友链</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">关于</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">Hexo修改永久链接</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/Water.jpg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Xplorist</span>
+                        
+                            <span class="author-label">Lv6</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2021-11-16 12:56:00</span>
+        <span class="mobile">2021-11-16 12:56</span>
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/Hexo/">Hexo</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/Hexo/">Hexo</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="Hexo修改永久链接"><a href="#Hexo修改永久链接" class="headerlink" title="Hexo修改永久链接"></a>Hexo修改永久链接</h1><h2 id="reference-site-list"><a href="#reference-site-list" class="headerlink" title="reference-site-list"></a>reference-site-list</h2><blockquote>
+<ul>
+<li><a class="link"   target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/permalinks" >Hexo 官网文档：永久链接（Permalinks）<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/tag-plugins" >Hexo 官网文档: 插件-引用文章<i class="fas fa-external-link-alt"></i></a></li>
+<li><a href="/2021/07/02/1faa2d6a7e85/" title="MinimalismWallPaper">MinimalismWallPaper</a></li>
+<li><a href="/2020/12/16/b6aef92fde91/" title="GitLab之CI_CD配置">GitLab之CI_CD配置</a></li>
+<li><a href="/2021/11/12/3c221aba920d/" title="WordPress上传图片">WordPress上传图片</a></li>
+<li><a href="/resources/%E9%9D%A2%E8%AF%95/2021-Java%E9%9D%A2%E8%AF%95%E9%A2%98%E5%92%8C%E7%AD%94%E6%A1%88.pdf">2021-Java面试题和答案.pdf</a></li>
+<li><a href="/resources/%E9%9D%A2%E8%AF%95/2021-Java%E9%9D%A2%E8%AF%95%E7%AA%81%E5%87%BB%E7%89%88.pdf">2021-Java面试突击版.pdf</a></li>
+<li><a href="/resources/%E9%9D%A2%E8%AF%95/2021-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%95%B4%E7%90%86%E6%89%8B%E5%86%8C.pdf">2021-Java面试知识点整理手册.pdf</a></li>
+</ul>
+</blockquote>
+<h2 id="steps"><a href="#steps" class="headerlink" title="steps"></a>steps</h2><ul>
+<li>为了将Hexo静态博客变得更规范，将永久链接由原来的:title改为了:hash</li>
+</ul>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#permalink: :year/:month/:day/:title/</span></span><br><span class="line"><span class="attr">permalink:</span> <span class="string">:year/:month/:day/:hash/</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>其实静态博客的永久链接就是最后生成index.html的文件夹路径，本来想直接使用:hash&#x2F;这一级的，但是后面意识到这样做的话，服务器上的public生成后的文件夹中会有非常多的hash值文件夹，于就把年月日的路径加上了这样进行一下分类，从链接名称也能够看出文章的创建日期。</p>
+</li>
+<li><p>要注意的一点：文章的链接一旦被其他引用，就不要修改文章名和日期，因为hash值的计算取的是文章名和日期进行hash运算，如果修改了，那么原来的链接就失效了。</p>
+</li>
+<li><p>之所以这样进行修改，是为了实现用Hexo静态博客实现知识体系的网状结构，用一个页面将多数的文章链接进来，超链接的方式来链接文章实现网状结构</p>
+</li>
+<li><p>在每篇文章的reference-site-list里面添加如下结构的内部链接</p>
+</li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">## reference-site-list</span></span><br><span class="line"></span><br><span class="line"><span class="quote">&gt; - [<span class="string">Hexo 官网文档：永久链接（Permalinks）</span>](<span class="link">https://hexo.io/zh-cn/docs/permalinks</span>)</span></span><br><span class="line"><span class="quote">&gt; - [<span class="string">Hexo 官网文档: 插件-引用文章</span>](<span class="link">https://hexo.io/zh-cn/docs/tag-plugins</span>)</span></span><br><span class="line"><span class="quote">&gt; - &#123;% post<span class="emphasis">_link MinimalismWallPaper &#x27;MinimalismWallPaper&#x27; %&#125;</span></span></span><br><span class="line"><span class="emphasis"><span class="quote">&gt; - &#123;% post_</span>link GitLab之CI<span class="emphasis">_CD配置 &#x27;GitLab之CI_</span>CD配置&#x27; %&#125;</span></span><br><span class="line"><span class="quote">&gt; - &#123;% post<span class="emphasis">_link WordPress/WordPress上传图片 &#x27;WordPress上传图片&#x27; %&#125;</span></span></span><br><span class="line"><span class="emphasis"><span class="quote">&gt; - [<span class="string">2021-Java面试题和答案.pdf</span>](<span class="link">/resources/面试/2021-Java面试题和答案.pdf</span>)</span></span></span><br><span class="line"><span class="emphasis"><span class="quote">&gt; - [<span class="string">2021-Java面试突击版.pdf</span>](<span class="link">/resources/面试/2021-Java面试突击版.pdf</span>)</span></span></span><br><span class="line"><span class="emphasis"><span class="quote">&gt; - [<span class="string">2021-Java面试知识点整理手册.pdf</span>](<span class="link">/resources/面试/2021-Java面试知识点整理手册.pdf</span>)</span></span></span><br><span class="line"><span class="emphasis"><span class="quote"></span></span></span><br></pre></td></tr></table></figure>
+<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><ol>
+<li>如果这里的post_link指的是xxx.md的路径，如果在WordPress文件夹下的 ‘WordPress上传图片.md’ 的post_link一定要写成 ‘WordPress&#x2F;WordPress上传图片’，官网上的文档说可以不加文件夹，实测后发现必须加文件夹名称</li>
+<li>markdown文件一定不要使用空格，任何文件或文件夹的名字都不要加空格，不然就无法使用这个内部引用了，Window竟然运行文件名和文件夹名加空格，坑</li>
+<li>引用内部静态资源可以直接 ‘&#x2F;resources&#x2F;2021-Java面试题和答案.pdf’ 去链接</li>
+</ol>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>有了内部链接的功能，我们写文章时引用内部文章就不再需要知道文章的永久链接是什么，通过markdown文件的文件夹加文件名就可以引用内部文章了，这样更方便了形成知识体系的网络结构。</li>
+</ul>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul class="copyright-info-content">
+        <li>本文标题：Hexo修改永久链接</li>
+        <li>本文作者：Xplorist</li>
+        <li>创建时间：2021-11-16 12:56:00</li>
+        <li>
+            本文链接：https://xplorist.tech/2021/11/16/841faa7a7a38/
+        </li>
+        <li>
+            版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/Hexo/">#Hexo</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2021/11/19/3eb442a731c8/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">SQL题收集</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/11/14/dd4763200417/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Win10上安装NodeJS相关环境</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments"></i>&nbsp;评论
+    </div>
+    
+
+        
+            
+
+
+    <div id="gitalk-container"></div>
+    <script 
+            src="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js"></script>
+    <script >
+
+      function loadGitalk() {
+        let __gitalk__pathname = decodeURI(location.pathname);
+        const __gitalk__pathnameLength = __gitalk__pathname.length;
+        const __gitalk__pathnameMaxLength = 50;
+        if (__gitalk__pathnameLength > __gitalk__pathnameMaxLength) {
+          __gitalk__pathname = __gitalk__pathname.substring(0, __gitalk__pathnameMaxLength - 3) + '...';
+        }
+
+        try {
+
+          Gitalk && new Gitalk({
+            clientID: '24c227c71f9bb758a554',
+            clientSecret: '724a45a68d355acb27c19a61d15fbb7dee34db4e',
+            repo: 'hexo-site-comments',
+            owner: 'Xplorist',
+            admin: 'Xplorist',
+            id: __gitalk__pathname,
+            language: 'zh-CN'
+          }).render('gitalk-container');
+
+        } catch (e) {
+          window.Gitalk = null;
+        }
+      }
+
+      if ('false') {
+        const loadGitalkTimeout = setTimeout(() => {
+          loadGitalk();
+          clearTimeout(loadGitalkTimeout);
+        }, 1000);
+      } else {
+        window.addEventListener('DOMContentLoaded', loadGitalk);
+      }
+    </script>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            
+<footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+                <span>2020</span> -
+            
+            2023
+            
+                &nbsp;<i class="fas fa-heart icon-animate"></i>
+                &nbsp;<a href="/">Xplorist</a>
+            
+        </div>
+        
+            <script async 
+                    src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    访问人数&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                
+                
+                    总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题
+            &nbsp;
+            <a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.8</a>
+        </div>
+        
+            <div class="icp-info info-item">
+                <a target="_blank" rel="nofollow"
+                   href="https://beian.miit.gov.cn"
+                >
+                    蜀ICP备20002343号
+                </a>
+            </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-up-right-and-down-left-from-center"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Hexo%E4%BF%AE%E6%94%B9%E6%B0%B8%E4%B9%85%E9%93%BE%E6%8E%A5"><span class="nav-number">1.</span> <span class="nav-text">Hexo修改永久链接</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#reference-site-list"><span class="nav-number">1.1.</span> <span class="nav-text">reference-site-list</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#steps"><span class="nav-number">1.2.</span> <span class="nav-text">steps</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F"><span class="nav-number">1.2.1.</span> <span class="nav-text">注意</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">1.2.2.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-block-tools.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>

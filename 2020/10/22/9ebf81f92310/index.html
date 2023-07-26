@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Xplorist">
+    
+    <title>
+        
+            安装Hexo和Next主题过程记录 |
+        
+        Xplorist
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.svg">
+    
+<link rel="stylesheet" href="/fontawesome/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/brands.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"zh-CN","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","logo":"/images/logo.svg","favicon":"/images/logo.svg","avatar":"/images/Water.jpg","left_side_width":"300px","content_max_width":"1080px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"header_transparent":true,"background_img":"/images/dawn-in-the-valley.jpg","description":"Exploration, a journey that never ends。","font_color":null,"hitokoto":{"enable":false}},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":false},"code_copy":{},"code_block_tools":{"enable":true,"style":"mac"},"side_tools":{},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.8"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"};
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="/images/logo.svg">
+                </a>
+            
+            <a class="logo-title" href="/">
+               Xplorist
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                分类
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                友链
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                关于
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">分类</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">标签</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links">友链</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">关于</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">安装Hexo和Next主题过程记录</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/Water.jpg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Xplorist</span>
+                        
+                            <span class="author-label">Lv6</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2020-10-22 10:46:44</span>
+        <span class="mobile">2020-10-22 10:46</span>
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/hexo/">hexo</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        &gt; <a href="/categories/hexo/hexo-theme-next/">hexo-theme-next</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/hexo/">hexo</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/hexo-theme-next/">hexo-theme-next</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="开发环境以及版本"><a href="#开发环境以及版本" class="headerlink" title="开发环境以及版本"></a>开发环境以及版本</h1><ul>
+<li>硬件配置: <ul>
+<li>CPU: AMD Ryzen 7 3700X 8-Core Processor 3.59GHz X64</li>
+<li>RAM: 16.0 GB</li>
+</ul>
+</li>
+<li>操作系统: <ul>
+<li>版本: Windows 10 专业工作站版 </li>
+<li>版本号: 2004</li>
+<li>操作系统版本: 19041.572</li>
+<li>位宽类型: X64</li>
+</ul>
+</li>
+<li>软件环境:<ul>
+<li>NodeJS: v12.19.0</li>
+<li>Yarn: 1.22.5</li>
+<li>Hexo: 5.2.0</li>
+<li>Next: 8.0.1</li>
+</ul>
+</li>
+</ul>
+<h2 id="查看软件环境命令及结果"><a href="#查看软件环境命令及结果" class="headerlink" title="查看软件环境命令及结果"></a>查看软件环境命令及结果</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">PS D:\xplorist\notebookx&gt; node -v</span><br><span class="line">v12.19.0</span><br><span class="line">PS D:\xplorist\notebookx&gt; yarn -v</span><br><span class="line">1.22.5</span><br><span class="line">PS D:\xplorist\notebookx&gt; hexo -v</span><br><span class="line">INFO  Validating config</span><br><span class="line">INFO  ==================================</span><br><span class="line">  ███╗   ██╗███████╗██╗  ██╗████████╗</span><br><span class="line">  ████╗  ██║██╔════╝╚██╗██╔╝╚══██╔══╝</span><br><span class="line">  ██╔██╗ ██║█████╗   ╚███╔╝    ██║</span><br><span class="line">  ██║╚██╗██║██╔══╝   ██╔██╗    ██║</span><br><span class="line">  ██║ ╚████║███████╗██╔╝ ██╗   ██║</span><br><span class="line">  ╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝   ╚═╝</span><br><span class="line">========================================</span><br><span class="line">NexT version 8.0.1</span><br><span class="line">Documentation: https://theme-next.js.org</span><br><span class="line">========================================</span><br><span class="line">hexo: 5.2.0</span><br><span class="line">hexo-cli: 4.2.0</span><br><span class="line">os: Windows_NT 10.0.19041 win32 x64</span><br><span class="line">node: 12.19.0</span><br><span class="line">v8: 7.8.279.23-node.44</span><br><span class="line">uv: 1.39.0</span><br><span class="line">zlib: 1.2.11</span><br><span class="line">brotli: 1.0.9</span><br><span class="line">ares: 1.16.0</span><br><span class="line">modules: 72</span><br><span class="line">nghttp2: 1.41.0</span><br><span class="line">napi: 7</span><br><span class="line">llhttp: 2.1.2</span><br><span class="line">http_parser: 2.9.3</span><br><span class="line">openssl: 1.1.1g</span><br><span class="line">cldr: 37.0</span><br><span class="line">icu: 67.1</span><br><span class="line">tz: 2019c</span><br><span class="line">unicode: 13.0</span><br></pre></td></tr></table></figure>
+
+<h1 id="软件环境准备"><a href="#软件环境准备" class="headerlink" title="软件环境准备"></a>软件环境准备</h1><ol>
+<li>安装NodeJS –过程略</li>
+<li>安装Yarn –过程略</li>
+<li>安装hexo-cli</li>
+<li>安装hexo-theme-next</li>
+</ol>
+<h2 id="安装hexo-cli"><a href="#安装hexo-cli" class="headerlink" title="安装hexo-cli"></a>安装hexo-cli</h2><ul>
+<li>命令<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn global add hexo-cli</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="创建hexo项目"><a href="#创建hexo项目" class="headerlink" title="创建hexo项目"></a>创建hexo项目</h2><ul>
+<li>命令<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init notebookx</span><br></pre></td></tr></table></figure></li>
+<li>结果<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">D:\xplorist&gt;hexo init notebookx</span><br><span class="line">INFO  Cloning hexo-starter https://github.com/hexojs/hexo-starter.git</span><br><span class="line">INFO  Install dependencies</span><br><span class="line">warning hexo-renderer-stylus &gt; stylus &gt; css-parse &gt; css &gt; urix@0.1.0: Please see https://github.com/lydell/urix<span class="comment">#deprecated</span></span><br><span class="line">warning hexo-renderer-stylus &gt; stylus &gt; css-parse &gt; css &gt; source-map-resolve &gt; urix@0.1.0: Please see https://github.com/lydell/urix<span class="comment">#deprecated</span></span><br><span class="line">warning hexo-renderer-stylus &gt; stylus &gt; css-parse &gt; css &gt; source-map-resolve &gt; resolve-url@0.2.1: https://github.com/lydell/resolve-url<span class="comment">#deprecated</span></span><br><span class="line">INFO  Start blogging with Hexo!</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="安装hexo-theme-next"><a href="#安装hexo-theme-next" class="headerlink" title="安装hexo-theme-next"></a>安装hexo-theme-next</h2><ul>
+<li>命令<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> notebookx</span><br><span class="line">yarn add hexo-theme-next</span><br></pre></td></tr></table></figure></li>
+<li>结果<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">D:\xplorist&gt;<span class="built_in">cd</span> notebookx</span><br><span class="line"></span><br><span class="line">D:\xplorist\notebookx&gt;yarn add hexo-theme-next</span><br><span class="line">yarn add v1.22.5</span><br><span class="line">[1/4] Resolving packages...</span><br><span class="line">[2/4] Fetching packages...</span><br><span class="line">info fsevents@2.1.3: The platform <span class="string">&quot;win32&quot;</span> is incompatible with this module.</span><br><span class="line">info <span class="string">&quot;fsevents@2.1.3&quot;</span> is an optional dependency and failed compatibility check. Excluding it from installation.</span><br><span class="line">[3/4] Linking dependencies...</span><br><span class="line">[4/4] Building fresh packages...</span><br><span class="line"></span><br><span class="line">success Saved lockfile.</span><br><span class="line">success Saved 1 new dependency.</span><br><span class="line">info Direct dependencies</span><br><span class="line">└─ hexo-theme-next@8.0.1</span><br><span class="line">info All dependencies</span><br><span class="line">└─ hexo-theme-next@8.0.1</span><br><span class="line">Done <span class="keyword">in</span> 4.35s.</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="配置-config-yml修改theme"><a href="#配置-config-yml修改theme" class="headerlink" title="配置_config.yml修改theme"></a>配置_config.yml修改theme</h2><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># _config.yml</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#theme: landscape</span></span><br><span class="line"><span class="attr">theme:</span> <span class="string">next</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="配置-config-next-yml"><a href="#配置-config-next-yml" class="headerlink" title="配置_config.next.yml"></a>配置_config.next.yml</h2><ul>
+<li><p>通过PowerShell执行以下命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">D:</span><br><span class="line"><span class="built_in">cd</span> D:\xplorist\notebookx</span><br><span class="line"><span class="built_in">cp</span> node_modules/hexo-theme-next/_config.yml _config.next.yml</span><br></pre></td></tr></table></figure>
+<p>将配置next主题的配置文件复制到notebookx项目根目录下，并更名为_config.next.yml</p>
+</li>
+<li><p>修改_config.next.yml</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># _config.next.yml</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># --解释：打开Gemini，使用Gemini这个主题--</span></span><br><span class="line"><span class="comment"># Schemes</span></span><br><span class="line"><span class="comment">#scheme: Muse</span></span><br><span class="line"><span class="comment">#scheme: Mist</span></span><br><span class="line"><span class="comment">#scheme: Pisces</span></span><br><span class="line"><span class="attr">scheme:</span> <span class="string">Gemini</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># --解释：darkmode改为true， 开启暗黑模式--</span></span><br><span class="line"><span class="comment"># Dark Mode</span></span><br><span class="line"><span class="comment">#darkmode: false</span></span><br><span class="line"><span class="attr">darkmode:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># --解释: enable 改为 false,关闭动画，动画加载很慢给博客一种缓慢刷新网速很慢的感觉，影响感官--</span></span><br><span class="line"><span class="attr">motion:</span></span><br><span class="line">  <span class="comment">#enable: true</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># --解释: badges 改为 true, 显示徽章，其实就是tags,categories,archives上添加个数的数字图标--</span></span><br><span class="line"><span class="attr">menu_settings:</span></span><br><span class="line">  <span class="attr">icons:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment">#badges: false</span></span><br><span class="line">  <span class="attr">badges:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># --解释: --</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="配置scaffolds文件夹中的模板"><a href="#配置scaffolds文件夹中的模板" class="headerlink" title="配置scaffolds文件夹中的模板"></a>配置scaffolds文件夹中的模板</h2><ul>
+<li><p>修改post.md</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- post.md --&gt;</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line">title: &#123;&#123; title &#125;&#125;</span><br><span class="line">date: &#123;&#123; date &#125;&#125;</span><br><span class="line">tags:</span><br><span class="line"><span class="bullet">  -</span> tag</span><br><span class="line">categories:</span><br><span class="line"><span class="section">  - category</span></span><br><span class="line"><span class="section">---</span></span><br><span class="line"></span><br><span class="line"><span class="section"># 开发环境以及版本</span></span><br><span class="line"></span><br><span class="line"><span class="bullet">*</span> 硬件配置: </span><br><span class="line"><span class="bullet">    *</span> CPU: AMD Ryzen 7 3700X 8-Core Processor 3.59GHz X64</span><br><span class="line"><span class="bullet">    *</span> RAM: 16.0 GB</span><br><span class="line"><span class="bullet">*</span> 操作系统: </span><br><span class="line"><span class="bullet">    *</span> 版本: Windows 10 专业工作站版 </span><br><span class="line"><span class="bullet">    *</span> 版本号: 2004</span><br><span class="line"><span class="bullet">    *</span> 操作系统版本: 19041.572</span><br><span class="line"><span class="bullet">    *</span> 位宽类型: X64</span><br><span class="line"><span class="bullet">*</span> 软件环境:</span><br><span class="line"><span class="bullet">    *</span> NodeJS: v12.19.0</span><br><span class="line"><span class="bullet">    *</span> Yarn: 1.22.5</span><br><span class="line"><span class="bullet">    *</span> Hexo: 5.2.0</span><br><span class="line"><span class="bullet">    *</span> Next: 8.0.1</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置自定义模板diary.md</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- diary.md --&gt;</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line">title: &#123;&#123; title &#125;&#125;</span><br><span class="line">date: &#123;&#123; date &#125;&#125;</span><br><span class="line">tags:</span><br><span class="line"><span class="bullet">  -</span> diary</span><br><span class="line">categories:</span><br><span class="line"><span class="section">  - diary</span></span><br><span class="line"><span class="section">---</span></span><br><span class="line"></span><br><span class="line">: 手动修改categories中的year和month</span><br><span class="line"><span class="bullet">-</span> [diary, year, month]</span><br><span class="line"></span><br><span class="line"><span class="section"># todo-list</span></span><br><span class="line"></span><br><span class="line"><span class="bullet">*</span> [x] yy</span><br><span class="line"><span class="bullet">*</span> [ ] x</span><br><span class="line"></span><br><span class="line"><span class="section"># record-list</span></span><br><span class="line"></span><br><span class="line"><span class="bullet">*</span> x</span><br><span class="line"></span><br><span class="line"><span class="section"># home-record-list</span></span><br><span class="line"></span><br><span class="line"><span class="bullet">*</span> x</span><br><span class="line"></span><br><span class="line"><span class="section"># reference-site-list</span></span><br><span class="line"></span><br><span class="line"><span class="strong">**theme**</span></span><br><span class="line"><span class="quote">&gt; <span class="emphasis">* [<span class="string">xplorist.tech website</span>](<span class="link">https://www.xplorist.tech/</span>)</span></span></span><br><span class="line"><span class="emphasis"><span class="quote"></span></span></span><br><span class="line"><span class="emphasis"><span class="quote"># inside-post-link-list</span></span></span><br><span class="line"><span class="emphasis"><span class="quote"></span></span></span><br><span class="line"><span class="emphasis"><span class="quote"><span class="strong">**theme**</span></span></span></span><br><span class="line"><span class="emphasis"><span class="quote">&gt; *</span> &#123;% post<span class="emphasis">_link hello-world &#x27;通往 hello world 文章的链接&#x27; %&#125;</span></span></span><br><span class="line"><span class="emphasis"><span class="quote">&gt; * &#123;% post_</span>link template/hexo-diary-template &#x27;通往hexo-diary-template文章的链接&#x27; %&#125;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="命令行创建post和diary"><a href="#命令行创建post和diary" class="headerlink" title="命令行创建post和diary"></a>命令行创建post和diary</h2><ul>
+<li><p>post 文章</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new post --path folder-name/file-name <span class="string">&quot;title-name&quot;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>diary 日志</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new diary --path diary/2020/10/22 <span class="string">&quot;diary 2020-10-22&quot;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="命令行实例"><a href="#命令行实例" class="headerlink" title="命令行实例"></a>命令行实例</h2><h3 id="创建hexo-diary-template"><a href="#创建hexo-diary-template" class="headerlink" title="创建hexo-diary-template"></a>创建hexo-diary-template</h3><ul>
+<li><p>命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new post --path template/hexo-diary-template <span class="string">&quot;hexo diary template&quot;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>结果</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">D:\xplorist\notebookx&gt;hexo new post --path template/hexo-diary-template <span class="string">&quot;hexo diary template&quot;</span></span><br><span class="line">INFO  Validating config</span><br><span class="line">INFO  ==================================</span><br><span class="line">  ███╗   ██╗███████╗██╗  ██╗████████╗</span><br><span class="line">  ████╗  ██║██╔════╝╚██╗██╔╝╚══██╔══╝</span><br><span class="line">  ██╔██╗ ██║█████╗   ╚███╔╝    ██║</span><br><span class="line">  ██║╚██╗██║██╔══╝   ██╔██╗    ██║</span><br><span class="line">  ██║ ╚████║███████╗██╔╝ ██╗   ██║</span><br><span class="line">  ╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝   ╚═╝</span><br><span class="line">========================================</span><br><span class="line">NexT version 8.0.1</span><br><span class="line">Documentation: https://theme-next.js.org</span><br><span class="line">========================================</span><br><span class="line">INFO  Created: D:\xplorist\notebookx\<span class="built_in">source</span>\_posts\template\hexo-diary-template.md</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="配置菜单栏并在source文件夹中添加子文件夹"><a href="#配置菜单栏并在source文件夹中添加子文件夹" class="headerlink" title="配置菜单栏并在source文件夹中添加子文件夹"></a>配置菜单栏并在source文件夹中添加子文件夹</h2><ul>
+<li><p>配置菜单栏,修改_config.next.yml</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># _config.next.yml</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># --解释: 取消home，about，tags，categories，archives的注释，显示左边的目录--</span></span><br><span class="line"><span class="attr">menu:</span></span><br><span class="line">  <span class="comment">#home: / || fa fa-home</span></span><br><span class="line">  <span class="comment">#about: /about/ || fa fa-user</span></span><br><span class="line">  <span class="comment">#tags: /tags/ || fa fa-tags</span></span><br><span class="line">  <span class="comment">#categories: /categories/ || fa fa-th</span></span><br><span class="line">  <span class="comment">#archives: /archives/ || fa fa-archive</span></span><br><span class="line">  <span class="comment">#schedule: /schedule/ || fa fa-calendar</span></span><br><span class="line">  <span class="comment">#sitemap: /sitemap.xml || fa fa-sitemap</span></span><br><span class="line">  <span class="comment">#commonweal: /404/ || fa fa-heartbeat</span></span><br><span class="line">  <span class="attr">home:</span> <span class="string">/</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-home</span></span><br><span class="line">  <span class="attr">about:</span> <span class="string">/about/</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-user</span></span><br><span class="line">  <span class="attr">tags:</span> <span class="string">/tags/</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-tags</span></span><br><span class="line">  <span class="attr">categories:</span> <span class="string">/categories/</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-th</span></span><br><span class="line">  <span class="attr">archives:</span> <span class="string">/archives/</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-archive</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加categories文件夹,并在其中添加index.md, <strong>执行此步操作后，左边的菜单栏的 categories 菜单才会有内容</strong></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- index.md --&gt;</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line">title: categories</span><br><span class="line"><span class="section">type: categories</span></span><br><span class="line"><span class="section">---</span></span><br></pre></td></tr></table></figure></li>
+<li><p>添加tags文件夹,并在其中添加index.md, <strong>执行此步操作后，左边的菜单栏的 tags 菜单才会有内容</strong></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- index.md --&gt;</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line">title: tags</span><br><span class="line"><span class="section">type: tags</span></span><br><span class="line"><span class="section">---</span></span><br></pre></td></tr></table></figure></li>
+<li><p>添加about文件夹,并在其中添加index.md, <strong>执行此步操作后，左边的菜单栏的 about 菜单才会有内容</strong></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- index.md --&gt;</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line">title: about</span><br><span class="line"><span class="section">type: about</span></span><br><span class="line"><span class="section">---</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加images文件夹，并在其中添加头像图片xplorist.jpg,修改_config.next.yml</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># _config.next.yml</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># --解释: custom_logo 改为 /images/xplorist.jpg， 自定义头像logo --</span></span><br><span class="line"><span class="comment"># Custom Logo (Warning: Do not support scheme Mist)</span></span><br><span class="line"><span class="comment">#custom_logo: #/uploads/custom-logo.jpg</span></span><br><span class="line"><span class="attr">custom_logo:</span> <span class="string">/images/xplorist.jpg</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="添加插件"><a href="#添加插件" class="headerlink" title="添加插件"></a>添加插件</h2><h3 id="添加hexo-generator-searchdb插件"><a href="#添加hexo-generator-searchdb插件" class="headerlink" title="添加hexo-generator-searchdb插件"></a>添加hexo-generator-searchdb插件</h3><ul>
+<li>命令<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add hexo-generator-searchdb</span><br></pre></td></tr></table></figure></li>
+<li>配置_config.yml (注意：不是next主题的配置文件哦，是自己创建的hexo项目的配置文件)<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># _config.yml</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ----------------- sepeate line -----------------------</span></span><br><span class="line"><span class="comment"># xplorist custom</span></span><br><span class="line"><span class="comment"># Plugins</span></span><br><span class="line"><span class="comment"># Plugin: hexo-generator-searchdb</span></span><br><span class="line"><span class="attr">search:</span></span><br><span class="line">  <span class="attr">path:</span> <span class="string">search.xml</span></span><br><span class="line">  <span class="attr">field:</span> <span class="string">post</span></span><br><span class="line">  <span class="attr">content:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">format:</span> <span class="string">html</span></span><br></pre></td></tr></table></figure></li>
+<li>配置_config.next.yml<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># _config.next.yml</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># --解释：enable 改为 true, 打开本地搜素，左边的菜单上会显示搜索菜单 --</span></span><br><span class="line"><span class="attr">local_search:</span></span><br><span class="line">  <span class="comment">#enable: false</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="修改网站相关信息"><a href="#修改网站相关信息" class="headerlink" title="修改网站相关信息"></a>修改网站相关信息</h2><h3 id="修改菜单栏信息"><a href="#修改菜单栏信息" class="headerlink" title="修改菜单栏信息"></a>修改菜单栏信息</h3><ul>
+<li>修改_config.yml<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># _config.yml</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Site</span></span><br><span class="line"><span class="comment">#title: Hexo</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">Xplorist</span></span><br><span class="line"><span class="comment">#subtitle: &#x27;&#x27;</span></span><br><span class="line"><span class="attr">subtitle:</span> <span class="string">&#x27;Technology Blog&#x27;</span></span><br><span class="line"><span class="comment">#description: &#x27;&#x27;</span></span><br><span class="line"><span class="attr">description:</span> <span class="string">&#x27;Exploration, a journey that never ends.&#x27;</span></span><br><span class="line"><span class="comment">#keywords:</span></span><br><span class="line"><span class="attr">keywords:</span> <span class="string">xplorist</span></span><br><span class="line"><span class="comment">#author: John Doe</span></span><br><span class="line"><span class="attr">author:</span> <span class="string">xplorist</span></span><br><span class="line"><span class="attr">language:</span> <span class="string">en</span></span><br><span class="line"><span class="attr">timezone:</span> <span class="string">&#x27;&#x27;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="修改about的信息"><a href="#修改about的信息" class="headerlink" title="修改about的信息"></a>修改about的信息</h3><ul>
+<li>修改about&#x2F;index.md<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: about</span><br><span class="line"><span class="section">type: about</span></span><br><span class="line"><span class="section">---</span></span><br><span class="line"></span><br><span class="line"><span class="section"># 联系方式</span></span><br><span class="line"></span><br><span class="line"><span class="bullet">*</span> email: xplorist@163.com</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="添加代码块复制功能"><a href="#添加代码块复制功能" class="headerlink" title="添加代码块复制功能"></a>添加代码块复制功能</h2><ul>
+<li>配置 _config.next.yml<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># _config.next.yml</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ---解释: copy_button 的 enable 改为 true, 打开代码块复制功能--</span></span><br><span class="line"></span><br><span class="line"><span class="attr">codeblock:</span></span><br><span class="line">  <span class="comment"># Code Highlight theme</span></span><br><span class="line">  <span class="comment"># All available themes: https://theme-next.js.org/highlight/</span></span><br><span class="line">  <span class="attr">theme:</span></span><br><span class="line">    <span class="attr">light:</span> <span class="string">default</span></span><br><span class="line">    <span class="attr">dark:</span> <span class="string">tomorrow-night</span></span><br><span class="line">  <span class="attr">prism:</span></span><br><span class="line">    <span class="attr">light:</span> <span class="string">prism</span></span><br><span class="line">    <span class="attr">dark:</span> <span class="string">prism-dark</span></span><br><span class="line">  <span class="comment"># Add copy button on codeblock</span></span><br><span class="line">  <span class="attr">copy_button:</span></span><br><span class="line">    <span class="comment">#enable: false</span></span><br><span class="line">    <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">    <span class="comment"># Available values: default | flat | mac</span></span><br><span class="line">    <span class="attr">style:</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h1><ul>
+<li>命令<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">hexo init project-name</span><br><span class="line"></span><br><span class="line">hexo new post --path folder-name/file-name <span class="string">&quot;title-name&quot;</span></span><br><span class="line"></span><br><span class="line">hexo new diary --path diary/2020/10/22 <span class="string">&quot;diary 2020-10-22&quot;</span></span><br><span class="line"></span><br><span class="line">hexo server</span><br><span class="line"></span><br><span class="line">hexo generate</span><br><span class="line"></span><br><span class="line">hexo generate --watch</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul class="copyright-info-content">
+        <li>本文标题：安装Hexo和Next主题过程记录</li>
+        <li>本文作者：Xplorist</li>
+        <li>创建时间：2020-10-22 10:46:44</li>
+        <li>
+            本文链接：https://xplorist.tech/2020/10/22/9ebf81f92310/
+        </li>
+        <li>
+            版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/hexo/">#hexo</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/hexo-theme-next/">#hexo-theme-next</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2020/10/22/03d4247c64bd/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">GCP上搭建GitLab过程记录</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2020/10/21/114dda78b50f/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">2020-10-21-x</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments"></i>&nbsp;评论
+    </div>
+    
+
+        
+            
+
+
+    <div id="gitalk-container"></div>
+    <script 
+            src="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js"></script>
+    <script >
+
+      function loadGitalk() {
+        let __gitalk__pathname = decodeURI(location.pathname);
+        const __gitalk__pathnameLength = __gitalk__pathname.length;
+        const __gitalk__pathnameMaxLength = 50;
+        if (__gitalk__pathnameLength > __gitalk__pathnameMaxLength) {
+          __gitalk__pathname = __gitalk__pathname.substring(0, __gitalk__pathnameMaxLength - 3) + '...';
+        }
+
+        try {
+
+          Gitalk && new Gitalk({
+            clientID: '24c227c71f9bb758a554',
+            clientSecret: '724a45a68d355acb27c19a61d15fbb7dee34db4e',
+            repo: 'hexo-site-comments',
+            owner: 'Xplorist',
+            admin: 'Xplorist',
+            id: __gitalk__pathname,
+            language: 'zh-CN'
+          }).render('gitalk-container');
+
+        } catch (e) {
+          window.Gitalk = null;
+        }
+      }
+
+      if ('false') {
+        const loadGitalkTimeout = setTimeout(() => {
+          loadGitalk();
+          clearTimeout(loadGitalkTimeout);
+        }, 1000);
+      } else {
+        window.addEventListener('DOMContentLoaded', loadGitalk);
+      }
+    </script>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            
+<footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+                <span>2020</span> -
+            
+            2023
+            
+                &nbsp;<i class="fas fa-heart icon-animate"></i>
+                &nbsp;<a href="/">Xplorist</a>
+            
+        </div>
+        
+            <script async 
+                    src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    访问人数&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                
+                
+                    总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题
+            &nbsp;
+            <a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.8</a>
+        </div>
+        
+            <div class="icp-info info-item">
+                <a target="_blank" rel="nofollow"
+                   href="https://beian.miit.gov.cn"
+                >
+                    蜀ICP备20002343号
+                </a>
+            </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-up-right-and-down-left-from-center"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E4%BB%A5%E5%8F%8A%E7%89%88%E6%9C%AC"><span class="nav-number">1.</span> <span class="nav-text">开发环境以及版本</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E8%BD%AF%E4%BB%B6%E7%8E%AF%E5%A2%83%E5%91%BD%E4%BB%A4%E5%8F%8A%E7%BB%93%E6%9E%9C"><span class="nav-number">1.1.</span> <span class="nav-text">查看软件环境命令及结果</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BD%AF%E4%BB%B6%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87"><span class="nav-number">2.</span> <span class="nav-text">软件环境准备</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85hexo-cli"><span class="nav-number">2.1.</span> <span class="nav-text">安装hexo-cli</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAhexo%E9%A1%B9%E7%9B%AE"><span class="nav-number">2.2.</span> <span class="nav-text">创建hexo项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85hexo-theme-next"><span class="nav-number">2.3.</span> <span class="nav-text">安装hexo-theme-next</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-config-yml%E4%BF%AE%E6%94%B9theme"><span class="nav-number">2.4.</span> <span class="nav-text">配置_config.yml修改theme</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-config-next-yml"><span class="nav-number">2.5.</span> <span class="nav-text">配置_config.next.yml</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEscaffolds%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%AD%E7%9A%84%E6%A8%A1%E6%9D%BF"><span class="nav-number">2.6.</span> <span class="nav-text">配置scaffolds文件夹中的模板</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%88%9B%E5%BB%BApost%E5%92%8Cdiary"><span class="nav-number">2.7.</span> <span class="nav-text">命令行创建post和diary</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%AE%9E%E4%BE%8B"><span class="nav-number">2.8.</span> <span class="nav-text">命令行实例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAhexo-diary-template"><span class="nav-number">2.8.1.</span> <span class="nav-text">创建hexo-diary-template</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E8%8F%9C%E5%8D%95%E6%A0%8F%E5%B9%B6%E5%9C%A8source%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%AD%E6%B7%BB%E5%8A%A0%E5%AD%90%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="nav-number">2.9.</span> <span class="nav-text">配置菜单栏并在source文件夹中添加子文件夹</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E6%8F%92%E4%BB%B6"><span class="nav-number">2.10.</span> <span class="nav-text">添加插件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0hexo-generator-searchdb%E6%8F%92%E4%BB%B6"><span class="nav-number">2.10.1.</span> <span class="nav-text">添加hexo-generator-searchdb插件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E7%BD%91%E7%AB%99%E7%9B%B8%E5%85%B3%E4%BF%A1%E6%81%AF"><span class="nav-number">2.11.</span> <span class="nav-text">修改网站相关信息</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E8%8F%9C%E5%8D%95%E6%A0%8F%E4%BF%A1%E6%81%AF"><span class="nav-number">2.11.1.</span> <span class="nav-text">修改菜单栏信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9about%E7%9A%84%E4%BF%A1%E6%81%AF"><span class="nav-number">2.11.2.</span> <span class="nav-text">修改about的信息</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E4%BB%A3%E7%A0%81%E5%9D%97%E5%A4%8D%E5%88%B6%E5%8A%9F%E8%83%BD"><span class="nav-number">2.12.</span> <span class="nav-text">添加代码块复制功能</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="nav-number">3.</span> <span class="nav-text">常用命令</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-block-tools.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>

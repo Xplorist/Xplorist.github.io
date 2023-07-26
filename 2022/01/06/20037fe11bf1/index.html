@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Xplorist">
+    
+    <title>
+        
+            动态规划-背包问题 |
+        
+        Xplorist
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.svg">
+    
+<link rel="stylesheet" href="/fontawesome/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/brands.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"zh-CN","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","logo":"/images/logo.svg","favicon":"/images/logo.svg","avatar":"/images/Water.jpg","left_side_width":"300px","content_max_width":"1080px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"header_transparent":true,"background_img":"/images/dawn-in-the-valley.jpg","description":"Exploration, a journey that never ends。","font_color":null,"hitokoto":{"enable":false}},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":false},"code_copy":{},"code_block_tools":{"enable":true,"style":"mac"},"side_tools":{},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.8"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"};
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="/images/logo.svg">
+                </a>
+            
+            <a class="logo-title" href="/">
+               Xplorist
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                分类
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                友链
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                关于
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">分类</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">标签</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links">友链</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">关于</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">动态规划-背包问题</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/Water.jpg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Xplorist</span>
+                        
+                            <span class="author-label">Lv6</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-01-06 00:11:00</span>
+        <span class="mobile">2022-01-06 00:11</span>
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/Algorithm/">Algorithm</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/Algorithm/">Algorithm</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h2 id="动态规划-背包问题"><a href="#动态规划-背包问题" class="headerlink" title="动态规划-背包问题"></a>动态规划-背包问题</h2><h2 id="reference-site-list"><a href="#reference-site-list" class="headerlink" title="reference-site-list"></a>reference-site-list</h2><blockquote>
+<ul>
+<li><a class="link"   target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98" >维基百科 - 背包问题<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://blog.csdn.net/u013445530/article/details/40210587" >01背包问题吐血详解<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://www.kancloud.cn/kancloud/pack/70124" >背包问题九讲<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/93857890" >动态规划之背包问题系列<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://juejin.cn/post/6946465522116460551" >算法-动态规划（有依赖的背包问题-牛客网购物车题）<i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+</blockquote>
+<h2 id="关于背包问题"><a href="#关于背包问题" class="headerlink" title="关于背包问题"></a>关于背包问题</h2><ul>
+<li>看了一天的背包问题相关的东西，最开始从华为108道算法题中的第16道开始，最开始用自己探索发现的列举组合方案，通过了很多小范围的测试用例，但是一个25个物品的测试用例就一直报内存溢出，无奈啊，只好去研究动态规划(dynamic programming, 简称dp)问题，然后发现背包问题和这道题很相似，然后就开始了被虐之旅，查了维基百科，很神奇的公式，一直想要理解，然后又继续查资料，继续理解，但是还是脑子挺懵的，但是体会到了数学抽象的强大，直接假设有最大值，然后去寻找规律，真的神奇。规律用逻辑可以解释，但是这种思维模型和平常接触到的东西不太一样，理解起来有点吃力。只能说，学海无涯，数学里随便一个东西都能吊打你现有的思维，说实话，靠自己想真的想不出来，学习真的很重要，学习和思考同样重要。</li>
+</ul>
+<h2 id="01背包问题"><a href="#01背包问题" class="headerlink" title="01背包问题"></a>01背包问题</h2><ul>
+<li>题目</li>
+</ul>
+<blockquote>
+<p>假设现有容量10kg的背包，另外有3个物品，分别为a1，a2，a3。<br>物品a1重量为3kg，价值为4；物品a2重量为4kg，价值为5；物品a3重量为5kg，价值为6。<br>背包能装下的物品的总价值最大是多少？</p>
+</blockquote>
+<ul>
+<li>分析</li>
+</ul>
+<p>公式：<br><img src="/images/Algorithm/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92-01%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E5%85%AC%E5%BC%8F.png" alt="动态规划-01背包问题公式.png"></p>
+<p>表格：</p>
+<p><img src="/images/Algorithm/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92-01%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98.png" alt="动态规划-01背包问题.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">i = 0 时，ans[i][j] = 0</span><br><span class="line">j &lt; weights[i]  时，ans[i][j] = ans[i - 1][j]</span><br><span class="line">j &gt;= weights[i] 时，ans[i][j] = max&#123;ans[i - 1][j], prices[i] + ans[i – 1][j – weights[i]]&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>代码</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="comment">//test();</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> <span class="string">&quot;10 3\n&quot;</span></span><br><span class="line">                + <span class="string">&quot;3 4\n&quot;</span></span><br><span class="line">                + <span class="string">&quot;4 5\n&quot;</span></span><br><span class="line">                + <span class="string">&quot;5 6\n&quot;</span>;</span><br><span class="line">        String[] arr = str.split(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">        process(arr);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">test</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">Scanner</span> <span class="variable">scanner</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line">        <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        String[] arr = <span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">while</span> (scanner.hasNextLine()) &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> scanner.nextLine();</span><br><span class="line">            <span class="keyword">if</span> (sum == <span class="number">0</span>) &#123;</span><br><span class="line">                String[] strings = str.split(<span class="string">&quot; &quot;</span>);</span><br><span class="line">                sum = Integer.parseInt(strings[<span class="number">1</span>]) + <span class="number">1</span>;</span><br><span class="line">                count = <span class="number">0</span>;</span><br><span class="line">                arr = <span class="keyword">new</span> <span class="title class_">String</span>[sum];</span><br><span class="line">            &#125;</span><br><span class="line">            arr[count] = str;</span><br><span class="line">            sum--;</span><br><span class="line">            count++;</span><br><span class="line">            <span class="keyword">if</span> (sum == <span class="number">0</span>) &#123;</span><br><span class="line">                process(arr);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        scanner.close();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">process</span><span class="params">(String[] arr)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">str0</span> <span class="operator">=</span> arr[<span class="number">0</span>];</span><br><span class="line">        String[] strings0 = str0.split(<span class="string">&quot; &quot;</span>);</span><br><span class="line">        <span class="type">int</span> <span class="variable">weightMax</span> <span class="operator">=</span> Integer.parseInt(strings0[<span class="number">0</span>]);</span><br><span class="line">        <span class="type">int</span> <span class="variable">num</span> <span class="operator">=</span> Integer.parseInt(strings0[<span class="number">1</span>]);</span><br><span class="line">        <span class="type">int</span> <span class="variable">length</span> <span class="operator">=</span> arr.length;</span><br><span class="line">        <span class="type">int</span>[] weights = <span class="keyword">new</span> <span class="title class_">int</span>[length];</span><br><span class="line">        <span class="type">int</span>[] prices = <span class="keyword">new</span> <span class="title class_">int</span>[length];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; length; i++) &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> arr[i];</span><br><span class="line">            String[] strings = str.split(<span class="string">&quot; &quot;</span>);</span><br><span class="line">            weights[i] = Integer.parseInt(strings[<span class="number">0</span>]);</span><br><span class="line">            prices[i] = Integer.parseInt(strings[<span class="number">1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">int</span>[][] ans = <span class="keyword">new</span> <span class="title class_">int</span>[num + <span class="number">1</span>][weightMax + <span class="number">1</span>];</span><br><span class="line">        getMaxPrice(ans, weights, prices, num, weightMax);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">getMaxPrice</span><span class="params">(<span class="type">int</span>[][] ans, <span class="type">int</span>[] weights, <span class="type">int</span>[] prices, <span class="type">int</span> num, <span class="type">int</span> weightMax)</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; ans.length; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; ans[i].length; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (i == <span class="number">0</span>) &#123;</span><br><span class="line">                    ans[i][j] = <span class="number">0</span>;</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (j &lt; weights[i]) &#123;</span><br><span class="line">                    ans[i][j] = ans[i - <span class="number">1</span>][j];</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="type">int</span> <span class="variable">choose</span> <span class="operator">=</span> prices[i] + ans[i - <span class="number">1</span>][j - weights[i]];</span><br><span class="line">                    ans[i][j] = Math.max(choose, ans[i - <span class="number">1</span>][j]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(ans[num][weightMax]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>空间优化</li>
+</ul>
+<p>将二维数组替换为一维数组</p>
+<blockquote>
+<p>关键是循环的时候 j 层倒序循环，从后面往前走，ans[j - weights[i]]这个值就还是上次循环i-1的值</p>
+</blockquote>
+<p>代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">getMaxPrice</span><span class="params">(<span class="type">int</span>[] weights, <span class="type">int</span>[] prices, <span class="type">int</span> weightMax)</span> &#123;</span><br><span class="line">    <span class="type">int</span>[] ans = <span class="keyword">new</span> <span class="title class_">int</span>[weightMax + <span class="number">1</span>]; <span class="comment">// 优化为一维数组</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; weights.length; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> weightMax; j &gt;= <span class="number">0</span>; j--) &#123; <span class="comment">// 倒序循环，从后面往前走，ans[j - weights[i]]这个值就还是上次循环i-1的值</span></span><br><span class="line">            <span class="keyword">if</span> (j &gt;= weights[i]) &#123;</span><br><span class="line">                ans[j] = Math.max(ans[j], prices[i] + ans[j - weights[i]]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(ans[weightMax]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在背包物品价值最大值时，判断每件物品是否放入，确定背包中总共有哪些物品</li>
+</ul>
+<blockquote>
+<p>i &#x3D; 0 时，ans[i][j] &#x3D; 0<br>j &lt; weights[i]  时，ans[i][j] &#x3D; ans[i - 1][j]<br>j &gt;&#x3D; weights[i] 时，ans[i][j] &#x3D; max{ans[i - 1][j], prices[i] + ans[i – 1][j – weights[i]]}</p>
+</blockquote>
+<p>从上面的公式逻辑，就可以判断第i个物品是否放入</p>
+<blockquote>
+<ol>
+<li><p>j &lt; weights[i] 时，没放，坐标移动到 ans[i - 1][j]</p>
+</li>
+<li><p>j &gt;&#x3D; weights[i] 时,</p>
+<ol>
+<li>ans[i][j] &#x3D;&#x3D; ans[i - 1][j], 没放，坐标移动到 ans[i - 1][j]</li>
+<li>ans[i][j] !&#x3D; ans[i - 1][j], 放了，坐标移动到 ans[i – 1][j – weights[i]]</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<p>就这样一直在二维数组里向下循环，当i &#x3D;&#x3D; 0 时结束循环，就确定了背包中总共有哪些物品了</p>
+<h2 id="华为HJ16-购物单"><a href="#华为HJ16-购物单" class="headerlink" title="华为HJ16-购物单"></a>华为HJ16-购物单</h2><ul>
+<li><p>心态崩了，这道题卡了好久，一直想独立做出来，把0-1背包问题资料也研究了很久，但是做出来的算法还是不对，最后还是参考网上的代码才跑通，但还是不理解为什么那么写，不想再在这个问题上浪费时间了，后面再来看看吧，被算法虐得有点难受了。这下心态就正常了吧，不再那么不可一世了吧，开始产生对数学和计算机然后延伸到宇宙规律的敬畏了吧。观念要开始转变，不是每个人什么都会，不是每个人都是全能的，一份辛苦一份才，从别人那里虚心学习，尊重别人的成果，要传承中国文化里面的德，而不是西方的盲目自大狂妄，西方的理性还是值得学习的。</p>
+</li>
+<li><p>成长心理，积极的字面意思就是增加的一端，遇到挫折问题，不是一味地情绪反映，而是理性看待，正视现实，不会就是不会，这就是真实的自己，看到自己成长的空间，想的不是发泄情绪，而是怎么努力去提高自己。一个人越是想证明自己很强，表现得很自负，看不起其他人，藐视一切，清高，其实他内心是真的自卑。转变观念很重要，要懂得谦卑敬畏，勤奋刻苦。</p>
+</li>
+<li><p>题目</p>
+</li>
+</ul>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></td><td class="code"><pre><span class="line">HJ16 购物单</span><br><span class="line">题目</span><br><span class="line">题解(60)</span><br><span class="line">讨论(412)</span><br><span class="line">排行</span><br><span class="line">中等  通过率：20.15%  时间限制：1秒  空间限制：32M</span><br><span class="line">知识点</span><br><span class="line">动态规划</span><br><span class="line">warning 校招时部分企业笔试将禁止编程题跳出页面，为提前适应，练习时请使用在线自测，而非本地IDE。</span><br><span class="line">描述</span><br><span class="line">王强今天很开心，公司发给N元的年终奖。王强决定把年终奖用于购物，他把想买的物品分为两类：主件与附件，附件是从属于某个主件的，下表就是一些主件与附件的例子：</span><br><span class="line"></span><br><span class="line">主件	附件</span><br><span class="line">电脑	打印机，扫描仪</span><br><span class="line">书柜	图书</span><br><span class="line">书桌	台灯，文具</span><br><span class="line">工作椅	无</span><br><span class="line"></span><br><span class="line">如果要买归类为附件的物品，必须先买该附件所属的主件。每个主件可以有 0 个、 1 个或 2 个附件。附件不再有从属于自己的附件。王强想买的东西很多，为了不超出预算，他把每件物品规定了一个重要度，分为 5 等：用整数 1 ~ 5 表示，第 5 等最重要。他还从因特网上查到了每件物品的价格（都是 10 元的整数倍）。他希望在不超过 N 元（可以等于 N 元）的前提下，使每件物品的价格与重要度的乘积的总和最大。</span><br><span class="line">    设第 j 件物品的价格为 v[j] ，重要度为 w[j] ，共选中了 k 件物品，编号依次为 j 1 ， j 2 ，……， j k ，则所求的总和为：</span><br><span class="line">v[j 1 ]*w[j 1 ]+v[j 2 ]*w[j 2 ]+ … +v[j k ]*w[j k ] 。（其中 * 为乘号）</span><br><span class="line">    请你帮助王强设计一个满足要求的购物单。</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">输入描述：</span><br><span class="line">输入的第 1 行，为两个正整数，用一个空格隔开：N m</span><br><span class="line"></span><br><span class="line">（其中 N （ &lt;32000 ）表示总钱数， m （ &lt;60 ）为希望购买物品的个数。）</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">从第 2 行到第 m+1 行，第 j 行给出了编号为 j-1 的物品的基本数据，每行有 3 个非负整数 v p q</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">（其中 v 表示该物品的价格（ v&lt;10000 ）， p 表示该物品的重要度（ 1 ~ 5 ）， q 表示该物品是主件还是附件。如果 q=0 ，表示该物品为主件，如果 q&gt;0 ，表示该物品为附件， q 是所属主件的编号）</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">输出描述：</span><br><span class="line"> 输出文件只有一个正整数，为不超过总钱数的物品的价格与重要度乘积的总和的最大值（ &lt;200000 ）。</span><br><span class="line">示例1</span><br><span class="line">输入：</span><br><span class="line">1000 5</span><br><span class="line">800 2 0</span><br><span class="line">400 5 1</span><br><span class="line">300 5 1</span><br><span class="line">400 3 0</span><br><span class="line">500 2 0</span><br><span class="line"></span><br><span class="line">输出：</span><br><span class="line">2200</span><br><span class="line"></span><br><span class="line">示例2：</span><br><span class="line">输入:</span><br><span class="line">50 5</span><br><span class="line">20 3 5</span><br><span class="line">20 3 5</span><br><span class="line">10 3 0</span><br><span class="line">10 2 0</span><br><span class="line">10 1 0</span><br><span class="line"></span><br><span class="line">输出:</span><br><span class="line">130</span><br><span class="line"></span><br><span class="line">示例3</span><br><span class="line">14000 25</span><br><span class="line">100 3 0</span><br><span class="line">400 5 0</span><br><span class="line">1300 5 1</span><br><span class="line">1400 2 2</span><br><span class="line">500 2 0</span><br><span class="line">800 2 0</span><br><span class="line">1400 5 0</span><br><span class="line">300 5 0</span><br><span class="line">1400 3 0</span><br><span class="line">500 2 0</span><br><span class="line">1800 4 0</span><br><span class="line">440 5 10</span><br><span class="line">1340 5 10</span><br><span class="line">1430 3 0</span><br><span class="line">500 2 0</span><br><span class="line">800 2 0</span><br><span class="line">1400 5 0</span><br><span class="line">300 4 0</span><br><span class="line">1400 3 0</span><br><span class="line">500 2 0</span><br><span class="line">1800 2 0</span><br><span class="line">400 5 20</span><br><span class="line">1310 5 20</span><br><span class="line">1400 3 0</span><br><span class="line">500 2 0</span><br><span class="line"></span><br><span class="line">输出:</span><br><span class="line">59350</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>代码</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        test();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">test</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">Scanner</span> <span class="variable">scanner</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line">        <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        String[] arr = <span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">while</span> (scanner.hasNextLine()) &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> scanner.nextLine();</span><br><span class="line">            <span class="keyword">if</span> (sum == <span class="number">0</span>) &#123;</span><br><span class="line">                String[] strings = str.split(<span class="string">&quot; &quot;</span>);</span><br><span class="line">                sum = Integer.parseInt(strings[<span class="number">1</span>]) + <span class="number">1</span>;</span><br><span class="line">                count = <span class="number">0</span>;</span><br><span class="line">                arr = <span class="keyword">new</span> <span class="title class_">String</span>[sum];</span><br><span class="line">            &#125;</span><br><span class="line">            arr[count] = str;</span><br><span class="line">            sum--;</span><br><span class="line">            count++;</span><br><span class="line">            <span class="keyword">if</span> (sum == <span class="number">0</span>) &#123;</span><br><span class="line">                process(arr);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        scanner.close();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">process</span><span class="params">(String[] arr)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">str0</span> <span class="operator">=</span> arr[<span class="number">0</span>];</span><br><span class="line">        String[] strings0 = str0.split(<span class="string">&quot; &quot;</span>);</span><br><span class="line">        <span class="type">int</span> <span class="variable">moneyMax</span> <span class="operator">=</span> Integer.parseInt(strings0[<span class="number">0</span>]);</span><br><span class="line">        List&lt;Goods&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">item</span> <span class="operator">=</span> arr[i];</span><br><span class="line">            String[] strings = item.split(<span class="string">&quot; &quot;</span>);</span><br><span class="line">            <span class="type">int</span> <span class="variable">price</span> <span class="operator">=</span> Integer.parseInt(strings[<span class="number">0</span>]);</span><br><span class="line">            <span class="type">int</span> <span class="variable">worth</span> <span class="operator">=</span> Integer.parseInt(strings[<span class="number">1</span>]);</span><br><span class="line">            <span class="keyword">if</span> (price &lt;= moneyMax) &#123;</span><br><span class="line">                <span class="type">int</span> <span class="variable">num</span> <span class="operator">=</span> price * worth;</span><br><span class="line">                <span class="type">Goods</span> <span class="variable">goods</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Goods</span>();</span><br><span class="line">                goods.id = i;</span><br><span class="line">                goods.price = price;</span><br><span class="line">                goods.worth = worth;</span><br><span class="line">                goods.pid = Integer.parseInt(strings[<span class="number">2</span>]);</span><br><span class="line">                goods.num = num;</span><br><span class="line">                list.add(goods);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        sort(list);</span><br><span class="line">        getMax(list, moneyMax);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">getMax</span><span class="params">(List&lt;Goods&gt; list, <span class="type">int</span> moneyMax)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">num</span> <span class="operator">=</span> findScale(list, moneyMax);</span><br><span class="line">        <span class="type">int</span> <span class="variable">numMax</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        combine(list, num, moneyMax, numMax);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 排序</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">sort</span><span class="params">(List&lt;Goods&gt; list)</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; list.size() - <span class="number">1</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> i + <span class="number">1</span>; j &lt; list.size(); j++) &#123;</span><br><span class="line">                <span class="type">Goods</span> <span class="variable">gi</span> <span class="operator">=</span> list.get(i);</span><br><span class="line">                <span class="type">Goods</span> <span class="variable">gj</span> <span class="operator">=</span> list.get(j);</span><br><span class="line">                <span class="keyword">if</span> (gi.price &gt; gj.price) &#123;</span><br><span class="line">                    list.set(i, gj);</span><br><span class="line">                    list.set(j, gi);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 寻找至多几件物品（原理：最小的n个数相加都大于最大钱，则n件物品一定不满足要求）</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">findScale</span><span class="params">(List&lt;Main.Goods&gt; list, <span class="type">int</span> moneyMax)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">num</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; list.size(); i++) &#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">temp</span> <span class="operator">=</span> sum + list.get(i).price;</span><br><span class="line">            <span class="keyword">if</span> (temp &lt;= moneyMax) &#123;</span><br><span class="line">                sum = temp;</span><br><span class="line">                num = i + <span class="number">1</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> num;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 分组</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">combine</span><span class="params">(List&lt;Goods&gt; list, <span class="type">int</span> num, <span class="type">int</span> moneyMax, <span class="type">int</span> numMax)</span> &#123;</span><br><span class="line">        <span class="comment">// 从至多个数num开始找起组合，不满足条件就继续往下递减</span></span><br><span class="line">        <span class="comment">// 找出个数为num的所有组合</span></span><br><span class="line">        List&lt;List&lt;Integer&gt;&gt; comboList = findCombine(list, num);</span><br><span class="line">        <span class="keyword">for</span> (List&lt;Integer&gt; combo : comboList) &#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">sumMoney</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">            <span class="type">int</span> <span class="variable">sumNum</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (Integer index : combo) &#123;</span><br><span class="line">                <span class="type">Goods</span> <span class="variable">goods</span> <span class="operator">=</span> list.get(index);</span><br><span class="line">                <span class="comment">// pid &gt; 0时为从件，等于0时为主件</span></span><br><span class="line">                <span class="type">int</span> <span class="variable">pid</span> <span class="operator">=</span> goods.pid;</span><br><span class="line">                <span class="keyword">if</span> (pid &gt; <span class="number">0</span> &amp;&amp; !comboContains(list, combo, pid)) &#123;</span><br><span class="line">                    <span class="comment">// 只有从件，没有主件，为错误组合</span></span><br><span class="line">                    sumNum = <span class="number">0</span>; <span class="comment">// 不符合条件，归0</span></span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                sumMoney += goods.price;</span><br><span class="line">                sumNum += goods.num;</span><br><span class="line">                <span class="keyword">if</span> (sumMoney &gt; moneyMax) &#123;</span><br><span class="line">                    sumNum = <span class="number">0</span>; <span class="comment">// 不符合条件，归0</span></span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (sumNum &gt; <span class="number">0</span> &amp;&amp; sumNum &gt; numMax) &#123;</span><br><span class="line">                numMax = sumNum;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (num &gt; <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">maxNumInN</span> <span class="operator">=</span> findMaxNumInN(list, num - <span class="number">1</span>);</span><br><span class="line">            <span class="keyword">if</span> (numMax &lt; maxNumInN) &#123;</span><br><span class="line">                comboList = <span class="literal">null</span>;</span><br><span class="line">                <span class="comment">// 当前深度求得的最大值小于(num - 1)个数组合的最大值，继续往下递减</span></span><br><span class="line">                combine(list, num - <span class="number">1</span>, moneyMax, numMax);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                System.out.println(numMax);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.println(numMax);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 求个数为n的最大分数</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">findMaxNumInN</span><span class="params">(List&lt;Goods&gt; list, <span class="type">int</span> num)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="comment">// 按照分数排序</span></span><br><span class="line">        List&lt;Goods&gt; numList = sortByNum(list);</span><br><span class="line">        <span class="type">int</span> <span class="variable">size</span> <span class="operator">=</span> numList.size();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; num; i++) &#123;</span><br><span class="line">            sum += numList.get(size - (<span class="number">1</span> + i)).num;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> sum;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 按照分数排序</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> List&lt;Goods&gt; <span class="title function_">sortByNum</span><span class="params">(List&lt;Goods&gt; list)</span> &#123;</span><br><span class="line">        List&lt;Goods&gt; temp = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        <span class="comment">// 遍历，重新组装list，实现深拷贝</span></span><br><span class="line">        <span class="keyword">for</span> (Goods item : list) &#123;</span><br><span class="line">            <span class="type">Goods</span> <span class="variable">obj</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Goods</span>();</span><br><span class="line">            obj.id = item.id;</span><br><span class="line">            obj.price = item.price;</span><br><span class="line">            obj.worth = item.worth;</span><br><span class="line">            obj.pid = item.pid;</span><br><span class="line">            obj.num = item.num;</span><br><span class="line">            temp.add(obj);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; temp.size() - <span class="number">1</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> i + <span class="number">1</span>; j &lt; temp.size(); j++) &#123;</span><br><span class="line">                <span class="type">Goods</span> <span class="variable">gi</span> <span class="operator">=</span> temp.get(i);</span><br><span class="line">                <span class="type">Goods</span> <span class="variable">gj</span> <span class="operator">=</span> temp.get(j);</span><br><span class="line">                <span class="keyword">if</span> (gi.num &gt; gj.num) &#123;</span><br><span class="line">                    temp.set(i, gj);</span><br><span class="line">                    temp.set(j, gi);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> temp;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 遍历combo中是否有该pid的id的对象</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">boolean</span> <span class="title function_">comboContains</span><span class="params">(List&lt;Goods&gt; list, List&lt;Integer&gt; combo, <span class="type">int</span> pid)</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (Integer index : combo) &#123;</span><br><span class="line">            <span class="type">Goods</span> <span class="variable">goods</span> <span class="operator">=</span> list.get(index);</span><br><span class="line">            <span class="keyword">if</span> (goods.id == pid) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 找出个数为num的所有组合</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> List&lt;List&lt;Integer&gt;&gt; <span class="title function_">findCombine</span><span class="params">(List&lt;Goods&gt; list, <span class="type">int</span> num)</span> &#123;</span><br><span class="line">        <span class="comment">// 生成根节点数组</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">size</span> <span class="operator">=</span> list.size();</span><br><span class="line">        Node[] roots = <span class="keyword">new</span> <span class="title class_">Node</span>[size - num + <span class="number">1</span>];</span><br><span class="line">        <span class="comment">// 满足深度为num，所以范围是[0, list.size() - num]的闭区间</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; roots.length; i++) &#123;</span><br><span class="line">            <span class="type">Node</span> <span class="variable">node</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Node</span>();</span><br><span class="line">            node.index = i;</span><br><span class="line">            node.pid = -<span class="number">1</span>;</span><br><span class="line">            roots[i] = node;</span><br><span class="line">            <span class="comment">// 从根节点出发生成深度为num的树</span></span><br><span class="line">            generateTree(node, <span class="number">1</span>, num, size);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 遍历树，将所有组合保存到list中</span></span><br><span class="line">        List&lt;List&lt;Integer&gt;&gt; comboList = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (Node node : roots) &#123;</span><br><span class="line">            List&lt;Integer&gt; combo = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">            recurseTree(node, combo, comboList);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> comboList;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 递归生成树</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">generateTree</span><span class="params">(Node node, <span class="type">int</span> cur, <span class="type">int</span> deep, <span class="type">int</span> listSize)</span> &#123;</span><br><span class="line">        <span class="comment">// 找node的子节点</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">index</span> <span class="operator">=</span> node.index;</span><br><span class="line">        <span class="keyword">if</span> (cur &lt; deep &amp;&amp; index + <span class="number">1</span> &lt; listSize) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> index + <span class="number">1</span>; i &lt;= listSize - (deep - cur); i++) &#123;</span><br><span class="line">                <span class="type">Node</span> <span class="variable">child</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Node</span>();</span><br><span class="line">                child.index = i;</span><br><span class="line">                child.pid = index;</span><br><span class="line">                node.children.add(child);</span><br><span class="line">                generateTree(child, cur + <span class="number">1</span>, deep, listSize);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 递归遍历树</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">recurseTree</span><span class="params">(Node node, List&lt;Integer&gt; combo, List&lt;List&lt;Integer&gt;&gt; comboList)</span> &#123;</span><br><span class="line">        List&lt;Integer&gt; temp = deepCopy(combo); <span class="comment">// 深拷贝，缓存当前层级的结果,深拷贝是为了不影响上层的结果</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">index</span> <span class="operator">=</span> node.index;</span><br><span class="line">        temp.add(index);</span><br><span class="line">        List&lt;Node&gt; children = node.children;</span><br><span class="line">        <span class="keyword">if</span> (children.size() &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">for</span> (Node child : children) &#123;</span><br><span class="line">                recurseTree(child, temp, comboList);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            comboList.add(temp);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 深拷贝</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> List&lt;Integer&gt; <span class="title function_">deepCopy</span><span class="params">(List&lt;Integer&gt; combo)</span> &#123;</span><br><span class="line">        List&lt;Integer&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (Integer item : combo) &#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">val</span> <span class="operator">=</span> item;</span><br><span class="line">            list.add(val);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> list;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Goods</span> &#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="type">int</span> id;</span><br><span class="line">        <span class="keyword">public</span> <span class="type">int</span> price;</span><br><span class="line">        <span class="keyword">public</span> <span class="type">int</span> worth;</span><br><span class="line">        <span class="keyword">public</span> <span class="type">int</span> pid;</span><br><span class="line">        <span class="keyword">public</span> <span class="type">int</span> num;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Node</span> &#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="type">int</span> index;</span><br><span class="line">        <span class="keyword">public</span> <span class="type">int</span> pid;</span><br><span class="line">        <span class="keyword">public</span> List&lt;Node&gt; children = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>结果</li>
+</ul>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">执行出错</span><br><span class="line">请检查是否存在数组越界等非法访问情况</span><br><span class="line">Exception in thread &quot;main&quot; java.lang.OutOfMemoryError: Java heap space</span><br><span class="line">at Main$Node.&lt;init&gt;(Main.java:259)</span><br><span class="line">at Main.generateTree(Main.java:214)</span><br><span class="line">at Main.generateTree(Main.java:218)</span><br><span class="line">at Main.generateTree(Main.java:218)</span><br><span class="line">at Main.generateTree(Main.java:218)</span><br><span class="line">at Main.generateTree(Main.java:218)</span><br><span class="line">at Main.generateTree(Main.java:218)</span><br><span class="line">at Main.generateTree(Main.java:218)</span><br><span class="line">at Main.generateTree(Main.java:218)</span><br><span class="line">at Main.generateTree(Main.java:218)</span><br><span class="line">at Main.generateTree(Main.java:218)</span><br><span class="line">at Main.generateTree(Main.java:218)</span><br><span class="line">at Main.generateTree(Main.java:218)</span><br><span class="line">at Main.generateTree(Main.java:218)</span><br><span class="line">at Main.generateTree(Main.java:218)</span><br><span class="line">at Main.generateTree(Main.java:218)</span><br><span class="line">at Main.generateTree(Main.java:218)</span><br><span class="line">at Main.generateTree(Main.java:218)</span><br><span class="line">at Main.findCombine(Main.java:196)</span><br><span class="line">at Main.combine(Main.java:96)</span><br><span class="line">at Main.getMax(Main.java:59)</span><br><span class="line">at Main.process(Main.java:53)</span><br><span class="line">at Main.test(Main.java:25)</span><br><span class="line">at Main.main(Main.java:5)</span><br><span class="line">8/12 组用例通过</span><br><span class="line">运行时间</span><br><span class="line">1435ms</span><br><span class="line">占用内存</span><br><span class="line">80016KB</span><br></pre></td></tr></table></figure>
+<ul>
+<li>用例输入</li>
+</ul>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">14000 25</span><br><span class="line">100 3 0</span><br><span class="line">400 5 0</span><br><span class="line">1300 5 1</span><br><span class="line">1400 2 2</span><br><span class="line">500 2 0</span><br><span class="line">800 2 0</span><br><span class="line">1400 5 0</span><br><span class="line">300 5 0</span><br><span class="line">1400 3 0</span><br><span class="line">500 2 0</span><br><span class="line">1800 4 0</span><br><span class="line">440 5 10</span><br><span class="line">1340 5 10</span><br><span class="line">1430 3 0</span><br><span class="line">500 2 0</span><br><span class="line">800 2 0</span><br><span class="line">1400 5 0</span><br><span class="line">300 4 0</span><br><span class="line">1400 3 0</span><br><span class="line">500 2 0</span><br><span class="line">1800 2 0</span><br><span class="line">400 5 20</span><br><span class="line">1310 5 20</span><br><span class="line">1400 3 0</span><br><span class="line">500 2 0</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>预期输出</li>
+</ul>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">59350</span><br></pre></td></tr></table></figure>
+<ul>
+<li>测试用例代码</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> <span class="string">&quot;14000 25\n&quot;</span></span><br><span class="line">        + <span class="string">&quot;100 3 0\n&quot;</span></span><br><span class="line">        + <span class="string">&quot;400 5 0\n&quot;</span></span><br><span class="line">        + <span class="string">&quot;1300 5 1\n&quot;</span></span><br><span class="line">        + <span class="string">&quot;1400 2 2\n&quot;</span></span><br><span class="line">        + <span class="string">&quot;500 2 0\n&quot;</span></span><br><span class="line">        + <span class="string">&quot;800 2 0\n&quot;</span></span><br><span class="line">        + <span class="string">&quot;1400 5 0\n&quot;</span></span><br><span class="line">        + <span class="string">&quot;300 5 0\n&quot;</span></span><br><span class="line">        + <span class="string">&quot;1400 3 0\n&quot;</span></span><br><span class="line">        + <span class="string">&quot;500 2 0\n&quot;</span></span><br><span class="line">        + <span class="string">&quot;1800 4 0\n&quot;</span></span><br><span class="line">        + <span class="string">&quot;440 5 10\n&quot;</span></span><br><span class="line">        + <span class="string">&quot;1340 5 10\n&quot;</span></span><br><span class="line">        + <span class="string">&quot;1430 3 0\n&quot;</span></span><br><span class="line">        + <span class="string">&quot;500 2 0\n&quot;</span></span><br><span class="line">        + <span class="string">&quot;800 2 0\n&quot;</span></span><br><span class="line">        + <span class="string">&quot;1400 5 0\n&quot;</span></span><br><span class="line">        + <span class="string">&quot;300 4 0\n&quot;</span></span><br><span class="line">        + <span class="string">&quot;1400 3 0\n&quot;</span></span><br><span class="line">        + <span class="string">&quot;500 2 0\n&quot;</span></span><br><span class="line">        + <span class="string">&quot;1800 2 0\n&quot;</span></span><br><span class="line">        + <span class="string">&quot;400 5 20\n&quot;</span></span><br><span class="line">        + <span class="string">&quot;1310 5 20\n&quot;</span></span><br><span class="line">        + <span class="string">&quot;1400 3 0\n&quot;</span></span><br><span class="line">        + <span class="string">&quot;500 2 0\n&quot;</span>;</span><br><span class="line">String[] arr = str.split(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">process(arr);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>实际输出</li>
+</ul>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">59350</span><br></pre></td></tr></table></figure>
+
+<p>网上找的代码，跑通了，但还不是很理解原理</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="comment">//test();</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> <span class="string">&quot;14000 25\n&quot;</span></span><br><span class="line">                + <span class="string">&quot;100 3 0\n&quot;</span></span><br><span class="line">                + <span class="string">&quot;400 5 0\n&quot;</span></span><br><span class="line">                + <span class="string">&quot;1300 5 1\n&quot;</span></span><br><span class="line">                + <span class="string">&quot;1400 2 2\n&quot;</span></span><br><span class="line">                + <span class="string">&quot;500 2 0\n&quot;</span></span><br><span class="line">                + <span class="string">&quot;800 2 0\n&quot;</span></span><br><span class="line">                + <span class="string">&quot;1400 5 0\n&quot;</span></span><br><span class="line">                + <span class="string">&quot;300 5 0\n&quot;</span></span><br><span class="line">                + <span class="string">&quot;1400 3 0\n&quot;</span></span><br><span class="line">                + <span class="string">&quot;500 2 0\n&quot;</span></span><br><span class="line">                + <span class="string">&quot;1800 4 0\n&quot;</span></span><br><span class="line">                + <span class="string">&quot;440 5 10\n&quot;</span></span><br><span class="line">                + <span class="string">&quot;1340 5 10\n&quot;</span></span><br><span class="line">                + <span class="string">&quot;1430 3 0\n&quot;</span></span><br><span class="line">                + <span class="string">&quot;500 2 0\n&quot;</span></span><br><span class="line">                + <span class="string">&quot;800 2 0\n&quot;</span></span><br><span class="line">                + <span class="string">&quot;1400 5 0\n&quot;</span></span><br><span class="line">                + <span class="string">&quot;300 4 0\n&quot;</span></span><br><span class="line">                + <span class="string">&quot;1400 3 0\n&quot;</span></span><br><span class="line">                + <span class="string">&quot;500 2 0\n&quot;</span></span><br><span class="line">                + <span class="string">&quot;1800 2 0\n&quot;</span></span><br><span class="line">                + <span class="string">&quot;400 5 20\n&quot;</span></span><br><span class="line">                + <span class="string">&quot;1310 5 20\n&quot;</span></span><br><span class="line">                + <span class="string">&quot;1400 3 0\n&quot;</span></span><br><span class="line">                + <span class="string">&quot;500 2 0\n&quot;</span>;</span><br><span class="line">        String[] arr = str.split(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">        process(arr);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">test</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">Scanner</span> <span class="variable">scanner</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line">        <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        String[] arr = <span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">while</span> (scanner.hasNextLine()) &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> scanner.nextLine();</span><br><span class="line">            <span class="keyword">if</span> (sum == <span class="number">0</span>) &#123;</span><br><span class="line">                String[] strings = str.split(<span class="string">&quot; &quot;</span>);</span><br><span class="line">                sum = Integer.parseInt(strings[<span class="number">1</span>]) + <span class="number">1</span>;</span><br><span class="line">                count = <span class="number">0</span>;</span><br><span class="line">                arr = <span class="keyword">new</span> <span class="title class_">String</span>[sum];</span><br><span class="line">            &#125;</span><br><span class="line">            arr[count] = str;</span><br><span class="line">            sum--;</span><br><span class="line">            count++;</span><br><span class="line">            <span class="keyword">if</span> (sum == <span class="number">0</span>) &#123;</span><br><span class="line">                process(arr);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        scanner.close();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">process</span><span class="params">(String[] arr)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        Goods[] goodsArray = <span class="keyword">new</span> <span class="title class_">Goods</span>[arr.length - <span class="number">1</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">            String[] strArray = arr[i].split(<span class="string">&quot; &quot;</span>);</span><br><span class="line">            <span class="keyword">if</span> (i == <span class="number">0</span>) &#123;</span><br><span class="line">                n = Integer.parseInt(strArray[<span class="number">0</span>])/<span class="number">10</span>;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="type">int</span> <span class="variable">master</span> <span class="operator">=</span> Integer.parseInt(strArray[<span class="number">2</span>]);</span><br><span class="line">            <span class="type">int</span> <span class="variable">price</span> <span class="operator">=</span> Integer.parseInt(strArray[<span class="number">0</span>])/<span class="number">10</span>;</span><br><span class="line">            <span class="type">int</span> <span class="variable">value</span> <span class="operator">=</span> Integer.parseInt(strArray[<span class="number">1</span>]);</span><br><span class="line">            <span class="type">Goods</span> <span class="variable">tmp</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Goods</span>(master, price, value, <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;());</span><br><span class="line">            goodsArray[i - <span class="number">1</span>] = tmp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (Goods goods : goodsArray) &#123;</span><br><span class="line">            <span class="keyword">if</span> (goods.master &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                goodsArray[goods.master - <span class="number">1</span>].list.add(goods);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(shopDp(goodsArray, n) * <span class="number">10</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Goods</span> &#123;</span><br><span class="line">        Goods(<span class="type">int</span> master, <span class="type">int</span> price, <span class="type">int</span> value, List&lt;Goods&gt; list) &#123;</span><br><span class="line">            <span class="built_in">this</span>.master = master;</span><br><span class="line">            <span class="built_in">this</span>.price = price;</span><br><span class="line">            <span class="built_in">this</span>.value = value;</span><br><span class="line">            <span class="built_in">this</span>.list = list;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">int</span> master;</span><br><span class="line">        <span class="type">int</span> value;</span><br><span class="line">        <span class="type">int</span> price;</span><br><span class="line">        List&lt;Goods&gt; list;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">shopDp</span><span class="params">(Goods[] goods, <span class="type">int</span> n)</span> &#123;</span><br><span class="line">        <span class="type">int</span>[] dp = <span class="keyword">new</span> <span class="title class_">int</span>[n + <span class="number">1</span>];</span><br><span class="line">        <span class="keyword">for</span> (Goods item : goods) &#123;</span><br><span class="line">            <span class="keyword">if</span> (item.master &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 主件和依赖的的同价格下最大价值</span></span><br><span class="line">            <span class="type">int</span>[] tmp = <span class="keyword">new</span> <span class="title class_">int</span>[n + <span class="number">1</span>];</span><br><span class="line">            tmp[item.price] = item.price * item.value;</span><br><span class="line">            <span class="keyword">for</span> (Goods child : item.list) &#123;</span><br><span class="line">                <span class="comment">// 最大价值不超过n，max(i) = n - child.price</span></span><br><span class="line">                <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> n - child.price; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (tmp[i] &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                        <span class="type">int</span> <span class="variable">price</span> <span class="operator">=</span> child.price + i;</span><br><span class="line">                        tmp[price] = Math.max(tmp[i] + child.price * child.value, tmp[price]);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// dp</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> n; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">                <span class="keyword">if</span> (dp[i] == <span class="number">0</span> &amp;&amp; i != <span class="number">0</span>) &#123;</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// 选择购买不能超过n，max(j) = n-i</span></span><br><span class="line">                <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> n - i; j &gt;= <span class="number">0</span>; j--) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (tmp[j] != <span class="number">0</span>) &#123;</span><br><span class="line">                        dp[i + j] = Math.max(dp[i] + tmp[j], dp[i + j]);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">int</span> <span class="variable">ret</span> <span class="operator">=</span> -<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> n; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">            <span class="keyword">if</span> (dp[i] != <span class="number">0</span>) &#123;</span><br><span class="line">                ret = Math.max(ret, dp[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul class="copyright-info-content">
+        <li>本文标题：动态规划-背包问题</li>
+        <li>本文作者：Xplorist</li>
+        <li>创建时间：2022-01-06 00:11:00</li>
+        <li>
+            本文链接：https://xplorist.tech/2022/01/06/20037fe11bf1/
+        </li>
+        <li>
+            版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/Algorithm/">#Algorithm</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2022/01/10/fc243fd4331b/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">查漏补缺</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/01/04/3d6907d7bbb2/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">魔方</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments"></i>&nbsp;评论
+    </div>
+    
+
+        
+            
+
+
+    <div id="gitalk-container"></div>
+    <script 
+            src="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js"></script>
+    <script >
+
+      function loadGitalk() {
+        let __gitalk__pathname = decodeURI(location.pathname);
+        const __gitalk__pathnameLength = __gitalk__pathname.length;
+        const __gitalk__pathnameMaxLength = 50;
+        if (__gitalk__pathnameLength > __gitalk__pathnameMaxLength) {
+          __gitalk__pathname = __gitalk__pathname.substring(0, __gitalk__pathnameMaxLength - 3) + '...';
+        }
+
+        try {
+
+          Gitalk && new Gitalk({
+            clientID: '24c227c71f9bb758a554',
+            clientSecret: '724a45a68d355acb27c19a61d15fbb7dee34db4e',
+            repo: 'hexo-site-comments',
+            owner: 'Xplorist',
+            admin: 'Xplorist',
+            id: __gitalk__pathname,
+            language: 'zh-CN'
+          }).render('gitalk-container');
+
+        } catch (e) {
+          window.Gitalk = null;
+        }
+      }
+
+      if ('false') {
+        const loadGitalkTimeout = setTimeout(() => {
+          loadGitalk();
+          clearTimeout(loadGitalkTimeout);
+        }, 1000);
+      } else {
+        window.addEventListener('DOMContentLoaded', loadGitalk);
+      }
+    </script>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            
+<footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+                <span>2020</span> -
+            
+            2023
+            
+                &nbsp;<i class="fas fa-heart icon-animate"></i>
+                &nbsp;<a href="/">Xplorist</a>
+            
+        </div>
+        
+            <script async 
+                    src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    访问人数&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                
+                
+                    总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题
+            &nbsp;
+            <a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.8</a>
+        </div>
+        
+            <div class="icp-info info-item">
+                <a target="_blank" rel="nofollow"
+                   href="https://beian.miit.gov.cn"
+                >
+                    蜀ICP备20002343号
+                </a>
+            </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-up-right-and-down-left-from-center"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92-%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">动态规划-背包问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference-site-list"><span class="nav-number">2.</span> <span class="nav-text">reference-site-list</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98"><span class="nav-number">3.</span> <span class="nav-text">关于背包问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#01%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98"><span class="nav-number">4.</span> <span class="nav-text">01背包问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%8E%E4%B8%BAHJ16-%E8%B4%AD%E7%89%A9%E5%8D%95"><span class="nav-number">5.</span> <span class="nav-text">华为HJ16-购物单</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-block-tools.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>

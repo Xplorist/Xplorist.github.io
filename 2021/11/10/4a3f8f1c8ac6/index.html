@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Xplorist">
+    
+    <title>
+        
+            Debian11上安装GitLab |
+        
+        Xplorist
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.svg">
+    
+<link rel="stylesheet" href="/fontawesome/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/brands.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"zh-CN","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","logo":"/images/logo.svg","favicon":"/images/logo.svg","avatar":"/images/Water.jpg","left_side_width":"300px","content_max_width":"1080px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"header_transparent":true,"background_img":"/images/dawn-in-the-valley.jpg","description":"Exploration, a journey that never ends。","font_color":null,"hitokoto":{"enable":false}},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":false},"code_copy":{},"code_block_tools":{"enable":true,"style":"mac"},"side_tools":{},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.8"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"};
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="/images/logo.svg">
+                </a>
+            
+            <a class="logo-title" href="/">
+               Xplorist
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                分类
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                友链
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                关于
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">分类</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">标签</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links">友链</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">关于</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">Debian11上安装GitLab</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/Water.jpg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Xplorist</span>
+                        
+                            <span class="author-label">Lv6</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2021-11-10 09:16:00</span>
+        <span class="mobile">2021-11-10 09:16</span>
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/GitLab/">GitLab</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        &gt; <a href="/categories/Debian/">Debian</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/GitLab/">GitLab</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/Debian/">Debian</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="Debian11上安装GitLab"><a href="#Debian11上安装GitLab" class="headerlink" title="Debian11上安装GitLab"></a>Debian11上安装GitLab</h1><h2 id="reference-site-list"><a href="#reference-site-list" class="headerlink" title="reference-site-list"></a>reference-site-list</h2><blockquote>
+<ul>
+<li><a class="link"   target="_blank" rel="noopener" href="https://about.gitlab.com/install/#debian" >GitLab 官网: Debian安装 Official Linux package<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://blog.csdn.net/zhangxu1024/article/details/8899020" >ubuntu linux下载的deb包存放在哪？<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://docs.gitlab.com/ee/security/reset_user_password.html#reset-your-root-password" >GitLab 官网: 如何重置root密码<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://docs.gitlab.com/runner/" >GitLab 官网: GitLab Runner 说明文档<i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+</blockquote>
+<h2 id="steps"><a href="#steps" class="headerlink" title="steps"></a>steps</h2><h3 id="安装准备"><a href="#安装准备" class="headerlink" title="安装准备"></a>安装准备</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">apt-get update</span><br><span class="line"></span><br><span class="line">apt-get install -y curl openssh-server ca-certificates perl</span><br><span class="line"></span><br><span class="line">apt-get install -y postfix</span><br><span class="line"></span><br><span class="line"><span class="comment"># 选择 Internet Site ，然后回车</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="添加包仓库并安装"><a href="#添加包仓库并安装" class="headerlink" title="添加包仓库并安装"></a>添加包仓库并安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">curl https://packages.gitlab.com/install/repositories/gitlab/gitlab-ee/script.deb.sh | bash</span><br><span class="line"></span><br><span class="line">EXTERNAL_URL=<span class="string">&quot;https://gitlab.xplorist.tech&quot;</span> GITLAB_ROOT_PASSWORD=<span class="string">&quot;password&quot;</span> apt-get install gitlab-ee</span><br><span class="line"></span><br><span class="line"><span class="comment"># 阿里云上下载非常慢 只有10K左右 gitlab-ee amd64 14.4.2-ee.0</span></span><br><span class="line"><span class="comment"># Get:1 https://packages.gitlab.com/gitlab/gitlab-ee/debian buster/main amd64 gitlab-ee amd64 14.4.2-ee.0 [1,037 MB]</span></span><br><span class="line"><span class="comment"># 下载地址：https://packages.gitlab.com/gitlab/gitlab-ee/packages/debian/buster/gitlab-ee_14.4.2-ee.0_amd64.deb/download.deb</span></span><br><span class="line"><span class="comment"># 本地将 gitlab-ee_14.4.2-ee.0_amd64.deb 文件下载好， 然后通过SFTP上传到服务器的 /var/cache/apt/archives 文件夹下，再执行安装命令</span></span><br><span class="line"><span class="built_in">cd</span> /var/cache/apt/archives</span><br><span class="line"></span><br><span class="line">EXTERNAL_URL=<span class="string">&quot;https://gitlab.xplorist.tech&quot;</span> GITLAB_ROOT_PASSWORD=<span class="string">&quot;password&quot;</span> apt-get install gitlab-ee</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加gitlab自动重启</span></span><br><span class="line">systemctl <span class="built_in">enable</span> gitlab-runsvdir.service</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="设置GitLab"><a href="#设置GitLab" class="headerlink" title="设置GitLab"></a>设置GitLab</h3><ul>
+<li><p>浏览器打开 <a class="link"   target="_blank" rel="noopener" href="https://gitlab.xplorist.tech/" >https://gitlab.xplorist.tech<i class="fas fa-external-link-alt"></i></a></p>
+</li>
+<li><p>使用root账号登陆，然后找到右上角的用户图标，点击下拉框中的Edit profile, 再选择Password，就可以修改安装时设置得不够安全的密码</p>
+</li>
+<li><p>点击左上角的Menu，选择Admin，进入Settings &#x3D;&gt; General &#x3D;&gt; Sign-up restrictions， 取消 Sign-up enabled 选中，不允许其他人注册</p>
+</li>
+</ul>
+<h3 id="安装GitLab-runner"><a href="#安装GitLab-runner" class="headerlink" title="安装GitLab-runner"></a>安装GitLab-runner</h3><ul>
+<li>在主页网站上安装gitlab-runner</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">curl -L <span class="string">&quot;https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.deb.sh&quot;</span> | bash</span><br><span class="line"></span><br><span class="line">apt-get update</span><br><span class="line"></span><br><span class="line"><span class="comment"># 阿里云下载非常慢， 只有100K左右 gitlab-runner amd64 14.4.0</span></span><br><span class="line"><span class="comment"># Get:1 https://packages.gitlab.com/runner/gitlab-runner/debian buster/main amd64 gitlab-runner amd64 14.4.0 [453 MB]</span></span><br><span class="line"><span class="comment"># 下载地址：https://packages.gitlab.com/runner/gitlab-runner/packages/debian/buster/gitlab-runner_14.4.0_amd64.deb/download.deb</span></span><br><span class="line"><span class="comment"># 本地将 gitlab-runner_14.4.0_amd64.deb 文件下载好， 然后通过SFTP上传到服务器的 /var/cache/apt/archives 文件夹下，再执行安装命令</span></span><br><span class="line"><span class="built_in">cd</span> /var/cache/apt/archives</span><br><span class="line"></span><br><span class="line">apt-get install gitlab-runner</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="本地push项目到GitLab"><a href="#本地push项目到GitLab" class="headerlink" title="本地push项目到GitLab"></a>本地push项目到GitLab</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># git客户端 账号全局设置</span></span><br><span class="line">git config --global user.email <span class="string">&quot;xplorist@163.com&quot;</span></span><br><span class="line">git config --global user.name <span class="string">&quot;xplorist&quot;</span></span><br><span class="line"><span class="comment">#git config --global http.proxy http://10.244.186.81:8088</span></span><br><span class="line"><span class="comment">#git config --global credential.helper wincred</span></span><br><span class="line">git config --global credential.helper store</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入到keep文件夹</span></span><br><span class="line">git init</span><br><span class="line">git remote add origin https://gitlab.xplorist.tech/xplorist/keep.git</span><br><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot;init commit&quot;</span></span><br><span class="line">git push -u origin master:master</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="GitLab和GitLab-runner进行交互式注册"><a href="#GitLab和GitLab-runner进行交互式注册" class="headerlink" title="GitLab和GitLab-runner进行交互式注册"></a>GitLab和GitLab-runner进行交互式注册</h3><ul>
+<li><p>登录root账号进入<a class="link"   target="_blank" rel="noopener" href="https://gitlab.xplorist.tech/admin/runners" >https://gitlab.xplorist.tech/admin/runners<i class="fas fa-external-link-alt"></i></a>, 找到shared runner 的token</p>
+</li>
+<li><p>进入gitlab-runner安装的服务器进行交互式注册</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">gitlab-runner register</span><br><span class="line"></span><br><span class="line"><span class="comment">## 交互式注册内容</span></span><br><span class="line">1.Enter the GitLab instance URL (<span class="keyword">for</span> example, https://gitlab.com/):</span><br><span class="line"><span class="comment"># 输入gitlab的网址</span></span><br><span class="line">https://gitlab.xplorist.tech</span><br><span class="line"></span><br><span class="line">2. Enter the registration token:</span><br><span class="line"><span class="comment"># 登录root账号进入http://10.244.186.85/admin/runners，找到shared Runner的token并输入（这里以Shared Runner为例）</span></span><br><span class="line">dasdfasdfeta</span><br><span class="line"></span><br><span class="line">3.Enter a description <span class="keyword">for</span> the runner:</span><br><span class="line"><span class="comment"># 输入此runner的描述</span></span><br><span class="line">shared_runner</span><br><span class="line"></span><br><span class="line">4.Enter tags <span class="keyword">for</span> the runner (comma-separated):</span><br><span class="line"><span class="comment"># 输入此Runner的tags</span></span><br><span class="line">shared_runner</span><br><span class="line"></span><br><span class="line">5.Enter an executor: parallels, ssh, virtualbox, kubernetes, docker-windows, docker, docker-ssh, shell, docker+machine, docker-ssh+machine, custom:</span><br><span class="line"><span class="comment"># 输入executor的类型，选择shell, （Windows操作系统下的有效shell为PowerShell）</span></span><br><span class="line">shell</span><br><span class="line"></span><br><span class="line"><span class="comment"># 出现下面提示则表示注册成功了</span></span><br><span class="line">Runner registered successfully. Feel free to start it, but <span class="keyword">if</span> it<span class="string">&#x27;s running already the config should be automatically reloaded!</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="在项目中添加-gitlab-ci-yml文件"><a href="#在项目中添加-gitlab-ci-yml文件" class="headerlink" title="在项目中添加.gitlab-ci.yml文件"></a>在项目中添加.gitlab-ci.yml文件</h3><ul>
+<li>.gitlab-ci.yml内容</li>
+</ul>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># .gitlab-ci.yml 内容</span></span><br><span class="line"><span class="attr">build:</span></span><br><span class="line">  <span class="attr">stage:</span> <span class="string">build</span></span><br><span class="line">  <span class="attr">before_script:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">yarn</span></span><br><span class="line">    <span class="comment">#- chmod -R -f 777 /usr/share/nginx/html/keep/</span></span><br><span class="line">  <span class="attr">script:</span></span><br><span class="line">    <span class="comment">#- hexo clean &amp;&amp; hexo deploy</span></span><br><span class="line">    <span class="comment">#- hexo generate</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">hexo</span> <span class="string">deploy</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">rsync</span> <span class="string">-av</span> <span class="string">./public/</span> <span class="string">/usr/share/nginx/html/keep/</span></span><br><span class="line">    <span class="comment">#- git config --global user.email &quot;xplorist@163.com&quot;</span></span><br><span class="line">    <span class="comment">#- git config --global user.name &quot;xplorist&quot;</span></span><br><span class="line">    <span class="comment">#- hexo deploy</span></span><br><span class="line">    <span class="comment">#- nginx -s reload</span></span><br><span class="line">  <span class="attr">tags:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">shared_runner</span></span><br><span class="line">  <span class="attr">only:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">main</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>解释：</li>
+</ul>
+<ol>
+<li>tags这里的tags要和注册的gitlab-runner的tag一样</li>
+<li>only 指定 gitlab repository 中的指定分支，就是GitLab服务器上的远程分支</li>
+</ol>
+<h3 id="配置项目中hexo的配置文件-config-yml中的deploy"><a href="#配置项目中hexo的配置文件-config-yml中的deploy" class="headerlink" title="配置项目中hexo的配置文件_config.yml中的deploy"></a>配置项目中hexo的配置文件_config.yml中的deploy</h3><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">git@github.com:Xplorist/Xplorist.github.io.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="将wordpress文件夹复制到keep文件夹下"><a href="#将wordpress文件夹复制到keep文件夹下" class="headerlink" title="将wordpress文件夹复制到keep文件夹下"></a>将wordpress文件夹复制到keep文件夹下</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/share/nginx/html</span><br><span class="line"><span class="built_in">mkdir</span> keep</span><br><span class="line"></span><br><span class="line"><span class="built_in">cp</span> /usr/share/nginx/html/index.html /usr/share/nginx/html/keep/index.html</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将wordpress文件夹复制到keep文件夹下</span></span><br><span class="line"><span class="built_in">cp</span> -r /usr/share/nginx/html/wordpress /usr/share/nginx/html/keep/wordpress</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将原先的wordpress重命名为wordpress_bak</span></span><br><span class="line"><span class="built_in">mv</span> /usr/share/nginx/html/wordpress /usr/share/nginx/html/wordpress_bak</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将picture移动到keep下</span></span><br><span class="line"><span class="built_in">mv</span> /usr/share/nginx/html/picture /usr/share/nginx/html/keep/picture</span><br><span class="line"><span class="comment"># 将info.php移动到keep下</span></span><br><span class="line"><span class="built_in">mv</span> /usr/share/nginx/html/info.php /usr/share/nginx/html/keep/info.php</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加访问权限，这儿设置得太大，待优化</span></span><br><span class="line"><span class="built_in">chmod</span> -R -f 777 /usr/share/nginx/html/keep/</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="配置nginx"><a href="#配置nginx" class="headerlink" title="配置nginx"></a>配置nginx</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/nginx/conf.d/xplorist.tech.conf</span><br><span class="line"></span><br><span class="line"><span class="comment">## xplorist.tech.conf编辑开始</span></span><br><span class="line">    location / &#123;</span><br><span class="line">        root   /usr/share/nginx/html/keep; <span class="comment"># 默认路径后面加上/keep</span></span><br><span class="line">        index  index.html index.htm index.php;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location ~ \.php$ &#123;</span><br><span class="line">        root /usr/share/nginx/html/keep; <span class="comment"># 和上面root一致</span></span><br><span class="line">        include snippets/fastcgi-php.conf;</span><br><span class="line">        fastcgi_pass unix:/run/php/php7.3-fpm.sock;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">## xplorist.tech.conf编辑结束</span></span><br><span class="line"></span><br><span class="line">nginx -s reload</span><br></pre></td></tr></table></figure>
+
+<h3 id="上传keep项目的public文件夹测试hexo效果"><a href="#上传keep项目的public文件夹测试hexo效果" class="headerlink" title="上传keep项目的public文件夹测试hexo效果"></a>上传keep项目的public文件夹测试hexo效果</h3><ul>
+<li>将本地开发开发的keep项目生成的public文件夹打包成public.zip后通过SFTP上传到服务器，然后解压</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># SFTP上传public.zip到/usr/share/nginx/html</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> /usr/share/nginx/html</span><br><span class="line"></span><br><span class="line">unzip public.zip</span><br><span class="line"></span><br><span class="line"><span class="built_in">cp</span> -r /usr/share/nginx/html/public/* /usr/share/nginx/html/keep</span><br></pre></td></tr></table></figure>
+
+<h3 id="gitlab-runner服务器上进行相关配置"><a href="#gitlab-runner服务器上进行相关配置" class="headerlink" title="gitlab-runner服务器上进行相关配置"></a>gitlab-runner服务器上进行相关配置</h3><ul>
+<li>如下配置想要达到的效果：</li>
+</ul>
+<ol>
+<li>本地提交keep项目的源码到GitLab</li>
+<li>GitLab 检测到.gitlabci.yml , 触发GitLab-runner的 shell 执行器，执行 .gitlabci.yml 中的shell脚本</li>
+<li>GitLab-runner从 GitLab 仓库 pull 最新的代码，然后执行 .gitlabci.yml 脚本</li>
+<li>.gitlabci.yml 脚本中的主要内容就是实现 hexo deploy，在本地生成public文件夹中编译好的静态html网页</li>
+<li>然后利用rsync将public文件夹中的内容增量更新到nginx的html文件夹中</li>
+<li>hexo deploy会触发hexo项目中的_config.yml中的deploy设置，从而执行hexo deploy命令</li>
+<li>hexo deploy中的设置就是将public文件夹中的静态html网页全部push到github.io仓中</li>
+<li>git客户端到github的操作则是配置了ssh的方式实现免密，所以github仓库链接也是ssh的链接</li>
+</ol>
+<ul>
+<li>安装NodeJS和Yarn</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line">curl -sL https://deb.nodesource.com/setup_16.x -o nodesource_setup.sh</span><br><span class="line">bash nodesource_setup.sh</span><br><span class="line">apt-get install -y nodejs</span><br><span class="line"></span><br><span class="line">npm install --global yarn</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>安装rsync</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get install rsync</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>安装hexo</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn global add  hexo</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置SSH实现免密同步到GitHub-pages"><a href="#配置SSH实现免密同步到GitHub-pages" class="headerlink" title="配置SSH实现免密同步到GitHub pages"></a>配置SSH实现免密同步到GitHub pages</h3><ul>
+<li>生成ssh key</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t ed25519 -C <span class="string">&quot;xplorist@163.com&quot;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>复制ssh key到gitlab-runner账号文件夹下</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cp</span> -r /root/.ssh /home/gitlab-runner</span><br><span class="line"></span><br><span class="line"><span class="comment">#cp /root/.ssh/id_ed25519 /home/gitlab-runner/.ssh/id_ed25519</span></span><br><span class="line"><span class="comment">#cp /root/.ssh/id_ed25519.pub /home/gitlab-runner/.ssh/id_ed25519.pub</span></span><br><span class="line"><span class="comment">#cp /root/.ssh/known_hosts /home/gitlab-runner/.ssh/known_hosts</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加访问权限，这个权限放得太太，其实不好</span></span><br><span class="line"><span class="built_in">chmod</span> -R -f 777 /home/gitlab-runner/.ssh/</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在GitHub中配置刚才生成的公钥pub</li>
+</ul>
+<p>登录GitHub后，进入Settings 的 SSH and GPG keys, 新增SSH key将公钥复制进去</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> /home/gitlab-runner/.ssh/id_ed25519.pub</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>配置git 客户端全局设置</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.email <span class="string">&quot;xplorist@163.com&quot;</span></span><br><span class="line">git config --global user.name <span class="string">&quot;xplorist&quot;</span></span><br><span class="line">git config --global credential.helper store</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从GitHub上以ssh的方式 1.clone 2.edit 3.add 4.commit 5.push 一个非公开的小项目，测试SSH免密效果</span></span><br><span class="line">git <span class="built_in">clone</span> git@github.com:Xplorist/readme.git</span><br><span class="line"><span class="built_in">cd</span> readme</span><br><span class="line">vi test.md</span><br><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot;add test&quot;</span></span><br><span class="line">git push -u origin main:main</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将生成的 known_hosts 复制到gitlab-runner账号文件夹下</span></span><br><span class="line"><span class="built_in">cp</span> /root/.ssh/known_hosts /home/gitlab-runner/.ssh/known_hosts</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看连个文件夹内容是否一样</span></span><br><span class="line"><span class="built_in">cd</span> /root/.ssh</span><br><span class="line"><span class="built_in">ls</span></span><br><span class="line"><span class="built_in">cd</span> /home/gitlab-runner/.ssh</span><br><span class="line"><span class="built_in">ls</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="提交keep项目到服务器"><a href="#提交keep项目到服务器" class="headerlink" title="提交keep项目到服务器"></a>提交keep项目到服务器</h3><ul>
+<li><p>在gitlab.xplorist.tech公网的GitLab中创建keep项目代码仓</p>
+</li>
+<li><p>提交代码</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 先将keep项目下原来的.git目录剪切到其他文件夹如keep-git-bak中</span></span><br><span class="line">git init</span><br><span class="line">git remote add origin https://gitlab.xplorist.tech/xplorist/keep.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取远程分支，并合并远程分支 ps:可以使用 git pull origin main 一步取代</span></span><br><span class="line">git fetch origin main</span><br><span class="line">git merge origin/main</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看本地分支</span></span><br><span class="line">git branch</span><br><span class="line"></span><br><span class="line"><span class="comment"># 本地分支是master，直切创建并切换到main分支</span></span><br><span class="line">git checkout -b main</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看本地文件状态</span></span><br><span class="line">git status</span><br><span class="line"></span><br><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot;init commit&quot;</span></span><br><span class="line"></span><br><span class="line">git push -u origin main:main</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果git客户端报错如下</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">INFO  171 files generated <span class="keyword">in</span> 1.9 s</span><br><span class="line">INFO  Deploying: git</span><br><span class="line">INFO  Setting up Git deployment...</span><br><span class="line">Initialized empty Git repository <span class="keyword">in</span> /home/gitlab-runner/builds/xTeKDtDV/0/xplorist/keep/.deploy_git/.git/</span><br><span class="line">*** Please tell me <span class="built_in">who</span> you are.</span><br><span class="line">Run</span><br><span class="line">  git config --global user.email <span class="string">&quot;you@example.com&quot;</span></span><br><span class="line">  git config --global user.name <span class="string">&quot;Your Name&quot;</span></span><br><span class="line">to <span class="built_in">set</span> your account<span class="string">&#x27;s default identity.</span></span><br><span class="line"><span class="string">Omit --global to set the identity only in this repository.</span></span><br><span class="line"><span class="string">fatal: unable to auto-detect email address (got &#x27;</span>gitlab-runner@iZ2vcevk40p3shxd80kkt7Z.(none)<span class="string">&#x27;)</span></span><br><span class="line"><span class="string">FATAL &#123;</span></span><br><span class="line"><span class="string">  err: Error: Spawn failed</span></span><br><span class="line"><span class="string">      at ChildProcess.&lt;anonymous&gt; (/home/gitlab-runner/builds/xTeKDtDV/0/xplorist/keep/node_modules/hexo-util/lib/spawn.js:51:21)</span></span><br><span class="line"><span class="string">      at ChildProcess.emit (node:events:390:28)</span></span><br><span class="line"><span class="string">      at Process.ChildProcess._handle.onexit (node:internal/child_process:290:12) &#123;</span></span><br><span class="line"><span class="string">    code: 128</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">&#125; Something&#x27;</span>s wrong. Maybe you can find the solution here: %s https://hexo.io/docs/troubleshooting.html</span><br></pre></td></tr></table></figure>
+<p>那就到切换到该目录下手动操作</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /home/gitlab-runner/builds/xTeKDtDV/0/xplorist/keep/public/</span><br><span class="line"></span><br><span class="line">git config --global user.email <span class="string">&quot;xplorist163.com&quot;</span></span><br><span class="line">git config --global user.name <span class="string">&quot;xplorist&quot;</span></span><br><span class="line"></span><br><span class="line">hexo deploy</span><br><span class="line"></span><br><span class="line"><span class="built_in">cp</span> -r /root/.ssh/* /home/gitlab-runner/.ssh</span><br><span class="line"></span><br><span class="line"><span class="built_in">chmod</span> -R -f 777 /home/gitlab-runner/.ssh</span><br><span class="line"></span><br><span class="line"><span class="built_in">cp</span> /root/.gitconfig /home/gitlab-runner/.gitconfig</span><br><span class="line"><span class="built_in">chmod</span> -R -f 777 /home/gitlab-runner</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果是Permission denied报错如下：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Fetching changes with git depth <span class="built_in">set</span> to 50...</span><br><span class="line">Reinitialized existing Git repository <span class="keyword">in</span> /home/gitlab-runner/builds/xTeKDtDV/0/xplorist/keep/.git/</span><br><span class="line">Checking out 73be115a as main...</span><br><span class="line">warning: failed to remove <span class="string">&quot;.deploy_git/2020/12/16/GitLab\344\271\213CI_CD\351\205\215\347\275\256/index.html&quot;</span>: Permission denied</span><br><span class="line">warning: failed to remove <span class="string">&quot;.deploy_git/2020/12/18/\351\227\250\346\210\267\347\263\273\347\273\237\344\270\255\347\263\273\347\273\237\347\273\237\350\256\241Matomo\351\205\215\347\275\256/index.html&quot;</span>: Permission denied</span><br></pre></td></tr></table></figure>
+
+<p>执行添加权限</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">rm</span> -rf /home/gitlab-runner/builds/xTeKDtDV/0/xplorist/keep/.deploy_git</span><br><span class="line"></span><br><span class="line"><span class="built_in">chmod</span> -R -f 777 /home/gitlab-runner/builds/xTeKDtDV/</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果hexo deploy报错，就手动执行调用hexo deploy 进行部署到GitHub上github.io库，生成GitHub pages</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /home/gitlab-runner/builds/y6tSEeXS/0/xplorist/keep/public/</span><br><span class="line">hexo deploy</span><br><span class="line"></span><br><span class="line"><span class="comment"># 会要求输入账号密码,上面配置了git客户端的全局设置，第一次输入后，以后就会保存密码利用ssh就是实现了免密提交</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果rsync Permission denied报错如下：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rsync: mkstemp <span class="string">&quot;/usr/share/nginx/html/keep/2020/12/16/GitLab之CI_CD配置/.index.html.rTEdp0&quot;</span> failed:  (13)</span><br></pre></td></tr></table></figure>
+
+<p>就手动初始化同步操作</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 修改文件夹权限</span></span><br><span class="line"><span class="built_in">chmod</span> -R -f 777 /usr/share/nginx/html/keep/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 测试rsync</span></span><br><span class="line"><span class="built_in">cd</span> /home/gitlab-runner/builds/xTeKDtDV/0/xplorist/keep</span><br><span class="line">rsync -av ./public/ /usr/share/nginx/html/keep/</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>最后重启gitlab流水线中的job，看命令行结果</li>
+</ul>
+<h3 id="将内网GitLab仓库全部更新为公网的远程仓库"><a href="#将内网GitLab仓库全部更新为公网的远程仓库" class="headerlink" title="将内网GitLab仓库全部更新为公网的远程仓库"></a>将内网GitLab仓库全部更新为公网的远程仓库</h3><ul>
+<li>内网GitLab服务结束其过渡的使命，正式全面使用公网GitLab服务器</li>
+</ul>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul class="copyright-info-content">
+        <li>本文标题：Debian11上安装GitLab</li>
+        <li>本文作者：Xplorist</li>
+        <li>创建时间：2021-11-10 09:16:00</li>
+        <li>
+            本文链接：https://xplorist.tech/2021/11/10/4a3f8f1c8ac6/
+        </li>
+        <li>
+            版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/GitLab/">#GitLab</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/Debian/">#Debian</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2021/11/10/5cb6b64ae917/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Git使用main分支</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/11/09/4b5d6777f2af/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Debian11上安装MySQL</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments"></i>&nbsp;评论
+    </div>
+    
+
+        
+            
+
+
+    <div id="gitalk-container"></div>
+    <script 
+            src="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js"></script>
+    <script >
+
+      function loadGitalk() {
+        let __gitalk__pathname = decodeURI(location.pathname);
+        const __gitalk__pathnameLength = __gitalk__pathname.length;
+        const __gitalk__pathnameMaxLength = 50;
+        if (__gitalk__pathnameLength > __gitalk__pathnameMaxLength) {
+          __gitalk__pathname = __gitalk__pathname.substring(0, __gitalk__pathnameMaxLength - 3) + '...';
+        }
+
+        try {
+
+          Gitalk && new Gitalk({
+            clientID: '24c227c71f9bb758a554',
+            clientSecret: '724a45a68d355acb27c19a61d15fbb7dee34db4e',
+            repo: 'hexo-site-comments',
+            owner: 'Xplorist',
+            admin: 'Xplorist',
+            id: __gitalk__pathname,
+            language: 'zh-CN'
+          }).render('gitalk-container');
+
+        } catch (e) {
+          window.Gitalk = null;
+        }
+      }
+
+      if ('false') {
+        const loadGitalkTimeout = setTimeout(() => {
+          loadGitalk();
+          clearTimeout(loadGitalkTimeout);
+        }, 1000);
+      } else {
+        window.addEventListener('DOMContentLoaded', loadGitalk);
+      }
+    </script>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            
+<footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+                <span>2020</span> -
+            
+            2023
+            
+                &nbsp;<i class="fas fa-heart icon-animate"></i>
+                &nbsp;<a href="/">Xplorist</a>
+            
+        </div>
+        
+            <script async 
+                    src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    访问人数&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                
+                
+                    总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题
+            &nbsp;
+            <a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.8</a>
+        </div>
+        
+            <div class="icp-info info-item">
+                <a target="_blank" rel="nofollow"
+                   href="https://beian.miit.gov.cn"
+                >
+                    蜀ICP备20002343号
+                </a>
+            </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-up-right-and-down-left-from-center"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Debian11%E4%B8%8A%E5%AE%89%E8%A3%85GitLab"><span class="nav-number">1.</span> <span class="nav-text">Debian11上安装GitLab</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#reference-site-list"><span class="nav-number">1.1.</span> <span class="nav-text">reference-site-list</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#steps"><span class="nav-number">1.2.</span> <span class="nav-text">steps</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%87%86%E5%A4%87"><span class="nav-number">1.2.1.</span> <span class="nav-text">安装准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E5%8C%85%E4%BB%93%E5%BA%93%E5%B9%B6%E5%AE%89%E8%A3%85"><span class="nav-number">1.2.2.</span> <span class="nav-text">添加包仓库并安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AEGitLab"><span class="nav-number">1.2.3.</span> <span class="nav-text">设置GitLab</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85GitLab-runner"><span class="nav-number">1.2.4.</span> <span class="nav-text">安装GitLab-runner</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0push%E9%A1%B9%E7%9B%AE%E5%88%B0GitLab"><span class="nav-number">1.2.5.</span> <span class="nav-text">本地push项目到GitLab</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GitLab%E5%92%8CGitLab-runner%E8%BF%9B%E8%A1%8C%E4%BA%A4%E4%BA%92%E5%BC%8F%E6%B3%A8%E5%86%8C"><span class="nav-number">1.2.6.</span> <span class="nav-text">GitLab和GitLab-runner进行交互式注册</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E6%B7%BB%E5%8A%A0-gitlab-ci-yml%E6%96%87%E4%BB%B6"><span class="nav-number">1.2.7.</span> <span class="nav-text">在项目中添加.gitlab-ci.yml文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E9%A1%B9%E7%9B%AE%E4%B8%ADhexo%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6-config-yml%E4%B8%AD%E7%9A%84deploy"><span class="nav-number">1.2.8.</span> <span class="nav-text">配置项目中hexo的配置文件_config.yml中的deploy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%86wordpress%E6%96%87%E4%BB%B6%E5%A4%B9%E5%A4%8D%E5%88%B6%E5%88%B0keep%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8B"><span class="nav-number">1.2.9.</span> <span class="nav-text">将wordpress文件夹复制到keep文件夹下</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEnginx"><span class="nav-number">1.2.10.</span> <span class="nav-text">配置nginx</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8A%E4%BC%A0keep%E9%A1%B9%E7%9B%AE%E7%9A%84public%E6%96%87%E4%BB%B6%E5%A4%B9%E6%B5%8B%E8%AF%95hexo%E6%95%88%E6%9E%9C"><span class="nav-number">1.2.11.</span> <span class="nav-text">上传keep项目的public文件夹测试hexo效果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gitlab-runner%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E8%BF%9B%E8%A1%8C%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE"><span class="nav-number">1.2.12.</span> <span class="nav-text">gitlab-runner服务器上进行相关配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AESSH%E5%AE%9E%E7%8E%B0%E5%85%8D%E5%AF%86%E5%90%8C%E6%AD%A5%E5%88%B0GitHub-pages"><span class="nav-number">1.2.13.</span> <span class="nav-text">配置SSH实现免密同步到GitHub pages</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%90%E4%BA%A4keep%E9%A1%B9%E7%9B%AE%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">1.2.14.</span> <span class="nav-text">提交keep项目到服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%86%E5%86%85%E7%BD%91GitLab%E4%BB%93%E5%BA%93%E5%85%A8%E9%83%A8%E6%9B%B4%E6%96%B0%E4%B8%BA%E5%85%AC%E7%BD%91%E7%9A%84%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="nav-number">1.2.15.</span> <span class="nav-text">将内网GitLab仓库全部更新为公网的远程仓库</span></a></li></ol></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-block-tools.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>

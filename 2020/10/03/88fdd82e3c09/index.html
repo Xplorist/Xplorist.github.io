@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Xplorist">
+    
+    <title>
+        
+            Java-基础 |
+        
+        Xplorist
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.svg">
+    
+<link rel="stylesheet" href="/fontawesome/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/brands.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"zh-CN","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","logo":"/images/logo.svg","favicon":"/images/logo.svg","avatar":"/images/Water.jpg","left_side_width":"300px","content_max_width":"1080px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"header_transparent":true,"background_img":"/images/dawn-in-the-valley.jpg","description":"Exploration, a journey that never ends。","font_color":null,"hitokoto":{"enable":false}},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":false},"code_copy":{},"code_block_tools":{"enable":true,"style":"mac"},"side_tools":{},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.8"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"};
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="/images/logo.svg">
+                </a>
+            
+            <a class="logo-title" href="/">
+               Xplorist
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                分类
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                友链
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                关于
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">分类</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">标签</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links">友链</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">关于</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">Java-基础</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/Water.jpg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Xplorist</span>
+                        
+                            <span class="author-label">Lv6</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2020-10-03 15:29:01</span>
+        <span class="mobile">2020-10-03 15:29</span>
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/Java/">Java</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/Java/">Java</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="Java-基础"><a href="#Java-基础" class="headerlink" title="Java-基础"></a>Java-基础</h1><h2 id="reference-site-list"><a href="#reference-site-list" class="headerlink" title="reference-site-list"></a>reference-site-list</h2><blockquote>
+<ul>
+<li><a href="/2020/10/24/5ffcc1e3ba8a/" title="Java知识体系">Java知识体系</a></li>
+<li><a href=""></a></li>
+</ul>
+</blockquote>
+<h2 id="steps"><a href="#steps" class="headerlink" title="steps"></a>steps</h2><h3 id="Java语言有哪些特点"><a href="#Java语言有哪些特点" class="headerlink" title="Java语言有哪些特点"></a>Java语言有哪些特点</h3><ol>
+<li>简单易学、有丰富的类库</li>
+<li>面向对象</li>
+</ol>
+<ul>
+<li>Java最重要的特性，区别于面向过程和函数式编程、SQL式的指令编程语言，是一种更接近人类思考的方式进行建模，提高复用性，让程序耦合度更低，内聚性更高</li>
+</ul>
+<ol start="3">
+<li>平台无关性</li>
+</ol>
+<ul>
+<li>不同操作系统，JVM将同一套Java代码编译成相应操作系统的JVM能解释运行的.class字节码文件,从而实现跨平台，由此，Java是一门既有解释又有编译的语言</li>
+</ul>
+<ol start="4">
+<li>可靠安全</li>
+</ol>
+<ul>
+<li>异常机制，保证了程序健壮性，及时出现异常，程序仍然能够运行</li>
+</ul>
+<ol start="5">
+<li>多线程</li>
+</ol>
+<ul>
+<li>提升程序执行的效率</li>
+</ul>
+<h3 id="面向对象和面向过程的区别"><a href="#面向对象和面向过程的区别" class="headerlink" title="面向对象和面向过程的区别"></a>面向对象和面向过程的区别</h3><ul>
+<li><p>面向过程：<br>对现实世界的建模类型为将具体问题拆解成有限的步骤，用函数去实现这步骤，通过调用函数完成程序的功能。代表性语言：C语言，性能较高，常用于单片机、嵌入式开发。</p>
+</li>
+<li><p>面向对象：<br>对现实世界的建模类型为将具体问题中出现的事物进行建模，不同的事物具有相同的属性又可以进一步抽象成同一类，能够描述事物之间的关系，事物本身具有行为，程序的功能是基于事物本身的行为去实现。面向对象有封装、集成、多态的特性。相对于面向过程，具有易维护、易复用、易扩展的优点，但程序执行的性能比面向过程要低。</p>
+</li>
+</ul>
+<h3 id="基本数据类型"><a href="#基本数据类型" class="headerlink" title="基本数据类型"></a>基本数据类型</h3><ul>
+<li>4类8种，分为：整形(4种：byte, short, int, long)、浮点型(2种：float, double)、字符型char、布尔型boolean</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>基本类型</th>
+<th>位数</th>
+<th>默认值</th>
+<th>封装类</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>整形</td>
+<td>byte</td>
+<td>8</td>
+<td>(byte)0</td>
+<td>Byte</td>
+</tr>
+<tr>
+<td>整形</td>
+<td>short</td>
+<td>16</td>
+<td>(short)0</td>
+<td>Short</td>
+</tr>
+<tr>
+<td>整形</td>
+<td>int</td>
+<td>32</td>
+<td>0</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>整形</td>
+<td>long</td>
+<td>64</td>
+<td>0L</td>
+<td>Long</td>
+</tr>
+<tr>
+<td>浮点型</td>
+<td>float</td>
+<td>32</td>
+<td>0.0f</td>
+<td>Float</td>
+</tr>
+<tr>
+<td>浮点型</td>
+<td>double</td>
+<td>64</td>
+<td>0.0d</td>
+<td>Double</td>
+</tr>
+<tr>
+<td>字符型</td>
+<td>char</td>
+<td>16</td>
+<td>\u0000(null)</td>
+<td>Character</td>
+</tr>
+<tr>
+<td>布尔型</td>
+<td>boolean</td>
+<td>-</td>
+<td>false</td>
+<td>Boolean</td>
+</tr>
+</tbody></table>
+<ul>
+<li>int是基本数据类型；Integer是int的封装类，是引用类型。</li>
+<li>int默认值为0，Integer默认值为null，所以Integer能区分出0和null的情况。</li>
+</ul>
+<h3 id="标识符的命名规则"><a href="#标识符的命名规则" class="headerlink" title="标识符的命名规则"></a>标识符的命名规则</h3><ul>
+<li>x</li>
+</ul>
+<h3 id="instanceof-关键字的作用"><a href="#instanceof-关键字的作用" class="headerlink" title="instanceof 关键字的作用"></a>instanceof 关键字的作用</h3><ul>
+<li>x</li>
+</ul>
+<h3 id="Java自动装箱与拆箱"><a href="#Java自动装箱与拆箱" class="headerlink" title="Java自动装箱与拆箱"></a>Java自动装箱与拆箱</h3><ul>
+<li>x</li>
+</ul>
+<h3 id="重载和重写的区别"><a href="#重载和重写的区别" class="headerlink" title="重载和重写的区别"></a>重载和重写的区别</h3><ul>
+<li>x</li>
+</ul>
+<h3 id="equals与-x3D-x3D-的区别"><a href="#equals与-x3D-x3D-的区别" class="headerlink" title="equals与&#x3D;&#x3D;的区别"></a>equals与&#x3D;&#x3D;的区别</h3><ul>
+<li>x</li>
+</ul>
+<h3 id="Hashcode的作用"><a href="#Hashcode的作用" class="headerlink" title="Hashcode的作用"></a>Hashcode的作用</h3><ul>
+<li>x</li>
+</ul>
+<h3 id="String、String-StringBuffer-和-StringBuilder-的区别是什"><a href="#String、String-StringBuffer-和-StringBuilder-的区别是什" class="headerlink" title="String、String StringBuffer 和 StringBuilder 的区别是什"></a>String、String StringBuffer 和 StringBuilder 的区别是什</h3><p>么?</p>
+<ul>
+<li>x</li>
+</ul>
+<h3 id="ArrayList和linkedList的区别"><a href="#ArrayList和linkedList的区别" class="headerlink" title="ArrayList和linkedList的区别"></a>ArrayList和linkedList的区别</h3><ul>
+<li>x</li>
+</ul>
+<h3 id="HashMap和HashTable的区别"><a href="#HashMap和HashTable的区别" class="headerlink" title="HashMap和HashTable的区别"></a>HashMap和HashTable的区别</h3><ul>
+<li>x</li>
+</ul>
+<h3 id="Collection包结构，与Collections的区别"><a href="#Collection包结构，与Collections的区别" class="headerlink" title="Collection包结构，与Collections的区别"></a>Collection包结构，与Collections的区别</h3><ul>
+<li>x</li>
+</ul>
+<h3 id="Java的四种引用，强弱软虚"><a href="#Java的四种引用，强弱软虚" class="headerlink" title="Java的四种引用，强弱软虚"></a>Java的四种引用，强弱软虚</h3><ul>
+<li>x</li>
+</ul>
+<h3 id="泛型常用特点"><a href="#泛型常用特点" class="headerlink" title="泛型常用特点"></a>泛型常用特点</h3><ul>
+<li>x</li>
+</ul>
+<h3 id="Java创建对象有几种方式？"><a href="#Java创建对象有几种方式？" class="headerlink" title="Java创建对象有几种方式？"></a>Java创建对象有几种方式？</h3><ul>
+<li>x</li>
+</ul>
+<h3 id="有没有可能两个不相等的对象有相同的hashcode"><a href="#有没有可能两个不相等的对象有相同的hashcode" class="headerlink" title="有没有可能两个不相等的对象有相同的hashcode"></a>有没有可能两个不相等的对象有相同的hashcode</h3><ul>
+<li>x</li>
+</ul>
+<h3 id="深拷贝和浅拷贝的区别是什么"><a href="#深拷贝和浅拷贝的区别是什么" class="headerlink" title="深拷贝和浅拷贝的区别是什么?"></a>深拷贝和浅拷贝的区别是什么?</h3><ul>
+<li>x</li>
+</ul>
+<h3 id="final有哪些用法"><a href="#final有哪些用法" class="headerlink" title="final有哪些用法?"></a>final有哪些用法?</h3><ul>
+<li>x</li>
+</ul>
+<h3 id="static都有哪些用法"><a href="#static都有哪些用法" class="headerlink" title="static都有哪些用法?"></a>static都有哪些用法?</h3><ul>
+<li>x</li>
+</ul>
+<h3 id="3-0-1-x3D-x3D-0-3返回值是什么"><a href="#3-0-1-x3D-x3D-0-3返回值是什么" class="headerlink" title="3*0.1 &#x3D;&#x3D; 0.3返回值是什么"></a>3*0.1 &#x3D;&#x3D; 0.3返回值是什么</h3><ul>
+<li>x</li>
+</ul>
+<h3 id="a-x3D-a-b与a-x3D-b有什么区别吗"><a href="#a-x3D-a-b与a-x3D-b有什么区别吗" class="headerlink" title="a&#x3D;a+b与a+&#x3D;b有什么区别吗?"></a>a&#x3D;a+b与a+&#x3D;b有什么区别吗?</h3><ul>
+<li>x</li>
+</ul>
+<h3 id="try-catch-finally，try里有return，finally还执行么？"><a href="#try-catch-finally，try里有return，finally还执行么？" class="headerlink" title="try catch finally，try里有return，finally还执行么？"></a>try catch finally，try里有return，finally还执行么？</h3><ul>
+<li>x</li>
+</ul>
+<h3 id="Excption与Error包结构"><a href="#Excption与Error包结构" class="headerlink" title="Excption与Error包结构"></a>Excption与Error包结构</h3><ul>
+<li>x</li>
+</ul>
+<h3 id="OOM你遇到过哪些情况，SOF你遇到过哪些情况"><a href="#OOM你遇到过哪些情况，SOF你遇到过哪些情况" class="headerlink" title="OOM你遇到过哪些情况，SOF你遇到过哪些情况"></a>OOM你遇到过哪些情况，SOF你遇到过哪些情况</h3><ul>
+<li>x</li>
+</ul>
+<h3 id="简述线程、程序、进程的基本概念。以及他们之间关系是什"><a href="#简述线程、程序、进程的基本概念。以及他们之间关系是什" class="headerlink" title="简述线程、程序、进程的基本概念。以及他们之间关系是什"></a>简述线程、程序、进程的基本概念。以及他们之间关系是什</h3><p>么?</p>
+<ul>
+<li>x</li>
+</ul>
+<h3 id="Java-序列化中如果有些字段不想进行序列化，怎么办？"><a href="#Java-序列化中如果有些字段不想进行序列化，怎么办？" class="headerlink" title="Java 序列化中如果有些字段不想进行序列化，怎么办？"></a>Java 序列化中如果有些字段不想进行序列化，怎么办？</h3><ul>
+<li>x</li>
+</ul>
+<h3 id="说说Java-中-IO-流"><a href="#说说Java-中-IO-流" class="headerlink" title="说说Java 中 IO 流"></a>说说Java 中 IO 流</h3><ul>
+<li>x</li>
+</ul>
+<h3 id="Java-IO与-NIO的区别（补充）"><a href="#Java-IO与-NIO的区别（补充）" class="headerlink" title="Java IO与 NIO的区别（补充）"></a>Java IO与 NIO的区别（补充）</h3><ul>
+<li>x</li>
+</ul>
+<h3 id="java反射的作用于原理"><a href="#java反射的作用于原理" class="headerlink" title="java反射的作用于原理"></a>java反射的作用于原理</h3><ul>
+<li>x</li>
+</ul>
+<h3 id="说说List-Set-Map三者的区别？"><a href="#说说List-Set-Map三者的区别？" class="headerlink" title="说说List,Set,Map三者的区别？"></a>说说List,Set,Map三者的区别？</h3><ul>
+<li>x</li>
+</ul>
+<h3 id="Object-有哪些常用方法？大致说一下每个方法的含义"><a href="#Object-有哪些常用方法？大致说一下每个方法的含义" class="headerlink" title="Object 有哪些常用方法？大致说一下每个方法的含义"></a>Object 有哪些常用方法？大致说一下每个方法的含义</h3><ul>
+<li>x</li>
+</ul>
+<h3 id="Java-创建对象有几种方式？"><a href="#Java-创建对象有几种方式？" class="headerlink" title="Java 创建对象有几种方式？"></a>Java 创建对象有几种方式？</h3><ul>
+<li>x</li>
+</ul>
+<h3 id="获取一个类Class对象的方式有哪些？"><a href="#获取一个类Class对象的方式有哪些？" class="headerlink" title="获取一个类Class对象的方式有哪些？"></a>获取一个类Class对象的方式有哪些？</h3><ul>
+<li>x</li>
+</ul>
+<h3 id="ArrayList-和-LinkedList-的区别有哪些？"><a href="#ArrayList-和-LinkedList-的区别有哪些？" class="headerlink" title="ArrayList 和 LinkedList 的区别有哪些？"></a>ArrayList 和 LinkedList 的区别有哪些？</h3><ul>
+<li>x</li>
+</ul>
+<h3 id="用过-ArrayList-吗？说一下它有什么特点？"><a href="#用过-ArrayList-吗？说一下它有什么特点？" class="headerlink" title="用过 ArrayList 吗？说一下它有什么特点？"></a>用过 ArrayList 吗？说一下它有什么特点？</h3><ul>
+<li>x</li>
+</ul>
+<h3 id="有数组了为什么还要搞个-ArrayList-呢？"><a href="#有数组了为什么还要搞个-ArrayList-呢？" class="headerlink" title="有数组了为什么还要搞个 ArrayList 呢？"></a>有数组了为什么还要搞个 ArrayList 呢？</h3><ul>
+<li>x</li>
+</ul>
+<h3 id="说说什么是-fail-fast？"><a href="#说说什么是-fail-fast？" class="headerlink" title="说说什么是 fail-fast？"></a>说说什么是 fail-fast？</h3><ul>
+<li>x</li>
+</ul>
+<h3 id="说说Hashtable-与-HashMap-的区别"><a href="#说说Hashtable-与-HashMap-的区别" class="headerlink" title="说说Hashtable 与 HashMap 的区别"></a>说说Hashtable 与 HashMap 的区别</h3><ul>
+<li>x</li>
+</ul>
+<h3 id="HashMap-中的-key-我们可以使用任何类作为-key-吗？"><a href="#HashMap-中的-key-我们可以使用任何类作为-key-吗？" class="headerlink" title="HashMap 中的 key 我们可以使用任何类作为 key 吗？"></a>HashMap 中的 key 我们可以使用任何类作为 key 吗？</h3><ul>
+<li>x</li>
+</ul>
+<h3 id="HashMap-的长度为什么是-2-的-N-次方呢？"><a href="#HashMap-的长度为什么是-2-的-N-次方呢？" class="headerlink" title="HashMap 的长度为什么是 2 的 N 次方呢？"></a>HashMap 的长度为什么是 2 的 N 次方呢？</h3><ul>
+<li>x</li>
+</ul>
+<h3 id="HashMap-与-ConcurrentHashMap-的异同"><a href="#HashMap-与-ConcurrentHashMap-的异同" class="headerlink" title="HashMap 与 ConcurrentHashMap 的异同"></a>HashMap 与 ConcurrentHashMap 的异同</h3><ul>
+<li>x</li>
+</ul>
+<h3 id="红黑树有哪几个特征？"><a href="#红黑树有哪几个特征？" class="headerlink" title="红黑树有哪几个特征？"></a>红黑树有哪几个特征？</h3><ul>
+<li>x</li>
+</ul>
+<h3 id="说说你平时是怎么处理-Java-异常的"><a href="#说说你平时是怎么处理-Java-异常的" class="headerlink" title="说说你平时是怎么处理 Java 异常的"></a>说说你平时是怎么处理 Java 异常的</h3><ul>
+<li>x</li>
+</ul>
+<h3 id="说说深拷贝和浅拷贝？"><a href="#说说深拷贝和浅拷贝？" class="headerlink" title="说说深拷贝和浅拷贝？"></a>说说深拷贝和浅拷贝？</h3><ul>
+<li>x</li>
+</ul>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul class="copyright-info-content">
+        <li>本文标题：Java-基础</li>
+        <li>本文作者：Xplorist</li>
+        <li>创建时间：2020-10-03 15:29:01</li>
+        <li>
+            本文链接：https://xplorist.tech/2020/10/03/88fdd82e3c09/
+        </li>
+        <li>
+            版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/Java/">#Java</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2020/10/07/8a9f4a6916dd/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">2020-10-07-x</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2020/09/29/fa2ff33e5a73/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">2020-09-29-x</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments"></i>&nbsp;评论
+    </div>
+    
+
+        
+            
+
+
+    <div id="gitalk-container"></div>
+    <script 
+            src="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js"></script>
+    <script >
+
+      function loadGitalk() {
+        let __gitalk__pathname = decodeURI(location.pathname);
+        const __gitalk__pathnameLength = __gitalk__pathname.length;
+        const __gitalk__pathnameMaxLength = 50;
+        if (__gitalk__pathnameLength > __gitalk__pathnameMaxLength) {
+          __gitalk__pathname = __gitalk__pathname.substring(0, __gitalk__pathnameMaxLength - 3) + '...';
+        }
+
+        try {
+
+          Gitalk && new Gitalk({
+            clientID: '24c227c71f9bb758a554',
+            clientSecret: '724a45a68d355acb27c19a61d15fbb7dee34db4e',
+            repo: 'hexo-site-comments',
+            owner: 'Xplorist',
+            admin: 'Xplorist',
+            id: __gitalk__pathname,
+            language: 'zh-CN'
+          }).render('gitalk-container');
+
+        } catch (e) {
+          window.Gitalk = null;
+        }
+      }
+
+      if ('false') {
+        const loadGitalkTimeout = setTimeout(() => {
+          loadGitalk();
+          clearTimeout(loadGitalkTimeout);
+        }, 1000);
+      } else {
+        window.addEventListener('DOMContentLoaded', loadGitalk);
+      }
+    </script>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            
+<footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+                <span>2020</span> -
+            
+            2023
+            
+                &nbsp;<i class="fas fa-heart icon-animate"></i>
+                &nbsp;<a href="/">Xplorist</a>
+            
+        </div>
+        
+            <script async 
+                    src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    访问人数&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                
+                
+                    总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题
+            &nbsp;
+            <a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.8</a>
+        </div>
+        
+            <div class="icp-info info-item">
+                <a target="_blank" rel="nofollow"
+                   href="https://beian.miit.gov.cn"
+                >
+                    蜀ICP备20002343号
+                </a>
+            </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-up-right-and-down-left-from-center"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Java-%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">Java-基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#reference-site-list"><span class="nav-number">1.1.</span> <span class="nav-text">reference-site-list</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#steps"><span class="nav-number">1.2.</span> <span class="nav-text">steps</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Java%E8%AF%AD%E8%A8%80%E6%9C%89%E5%93%AA%E4%BA%9B%E7%89%B9%E7%82%B9"><span class="nav-number">1.2.1.</span> <span class="nav-text">Java语言有哪些特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%92%8C%E9%9D%A2%E5%90%91%E8%BF%87%E7%A8%8B%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.2.2.</span> <span class="nav-text">面向对象和面向过程的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.2.3.</span> <span class="nav-text">基本数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E8%AF%86%E7%AC%A6%E7%9A%84%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99"><span class="nav-number">1.2.4.</span> <span class="nav-text">标识符的命名规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#instanceof-%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">1.2.5.</span> <span class="nav-text">instanceof 关键字的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java%E8%87%AA%E5%8A%A8%E8%A3%85%E7%AE%B1%E4%B8%8E%E6%8B%86%E7%AE%B1"><span class="nav-number">1.2.6.</span> <span class="nav-text">Java自动装箱与拆箱</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E8%BD%BD%E5%92%8C%E9%87%8D%E5%86%99%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.2.7.</span> <span class="nav-text">重载和重写的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#equals%E4%B8%8E-x3D-x3D-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.2.8.</span> <span class="nav-text">equals与&#x3D;&#x3D;的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hashcode%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">1.2.9.</span> <span class="nav-text">Hashcode的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#String%E3%80%81String-StringBuffer-%E5%92%8C-StringBuilder-%E7%9A%84%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80"><span class="nav-number">1.2.10.</span> <span class="nav-text">String、String StringBuffer 和 StringBuilder 的区别是什</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ArrayList%E5%92%8ClinkedList%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.2.11.</span> <span class="nav-text">ArrayList和linkedList的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HashMap%E5%92%8CHashTable%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.2.12.</span> <span class="nav-text">HashMap和HashTable的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Collection%E5%8C%85%E7%BB%93%E6%9E%84%EF%BC%8C%E4%B8%8ECollections%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.2.13.</span> <span class="nav-text">Collection包结构，与Collections的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java%E7%9A%84%E5%9B%9B%E7%A7%8D%E5%BC%95%E7%94%A8%EF%BC%8C%E5%BC%BA%E5%BC%B1%E8%BD%AF%E8%99%9A"><span class="nav-number">1.2.14.</span> <span class="nav-text">Java的四种引用，强弱软虚</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%9B%E5%9E%8B%E5%B8%B8%E7%94%A8%E7%89%B9%E7%82%B9"><span class="nav-number">1.2.15.</span> <span class="nav-text">泛型常用特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E6%9C%89%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F%EF%BC%9F"><span class="nav-number">1.2.16.</span> <span class="nav-text">Java创建对象有几种方式？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%89%E6%B2%A1%E6%9C%89%E5%8F%AF%E8%83%BD%E4%B8%A4%E4%B8%AA%E4%B8%8D%E7%9B%B8%E7%AD%89%E7%9A%84%E5%AF%B9%E8%B1%A1%E6%9C%89%E7%9B%B8%E5%90%8C%E7%9A%84hashcode"><span class="nav-number">1.2.17.</span> <span class="nav-text">有没有可能两个不相等的对象有相同的hashcode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%B1%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B5%85%E6%8B%B7%E8%B4%9D%E7%9A%84%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">1.2.18.</span> <span class="nav-text">深拷贝和浅拷贝的区别是什么?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#final%E6%9C%89%E5%93%AA%E4%BA%9B%E7%94%A8%E6%B3%95"><span class="nav-number">1.2.19.</span> <span class="nav-text">final有哪些用法?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#static%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%E7%94%A8%E6%B3%95"><span class="nav-number">1.2.20.</span> <span class="nav-text">static都有哪些用法?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-0-1-x3D-x3D-0-3%E8%BF%94%E5%9B%9E%E5%80%BC%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">1.2.21.</span> <span class="nav-text">3*0.1 &#x3D;&#x3D; 0.3返回值是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#a-x3D-a-b%E4%B8%8Ea-x3D-b%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%E5%90%97"><span class="nav-number">1.2.22.</span> <span class="nav-text">a&#x3D;a+b与a+&#x3D;b有什么区别吗?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#try-catch-finally%EF%BC%8Ctry%E9%87%8C%E6%9C%89return%EF%BC%8Cfinally%E8%BF%98%E6%89%A7%E8%A1%8C%E4%B9%88%EF%BC%9F"><span class="nav-number">1.2.23.</span> <span class="nav-text">try catch finally，try里有return，finally还执行么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Excption%E4%B8%8EError%E5%8C%85%E7%BB%93%E6%9E%84"><span class="nav-number">1.2.24.</span> <span class="nav-text">Excption与Error包结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OOM%E4%BD%A0%E9%81%87%E5%88%B0%E8%BF%87%E5%93%AA%E4%BA%9B%E6%83%85%E5%86%B5%EF%BC%8CSOF%E4%BD%A0%E9%81%87%E5%88%B0%E8%BF%87%E5%93%AA%E4%BA%9B%E6%83%85%E5%86%B5"><span class="nav-number">1.2.25.</span> <span class="nav-text">OOM你遇到过哪些情况，SOF你遇到过哪些情况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%80%E8%BF%B0%E7%BA%BF%E7%A8%8B%E3%80%81%E7%A8%8B%E5%BA%8F%E3%80%81%E8%BF%9B%E7%A8%8B%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E3%80%82%E4%BB%A5%E5%8F%8A%E4%BB%96%E4%BB%AC%E4%B9%8B%E9%97%B4%E5%85%B3%E7%B3%BB%E6%98%AF%E4%BB%80"><span class="nav-number">1.2.26.</span> <span class="nav-text">简述线程、程序、进程的基本概念。以及他们之间关系是什</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java-%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%AD%E5%A6%82%E6%9E%9C%E6%9C%89%E4%BA%9B%E5%AD%97%E6%AE%B5%E4%B8%8D%E6%83%B3%E8%BF%9B%E8%A1%8C%E5%BA%8F%E5%88%97%E5%8C%96%EF%BC%8C%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F"><span class="nav-number">1.2.27.</span> <span class="nav-text">Java 序列化中如果有些字段不想进行序列化，怎么办？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%B4%E8%AF%B4Java-%E4%B8%AD-IO-%E6%B5%81"><span class="nav-number">1.2.28.</span> <span class="nav-text">说说Java 中 IO 流</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java-IO%E4%B8%8E-NIO%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%88%E8%A1%A5%E5%85%85%EF%BC%89"><span class="nav-number">1.2.29.</span> <span class="nav-text">Java IO与 NIO的区别（补充）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#java%E5%8F%8D%E5%B0%84%E7%9A%84%E4%BD%9C%E7%94%A8%E4%BA%8E%E5%8E%9F%E7%90%86"><span class="nav-number">1.2.30.</span> <span class="nav-text">java反射的作用于原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%B4%E8%AF%B4List-Set-Map%E4%B8%89%E8%80%85%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">1.2.31.</span> <span class="nav-text">说说List,Set,Map三者的区别？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Object-%E6%9C%89%E5%93%AA%E4%BA%9B%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%EF%BC%9F%E5%A4%A7%E8%87%B4%E8%AF%B4%E4%B8%80%E4%B8%8B%E6%AF%8F%E4%B8%AA%E6%96%B9%E6%B3%95%E7%9A%84%E5%90%AB%E4%B9%89"><span class="nav-number">1.2.32.</span> <span class="nav-text">Object 有哪些常用方法？大致说一下每个方法的含义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java-%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E6%9C%89%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F%EF%BC%9F"><span class="nav-number">1.2.33.</span> <span class="nav-text">Java 创建对象有几种方式？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E4%B8%80%E4%B8%AA%E7%B1%BBClass%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%96%B9%E5%BC%8F%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="nav-number">1.2.34.</span> <span class="nav-text">获取一个类Class对象的方式有哪些？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ArrayList-%E5%92%8C-LinkedList-%E7%9A%84%E5%8C%BA%E5%88%AB%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="nav-number">1.2.35.</span> <span class="nav-text">ArrayList 和 LinkedList 的区别有哪些？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8%E8%BF%87-ArrayList-%E5%90%97%EF%BC%9F%E8%AF%B4%E4%B8%80%E4%B8%8B%E5%AE%83%E6%9C%89%E4%BB%80%E4%B9%88%E7%89%B9%E7%82%B9%EF%BC%9F"><span class="nav-number">1.2.36.</span> <span class="nav-text">用过 ArrayList 吗？说一下它有什么特点？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%89%E6%95%B0%E7%BB%84%E4%BA%86%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E8%A6%81%E6%90%9E%E4%B8%AA-ArrayList-%E5%91%A2%EF%BC%9F"><span class="nav-number">1.2.37.</span> <span class="nav-text">有数组了为什么还要搞个 ArrayList 呢？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%B4%E8%AF%B4%E4%BB%80%E4%B9%88%E6%98%AF-fail-fast%EF%BC%9F"><span class="nav-number">1.2.38.</span> <span class="nav-text">说说什么是 fail-fast？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%B4%E8%AF%B4Hashtable-%E4%B8%8E-HashMap-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.2.39.</span> <span class="nav-text">说说Hashtable 与 HashMap 的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HashMap-%E4%B8%AD%E7%9A%84-key-%E6%88%91%E4%BB%AC%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8%E4%BB%BB%E4%BD%95%E7%B1%BB%E4%BD%9C%E4%B8%BA-key-%E5%90%97%EF%BC%9F"><span class="nav-number">1.2.40.</span> <span class="nav-text">HashMap 中的 key 我们可以使用任何类作为 key 吗？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HashMap-%E7%9A%84%E9%95%BF%E5%BA%A6%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF-2-%E7%9A%84-N-%E6%AC%A1%E6%96%B9%E5%91%A2%EF%BC%9F"><span class="nav-number">1.2.41.</span> <span class="nav-text">HashMap 的长度为什么是 2 的 N 次方呢？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HashMap-%E4%B8%8E-ConcurrentHashMap-%E7%9A%84%E5%BC%82%E5%90%8C"><span class="nav-number">1.2.42.</span> <span class="nav-text">HashMap 与 ConcurrentHashMap 的异同</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%A2%E9%BB%91%E6%A0%91%E6%9C%89%E5%93%AA%E5%87%A0%E4%B8%AA%E7%89%B9%E5%BE%81%EF%BC%9F"><span class="nav-number">1.2.43.</span> <span class="nav-text">红黑树有哪几个特征？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%B4%E8%AF%B4%E4%BD%A0%E5%B9%B3%E6%97%B6%E6%98%AF%E6%80%8E%E4%B9%88%E5%A4%84%E7%90%86-Java-%E5%BC%82%E5%B8%B8%E7%9A%84"><span class="nav-number">1.2.44.</span> <span class="nav-text">说说你平时是怎么处理 Java 异常的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%B4%E8%AF%B4%E6%B7%B1%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B5%85%E6%8B%B7%E8%B4%9D%EF%BC%9F"><span class="nav-number">1.2.45.</span> <span class="nav-text">说说深拷贝和浅拷贝？</span></a></li></ol></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-block-tools.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>

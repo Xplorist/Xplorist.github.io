@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Xplorist">
+    
+    <title>
+        
+            JavaScript实现列举某集合中指定长度的子集 |
+        
+        Xplorist
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.svg">
+    
+<link rel="stylesheet" href="/fontawesome/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/brands.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"zh-CN","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","logo":"/images/logo.svg","favicon":"/images/logo.svg","avatar":"/images/Water.jpg","left_side_width":"300px","content_max_width":"1080px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"header_transparent":true,"background_img":"/images/dawn-in-the-valley.jpg","description":"Exploration, a journey that never ends。","font_color":null,"hitokoto":{"enable":false}},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":false},"code_copy":{},"code_block_tools":{"enable":true,"style":"mac"},"side_tools":{},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.8"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"};
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="/images/logo.svg">
+                </a>
+            
+            <a class="logo-title" href="/">
+               Xplorist
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                分类
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                友链
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                关于
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">分类</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">标签</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links">友链</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">关于</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">JavaScript实现列举某集合中指定长度的子集</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/Water.jpg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Xplorist</span>
+                        
+                            <span class="author-label">Lv6</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2021-12-25 14:56:00</span>
+        <span class="mobile">2021-12-25 14:56</span>
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h2 id="JavaScript实现列举某集合中指定长度的子集"><a href="#JavaScript实现列举某集合中指定长度的子集" class="headerlink" title="JavaScript实现列举某集合中指定长度的子集"></a>JavaScript实现列举某集合中指定长度的子集</h2><h2 id="reference-site-list"><a href="#reference-site-list" class="headerlink" title="reference-site-list"></a>reference-site-list</h2><blockquote>
+<ul>
+<li>[] ()</li>
+</ul>
+</blockquote>
+<h2 id="steps"><a href="#steps" class="headerlink" title="steps"></a>steps</h2><ul>
+<li>x</li>
+</ul>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><blockquote>
+<p>用JavaScript实现找 {A, B, C, D, E} 这个集合中 所有长度为4的子集</p>
+</blockquote>
+<ul>
+<li>分析：</li>
+</ul>
+<p>这个问题其实就是列举出ABCDE中所有长度为4的组合，属于数学的排列组合中的组合问题。首先要将找规律，找到存储组合的数据结构，之前已经做过全排列的问题了，用树去存储。<br>简单分析一下，其实也是用树去存储组合。根据高中的知识可以知道，排列的列举，组合的列举，用树的模型去展示，思路就非常清晰了。</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">                  |- D</span><br><span class="line">           |- C - |</span><br><span class="line">           |      |- E</span><br><span class="line">    |- B - |          </span><br><span class="line">    |      |</span><br><span class="line">    |      |- D - |- E</span><br><span class="line">A - |</span><br><span class="line">    |</span><br><span class="line">    |- C - |- D - |- E</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">B - |- C - |- D - |- E</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>用树展示出来，思路一下子就来了，但是要用代码把思路写出来，其实还不算简单，自己分析了很久，总算用了一个上午把代码完成了。</p>
+<p>第一步： 生成根节点数组，根据树的总深度来算根节点数组的起始位置，很明显，要满足深度，数组最大的值为arr.length - deep, 所以知道了根节点的范围是给定数组的[0, arr.length - deep]这个闭区间范围</p>
+<p>第二步：从根节点出发生成深度为deep的树，树的生成和遍历，很明显会用到递归。</p>
+<ol>
+<li>在生成树的时候，要确定该节点的子节点的范围，这里是难点，起点很简单就是当前节点在数组中的位置往后移动一位，所以知道了我们的数据用单独的数字是不行的，必须是一个链表节点对象，保存在数组中的位置(index)和数据值(val)。</li>
+<li>确定树的子节点的终点位置，这又是一个需要认真思考的点，先说结论是：arr.length - (deep - cur), deep是树的最大深度，cur是该节点的当前深度，如果要用语言描述去理解的话，是这样的，arr.length - deep是整个数组保证deep深度的最远位置，但是当前已经在cur深度了，起点往后移动了cur，要保存deep，不能再减deep，deep这个值要变小cur,所以要减去cur。这个是我后来自己想的解释，之前写代码的时候真的是靠灵感去把这个范围写出来的，没有明确的逻辑，脑子里灵光一闪，应该就是它，然后去验证，最后自己来找合理的解释，所以我这里表述的时候，是先说答案，再说解释，不得不说，写代码比做数学题简单，可以靠灵感去猜然后去验证结果，就好像物理一样做实验去验证理论猜想，我觉得计算机可以看作是偏物理应用的数学分支。</li>
+<li>还有一个比较重要的点，在控制递归生成树的深度的时候，要做好判断，cur是从1开始的，只有当当前深度小于最大深度（不能等于最大深度）时，才能够生成子节点，其实从arr.length - (deep - cur)这个范围也可以看出cur必须要小于deep,不能等于，等于的话就数组下标越界了。从树的角度来看，如果等于deep的话，相当于叶子节点下又去生成子节点了，这很明显深度超过deep了。</li>
+<li>最后树的遍历和之前全排列那里是一样的思路，关键还是在每一层进行深拷贝缓存根节点到该层节点之间经历过的所有节点，叶子节点去push到结果数组中。</li>
+</ol>
+<h2 id="code"><a href="#code" class="headerlink" title="code"></a>code</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Combo<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">onclick</span>=<span class="string">&quot;btnClick()&quot;</span>&gt;</span>click<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">function</span> <span class="title function_">btnClick</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">var</span> arr = [<span class="string">&#x27;A&#x27;</span>, <span class="string">&#x27;B&#x27;</span>, <span class="string">&#x27;C&#x27;</span>, <span class="string">&#x27;D&#x27;</span>, <span class="string">&#x27;E&#x27;</span>];</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">var</span> deep = <span class="number">4</span>;</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">var</span> linkArr = [];</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; arr.<span class="property">length</span>; i++) &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">var</span> item = &#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">index</span>: i,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">val</span>: arr[i]</span></span><br><span class="line"><span class="language-javascript">            &#125;; <span class="comment">// 因为生成树中的子节点的范围要用到在arr中的位置，所以这里这样构建包含index和val的对象很关键</span></span></span><br><span class="line"><span class="language-javascript">            linkArr.<span class="title function_">push</span>(item);</span></span><br><span class="line"><span class="language-javascript">        &#125;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">var</span> rootArr = [];</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">var</span> treeArr = [];</span></span><br><span class="line"><span class="language-javascript">        <span class="title function_">generateRootArr</span>(linkArr, deep, rootArr, treeArr);</span></span><br><span class="line"><span class="language-javascript">        <span class="variable language_">window</span>.<span class="property">console</span>.<span class="title function_">log</span>(<span class="string">&quot;treeArr&quot;</span>, treeArr);</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">if</span> (deep &gt; <span class="number">1</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">var</span> resultArr = [];</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; treeArr.<span class="property">length</span>; i++) &#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="keyword">var</span> tree = treeArr[i];</span></span><br><span class="line"><span class="language-javascript">                <span class="keyword">var</span> temp = [];</span></span><br><span class="line"><span class="language-javascript">                <span class="title function_">loopTree</span>(tree, temp, resultArr);</span></span><br><span class="line"><span class="language-javascript">            &#125;</span></span><br><span class="line"><span class="language-javascript">            <span class="variable language_">window</span>.<span class="property">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;resultArr: &#x27;</span>, resultArr);</span></span><br><span class="line"><span class="language-javascript">        &#125;</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="comment">// 生成根节点数组, deep &gt;= 1</span></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">function</span> <span class="title function_">generateRootArr</span>(<span class="params">linkArr, deep, rootArr, treeArr</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; linkArr.<span class="property">length</span> - deep + <span class="number">1</span>; i++) &#123;</span></span><br><span class="line"><span class="language-javascript">            rootArr.<span class="title function_">push</span>(linkArr[i]);</span></span><br><span class="line"><span class="language-javascript">        &#125;</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">if</span> (deep &gt; <span class="number">1</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; rootArr.<span class="property">length</span>; i++) &#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="keyword">var</span> root = rootArr[i];</span></span><br><span class="line"><span class="language-javascript">                <span class="keyword">var</span> tree = &#123;</span></span><br><span class="line"><span class="language-javascript">                    <span class="attr">val</span>: root,</span></span><br><span class="line"><span class="language-javascript">                    <span class="attr">parent</span>: <span class="literal">null</span>,</span></span><br><span class="line"><span class="language-javascript">                    <span class="attr">children</span>: []</span></span><br><span class="line"><span class="language-javascript">                &#125;;</span></span><br><span class="line"><span class="language-javascript">                <span class="title function_">generateTree</span>(tree, linkArr, <span class="number">1</span>, deep);</span></span><br><span class="line"><span class="language-javascript">                treeArr.<span class="title function_">push</span>(tree);</span></span><br><span class="line"><span class="language-javascript">            &#125;</span></span><br><span class="line"><span class="language-javascript">        &#125;</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="comment">// 使用递归，根据根节点数组生成树, cur代表树的当前深度，deep代表树的最大深度</span></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">function</span> <span class="title function_">generateTree</span>(<span class="params">tree, linkArr, cur, deep</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">var</span> node = tree.<span class="property">val</span>;</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">var</span> index = node.<span class="property">index</span>;</span></span><br><span class="line"><span class="language-javascript">        <span class="comment">// 在[index + 1, linkArr.length - (deep - cur)]闭区间内建立子节点</span></span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">if</span> (cur &lt; deep &amp;&amp; index + <span class="number">1</span> &lt; linkArr.<span class="property">length</span>) &#123; <span class="comment">// 关键判断 cur &lt; deep</span></span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">for</span> (<span class="keyword">var</span> i = index + <span class="number">1</span>; i &lt;= linkArr.<span class="property">length</span> - (deep - cur); i++) &#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="keyword">var</span> item = &#123;</span></span><br><span class="line"><span class="language-javascript">                    <span class="attr">val</span>: linkArr[i],</span></span><br><span class="line"><span class="language-javascript">                    <span class="attr">parent</span>: node,</span></span><br><span class="line"><span class="language-javascript">                    <span class="attr">children</span>: []</span></span><br><span class="line"><span class="language-javascript">                &#125;;</span></span><br><span class="line"><span class="language-javascript">                tree.<span class="property">children</span>.<span class="title function_">push</span>(item);</span></span><br><span class="line"><span class="language-javascript">                <span class="title function_">generateTree</span>(item, linkArr, cur + <span class="number">1</span>, deep);</span></span><br><span class="line"><span class="language-javascript">            &#125;</span></span><br><span class="line"><span class="language-javascript">        &#125;</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="comment">// 使用递归，遍历树生成数组</span></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">function</span> <span class="title function_">loopTree</span>(<span class="params">tree, path, arr</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">var</span> temp = path.<span class="title function_">slice</span>(); <span class="comment">// 深拷贝，缓存根节点到当前层级节点的经历的路径数组</span></span></span><br><span class="line"><span class="language-javascript">        temp.<span class="title function_">push</span>(tree.<span class="property">val</span>.<span class="property">val</span>);</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">var</span> children = tree.<span class="property">children</span>;</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">if</span> (children.<span class="property">length</span> &gt; <span class="number">0</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; children.<span class="property">length</span>; i++) &#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="keyword">var</span> item = children[i];</span></span><br><span class="line"><span class="language-javascript">                <span class="title function_">loopTree</span>(item, temp, arr);</span></span><br><span class="line"><span class="language-javascript">            &#125;</span></span><br><span class="line"><span class="language-javascript">        &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="comment">// 叶子节点</span></span></span><br><span class="line"><span class="language-javascript">            arr.<span class="title function_">push</span>(temp);</span></span><br><span class="line"><span class="language-javascript">        &#125;</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul class="copyright-info-content">
+        <li>本文标题：JavaScript实现列举某集合中指定长度的子集</li>
+        <li>本文作者：Xplorist</li>
+        <li>创建时间：2021-12-25 14:56:00</li>
+        <li>
+            本文链接：https://xplorist.tech/2021/12/25/fd24c7abc6af/
+        </li>
+        <li>
+            版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/JavaScript/">#JavaScript</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2021/12/27/84de6a4902cc/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Vue数据变化但是视图未更新</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/12/24/8f817528aa32/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">排列组合课本</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments"></i>&nbsp;评论
+    </div>
+    
+
+        
+            
+
+
+    <div id="gitalk-container"></div>
+    <script 
+            src="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js"></script>
+    <script >
+
+      function loadGitalk() {
+        let __gitalk__pathname = decodeURI(location.pathname);
+        const __gitalk__pathnameLength = __gitalk__pathname.length;
+        const __gitalk__pathnameMaxLength = 50;
+        if (__gitalk__pathnameLength > __gitalk__pathnameMaxLength) {
+          __gitalk__pathname = __gitalk__pathname.substring(0, __gitalk__pathnameMaxLength - 3) + '...';
+        }
+
+        try {
+
+          Gitalk && new Gitalk({
+            clientID: '24c227c71f9bb758a554',
+            clientSecret: '724a45a68d355acb27c19a61d15fbb7dee34db4e',
+            repo: 'hexo-site-comments',
+            owner: 'Xplorist',
+            admin: 'Xplorist',
+            id: __gitalk__pathname,
+            language: 'zh-CN'
+          }).render('gitalk-container');
+
+        } catch (e) {
+          window.Gitalk = null;
+        }
+      }
+
+      if ('false') {
+        const loadGitalkTimeout = setTimeout(() => {
+          loadGitalk();
+          clearTimeout(loadGitalkTimeout);
+        }, 1000);
+      } else {
+        window.addEventListener('DOMContentLoaded', loadGitalk);
+      }
+    </script>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            
+<footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+                <span>2020</span> -
+            
+            2023
+            
+                &nbsp;<i class="fas fa-heart icon-animate"></i>
+                &nbsp;<a href="/">Xplorist</a>
+            
+        </div>
+        
+            <script async 
+                    src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    访问人数&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                
+                
+                    总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题
+            &nbsp;
+            <a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.8</a>
+        </div>
+        
+            <div class="icp-info info-item">
+                <a target="_blank" rel="nofollow"
+                   href="https://beian.miit.gov.cn"
+                >
+                    蜀ICP备20002343号
+                </a>
+            </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-up-right-and-down-left-from-center"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaScript%E5%AE%9E%E7%8E%B0%E5%88%97%E4%B8%BE%E6%9F%90%E9%9B%86%E5%90%88%E4%B8%AD%E6%8C%87%E5%AE%9A%E9%95%BF%E5%BA%A6%E7%9A%84%E5%AD%90%E9%9B%86"><span class="nav-number">1.</span> <span class="nav-text">JavaScript实现列举某集合中指定长度的子集</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference-site-list"><span class="nav-number">2.</span> <span class="nav-text">reference-site-list</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#steps"><span class="nav-number">3.</span> <span class="nav-text">steps</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98"><span class="nav-number">4.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#code"><span class="nav-number">5.</span> <span class="nav-text">code</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-block-tools.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>

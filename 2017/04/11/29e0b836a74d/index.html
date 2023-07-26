@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Xplorist">
+    
+    <title>
+        
+            2017-04-11-反射-JSON解析 |
+        
+        Xplorist
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.svg">
+    
+<link rel="stylesheet" href="/fontawesome/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/brands.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"zh-CN","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","logo":"/images/logo.svg","favicon":"/images/logo.svg","avatar":"/images/Water.jpg","left_side_width":"300px","content_max_width":"1080px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"header_transparent":true,"background_img":"/images/dawn-in-the-valley.jpg","description":"Exploration, a journey that never ends。","font_color":null,"hitokoto":{"enable":false}},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":false},"code_copy":{},"code_block_tools":{"enable":true,"style":"mac"},"side_tools":{},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.8"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"};
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="/images/logo.svg">
+                </a>
+            
+            <a class="logo-title" href="/">
+               Xplorist
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                分类
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                友链
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                关于
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">分类</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">标签</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links">友链</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">关于</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">2017-04-11-反射-JSON解析</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/Water.jpg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Xplorist</span>
+                        
+                            <span class="author-label">Lv6</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2017-04-11 14:23:01</span>
+        <span class="mobile">2017-04-11 14:23</span>
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/ShareLearn/">ShareLearn</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/ShareLearn/">ShareLearn</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="2017-04-11-反射-JSON解析"><a href="#2017-04-11-反射-JSON解析" class="headerlink" title="2017-04-11-反射-JSON解析"></a>2017-04-11-反射-JSON解析</h1><p>知识点1：</p>
+<p>反射的概念</p>
+<p>反射中的类</p>
+<p>Class 是类的抽象</p>
+<p>类是对象的抽象</p>
+<p>Class类的对象就是一个类（模板，设计图）</p>
+<p>反射的作用：</p>
+<p>将类中所有属性和方法（包括构造方法）都提取出来。</p>
+<p>获取Class对象来存储类（Class类很特殊，没有构造方法，不能创建它依附于其他类，是一个类的抽象，类的类）</p>
+<p>获取Class对象的三种方法：</p>
+<p>1、类名.class</p>
+<p>2、对象.getClass();获取的是对象的实际类型，多态中运行时动态获取对象类型</p>
+<p>3、Class.forName(类的路径及名称);</p>
+<p>Class 类对象主要的方法有5个方面：</p>
+<p>1、提取构造方法 getConstructor()</p>
+<p>2、提取方法getMethod()</p>
+<p>3、提取属性getField()</p>
+<p>4、提取父类getSuperclass()</p>
+<p>5、创建类的对象（实际是调用类的无参公有构造方法，可以将这个功能划分到提取构造方法里面去）</p>
+<p>具体的使用参见例子</p>
+<p>基本数据类型也可以使用类似的类名.class</p>
+<p>例如：int.class</p>
+<p>知识点2：</p>
+<p>JSON解析</p>
+<p>json：JavaScript Object Notation JavaScript 对象标记</p>
+<p>json是一种数据存储格式，存储形式如Java中的Map一样通过key-value这样的键值对来存储</p>
+<p>由于Map的这种key-value映射和类的属性名和属性值的功能相似，于是就可以将这种键值对的映射转换为对象进行存储。</p>
+<p>存储数据的格式</p>
+<p>map</p>
+<p>json</p>
+<p>xml</p>
+<p>json和xml都要解析才能够使用</p>
+<p>json解析就是将json形式的数据通过类的对象的方式存储起来，再利用类的对象的属性得到相应的值。</p>
+<p>json解析要使用到Gson的jar包</p>
+<p>具体解析参考示例</p>
+<p>实例1：</p>
+<p>反射的相关操作<br><img src="/images/shareLearn/2017-04-11-01.png" alt="2017-04-11-01.png"><br><img src="/images/shareLearn/2017-04-11-02.png" alt="2017-04-11-02.png"><br><img src="/images/shareLearn/2017-04-11-03.png" alt="2017-04-11-03.png"></p>
+<p>核心代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.share.eg01获取类的Class类的对象;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Constructor;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Field;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.InvocationTargetException;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ClassTest</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="comment">//getClassObject();</span></span><br><span class="line">        <span class="comment">//getConstructor();</span></span><br><span class="line">        getMethod();</span><br><span class="line">        <span class="comment">//getFeild();</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//获取类的对象</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">getClassObject</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="comment">//获取Person类的Class对象</span></span><br><span class="line">                <span class="comment">//1.类名.class</span></span><br><span class="line">                Class&lt;?&gt; c1= Person.class;</span><br><span class="line">                <span class="comment">//2.对象.getClass()</span></span><br><span class="line">                Person p=<span class="keyword">new</span> <span class="title class_">Person</span>();</span><br><span class="line">                Class&lt;?&gt; c2=p.getClass();</span><br><span class="line">                <span class="comment">//3.Class.forName(&quot;路径&quot;);</span></span><br><span class="line">                <span class="comment">//文件的全路径和类的全路径</span></span><br><span class="line">                Class&lt;?&gt; c3=<span class="literal">null</span>;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    c3=Class.forName(<span class="string">&quot;com.share.eg01获取类的Class类的对象.Person&quot;</span>);</span><br><span class="line">                &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">                    <span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">                System.out.println(c1);</span><br><span class="line">                System.out.println(c2);</span><br><span class="line">                System.out.println(c3);</span><br><span class="line">                </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//获取构造方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">getConstructor</span><span class="params">()</span>&#123;</span><br><span class="line">        Person p=<span class="keyword">new</span> <span class="title class_">Person</span>();</span><br><span class="line">        Class&lt;?&gt; c=p.getClass();</span><br><span class="line">        </span><br><span class="line">        Constructor&lt;?&gt;[] constructors = c.getConstructors();</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;constructors.length;i++)&#123;</span><br><span class="line">            System.out.println(constructors[i]);</span><br><span class="line">            Class&lt;?&gt;[] pt = constructors[i].getParameterTypes();</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>;j&lt;pt.length;j++)&#123;</span><br><span class="line">                System.out.println(pt[j]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">&quot;----------------------&quot;</span>);</span><br><span class="line">        <span class="keyword">for</span>(Constructor co:constructors)&#123;</span><br><span class="line">            System.out.println(co);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//获取方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">getMethod</span><span class="params">()</span>&#123;</span><br><span class="line">        Person p=<span class="keyword">new</span> <span class="title class_">Person</span>();</span><br><span class="line">        Class&lt;?&gt; c=p.getClass();</span><br><span class="line">        </span><br><span class="line">        Method[] methods = c.getDeclaredMethods();</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;methods.length;i++)&#123;</span><br><span class="line">            System.out.println(methods[i].getName());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            methods[<span class="number">2</span>].setAccessible(<span class="literal">true</span>);</span><br><span class="line">            methods[<span class="number">2</span>].invoke(p);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IllegalAccessException e) &#123;</span><br><span class="line">            <span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IllegalArgumentException e) &#123;</span><br><span class="line">            <span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InvocationTargetException e) &#123;</span><br><span class="line">            <span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//获取属性</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">getFeild</span><span class="params">()</span>&#123;</span><br><span class="line">        Person p=<span class="keyword">new</span> <span class="title class_">Person</span>();</span><br><span class="line">        Class&lt;?&gt; c=p.getClass();</span><br><span class="line">        </span><br><span class="line">        Field[] fields = c.getDeclaredFields();</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;fields.length;i++)&#123;</span><br><span class="line">            System.out.println(fields[i]);</span><br><span class="line">            fields[i].setAccessible(<span class="literal">true</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            fields[<span class="number">0</span>].set(p, <span class="string">&quot;1&quot;</span>);</span><br><span class="line">            System.out.println(p.getName());</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IllegalArgumentException e) &#123;</span><br><span class="line">            <span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IllegalAccessException e) &#123;</span><br><span class="line">            <span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.share.eg01获取类的Class类的对象;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Person</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Person</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>();</span><br><span class="line">        name=<span class="string">&quot;1&quot;</span>;</span><br><span class="line">        <span class="comment">// TODO Auto-generated constructor stub</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Person</span><span class="params">(String name)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>();</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getName</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setName</span><span class="params">(String name)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">()</span>&#123;</span><br><span class="line">        System.out.println(name);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">test</span><span class="params">()</span>&#123;</span><br><span class="line">        System.out.println(name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>实例2：</p>
+<p>json数据解析</p>
+<p>将通过URL获取服务器上的jason的数据并将数据进行解析</p>
+<p>核心代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.share.eg02_JSON数据解析;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.google.gson.Gson;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">JsonTest</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        String s=GetJsonData.getJasonData();</span><br><span class="line">        </span><br><span class="line">        Gson gson=<span class="keyword">new</span> <span class="title class_">Gson</span>();</span><br><span class="line">        Message m=gson.fromJson(s, Message.class);</span><br><span class="line">        System.out.println(<span class="string">&quot;解析的结果：&quot;</span>+m);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.share.eg02_JSON数据解析;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.BufferedReader;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStreamReader;</span><br><span class="line"><span class="keyword">import</span> java.net.MalformedURLException;</span><br><span class="line"><span class="keyword">import</span> java.net.URL;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">GetJsonData</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> String <span class="title function_">getJasonData</span><span class="params">()</span>&#123;</span><br><span class="line">        BufferedReader in=<span class="literal">null</span>;</span><br><span class="line">        StringBuffer sb=<span class="keyword">new</span> <span class="title class_">StringBuffer</span>();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            URL url=<span class="keyword">new</span> <span class="title class_">URL</span>(<span class="string">&quot;http://172.18.6.3:8080/PunishmentVote/vote?result=1&quot;</span>);</span><br><span class="line">            InputStream is=url.openStream();</span><br><span class="line">            InputStreamReader isr=<span class="keyword">new</span> <span class="title class_">InputStreamReader</span>(is,<span class="string">&quot;UTF-8&quot;</span>);</span><br><span class="line">            in=<span class="keyword">new</span> <span class="title class_">BufferedReader</span>(isr);</span><br><span class="line">            </span><br><span class="line">            String inputLine;</span><br><span class="line">            <span class="keyword">while</span>((inputLine=in.readLine())!=<span class="literal">null</span>)&#123;</span><br><span class="line">                sb.append(inputLine);</span><br><span class="line">                System.out.println(inputLine);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (MalformedURLException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            <span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;<span class="keyword">finally</span>&#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                in.close();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                <span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> sb.toString();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.share.eg02_JSON数据解析;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Message</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String vote_result;</span><br><span class="line">    <span class="keyword">private</span> String result;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Message</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Message</span><span class="params">(String vote_result, String result)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>();</span><br><span class="line">        <span class="built_in">this</span>.vote_result = vote_result;</span><br><span class="line">        <span class="built_in">this</span>.result = result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getVote_result</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> vote_result;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setVote_result</span><span class="params">(String vote_result)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.vote_result = vote_result;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getResult</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setResult</span><span class="params">(String result)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.result = result;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;【vote_result】:&quot;</span>+vote_result+<span class="string">&quot; 【result】:&quot;</span>+result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>实例3：</p>
+<p>json数据解析</p>
+<p>解析下面的数据：</p>
+<p>{<br>    “resultcode”: “200”,<br>    “reason”: “successed!”,<br>    “result”: {<br>        “sk”: {<br>            “temp”: “36”,<br>            “wind_direction”: “西风”,<br>            “wind_strength”: “2级”,<br>            “humidity”: “50%”,<br>            “time”: “11:23”<br>        },<br>        “today”: {<br>            “temperature”: “30℃<del>38℃”,<br>            “weather”: “晴”,<br>            “weather_id”: {<br>                “fa”: “00”,<br>                “fb”: “00”<br>            },<br>            “wind”: “南风微风”,<br>            “week”: “星期六”,<br>            “city”: “苏州”,<br>            “date_y”: “2016年07月23日”,<br>            “dressing_index”: “炎热”,<br>            “dressing_advice”: “天气炎热，建议着短衫、短裙、短裤、薄型T恤衫等清凉夏季服装。”,<br>            “uv_index”: “很强”,<br>            “comfort_index”: “”,<br>            “wash_index”: “较适宜”,<br>            “travel_index”: “较适宜”,<br>            “exercise_index”: “较适宜”,<br>            “drying_index”: “”<br>        },<br>        “future”: [<br>            {<br>                “temperature”: “30℃</del>38℃”,<br>                “weather”: “晴”,<br>                “weather_id”: {<br>                    “fa”: “00”,<br>                    “fb”: “00”<br>                },<br>                “wind”: “南风微风”,<br>                “week”: “星期六”,<br>                “date”: “20160723”<br>            },<br>            {<br>                “temperature”: “30℃<del>38℃”,<br>                “weather”: “晴”,<br>                “weather_id”: {<br>                    “fa”: “00”,<br>                    “fb”: “00”<br>                },<br>                “wind”: “东南风微风”,<br>                “week”: “星期日”,<br>                “date”: “20160724”<br>            },<br>            {<br>                “temperature”: “30℃</del>38℃”,<br>                “weather”: “晴”,<br>                “weather_id”: {<br>                    “fa”: “00”,<br>                    “fb”: “00”<br>                },<br>                “wind”: “东南风微风”,<br>                “week”: “星期一”,<br>                “date”: “20160725”<br>            },<br>            {<br>                “temperature”: “30℃<del>39℃”,<br>                “weather”: “晴”,<br>                “weather_id”: {<br>                    “fa”: “00”,<br>                    “fb”: “00”<br>                },<br>                “wind”: “西南风微风”,<br>                “week”: “星期二”,<br>                “date”: “20160726”<br>            },<br>            {<br>                “temperature”: “30℃</del>38℃”,<br>                “weather”: “晴”,<br>                “weather_id”: {<br>                    “fa”: “00”,<br>                    “fb”: “00”<br>                },<br>                “wind”: “西风微风”,<br>                “week”: “星期三”,<br>                “date”: “20160727”<br>            },<br>            {<br>                “temperature”: “30℃<del>39℃”,<br>                “weather”: “晴”,<br>                “weather_id”: {<br>                    “fa”: “00”,<br>                    “fb”: “00”<br>                },<br>                “wind”: “西南风微风”,<br>                “week”: “星期四”,<br>                “date”: “20160728”<br>            },<br>            {<br>                “temperature”: “30℃</del>38℃”,<br>                “weather”: “晴”,<br>                “weather_id”: {<br>                    “fa”: “00”,<br>                    “fb”: “00”<br>                },<br>                “wind”: “东南风微风”,<br>                “week”: “星期五”,<br>                “date”: “20160729”<br>            }<br>        ]<br>    },<br>    “error_code”: 0<br>}</p>
+<p>核心代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.share.eg03_Json数据解析;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Future</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String temperature;</span><br><span class="line">    <span class="keyword">private</span> String weather;</span><br><span class="line">    <span class="keyword">private</span> Weather_id wheather_id;</span><br><span class="line">    <span class="keyword">private</span> String wind;</span><br><span class="line">    <span class="keyword">private</span> String week;</span><br><span class="line">    <span class="keyword">private</span> String date;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Future</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>();</span><br><span class="line">        <span class="comment">// TODO Auto-generated constructor stub</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Future</span><span class="params">(String temperature, String weather, Weather_id wheather_id, String wind, String week, String date)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>();</span><br><span class="line">        <span class="built_in">this</span>.temperature = temperature;</span><br><span class="line">        <span class="built_in">this</span>.weather = weather;</span><br><span class="line">        <span class="built_in">this</span>.wheather_id = wheather_id;</span><br><span class="line">        <span class="built_in">this</span>.wind = wind;</span><br><span class="line">        <span class="built_in">this</span>.week = week;</span><br><span class="line">        <span class="built_in">this</span>.date = date;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getTemperature</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> temperature;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setTemperature</span><span class="params">(String temperature)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.temperature = temperature;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getWeather</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> weather;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setWeather</span><span class="params">(String weather)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.weather = weather;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> Weather_id <span class="title function_">getWheather_id</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> wheather_id;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setWheather_id</span><span class="params">(Weather_id wheather_id)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.wheather_id = wheather_id;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getWind</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> wind;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setWind</span><span class="params">(String wind)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.wind = wind;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getWeek</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> week;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setWeek</span><span class="params">(String week)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.week = week;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getDate</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> date;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setDate</span><span class="params">(String date)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.date = date;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.share.eg03_Json数据解析;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">JsonData</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> resultcode;</span><br><span class="line">    <span class="keyword">private</span> String reason;</span><br><span class="line">    <span class="keyword">private</span> Result result;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> error_code;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">JsonData</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>();</span><br><span class="line">        <span class="comment">// TODO Auto-generated constructor stub</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">JsonData</span><span class="params">(<span class="type">int</span> resultcode, String reason, Result result, <span class="type">int</span> error_code)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>();</span><br><span class="line">        <span class="built_in">this</span>.resultcode = resultcode;</span><br><span class="line">        <span class="built_in">this</span>.reason = reason;</span><br><span class="line">        <span class="built_in">this</span>.result = result;</span><br><span class="line">        <span class="built_in">this</span>.error_code = error_code;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getResultcode</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> resultcode;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setResultcode</span><span class="params">(<span class="type">int</span> resultcode)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.resultcode = resultcode;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getReason</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> reason;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setReason</span><span class="params">(String reason)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.reason = reason;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> Result <span class="title function_">getResult</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setResult</span><span class="params">(Result result)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.result = result;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getError_code</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> error_code;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setError_code</span><span class="params">(<span class="type">int</span> error_code)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.error_code = error_code;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.share.eg03_Json数据解析;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.InvocationTargetException;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.google.gson.Gson;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">JsonTest</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">jsonString</span> <span class="operator">=</span> <span class="string">&quot;&#123;\&quot;resultcode\&quot;:\&quot;200\&quot;,\&quot;reason\&quot;:\&quot;successed!\&quot;,\&quot;result\&quot;:&#123;\&quot;sk\&quot;:&#123;\&quot;temp\&quot;:\&quot;36\&quot;,\&quot;wind_direction\&quot;:\&quot;西风\&quot;,\&quot;wind_strength\&quot;:\&quot;2级\&quot;,\&quot;humidity\&quot;:\&quot;50%\&quot;,\&quot;time\&quot;:\&quot;11:23\&quot;&#125;,\&quot;today\&quot;:&#123;\&quot;temperature\&quot;:\&quot;30℃~38℃\&quot;,\&quot;weather\&quot;:\&quot;晴\&quot;,\&quot;weather_id\&quot;:&#123;\&quot;fa\&quot;:\&quot;00\&quot;,\&quot;fb\&quot;:\&quot;00\&quot;&#125;,\&quot;wind\&quot;:\&quot;南风微风\&quot;,\&quot;week\&quot;:\&quot;星期六\&quot;,\&quot;city\&quot;:\&quot;苏州\&quot;,\&quot;date_y\&quot;:\&quot;2016年07月23日\&quot;,\&quot;dressing_index\&quot;:\&quot;炎热\&quot;,\&quot;dressing_advice\&quot;:\&quot;天气炎热，建议着短衫、短裙、短裤、薄型T恤衫等清凉夏季服装。\&quot;,\&quot;uv_index\&quot;:\&quot;很强\&quot;,\&quot;comfort_index\&quot;:\&quot;\&quot;,\&quot;wash_index\&quot;:\&quot;较适宜\&quot;,\&quot;travel_index\&quot;:\&quot;较适宜\&quot;,\&quot;exercise_index\&quot;:\&quot;较适宜\&quot;,\&quot;drying_index\&quot;:\&quot;\&quot;&#125;,\&quot;future\&quot;:[&#123;\&quot;temperature\&quot;:\&quot;30℃~38℃\&quot;,\&quot;weather\&quot;:\&quot;晴\&quot;,\&quot;weather_id\&quot;:&#123;\&quot;fa\&quot;:\&quot;00\&quot;,\&quot;fb\&quot;:\&quot;00\&quot;&#125;,\&quot;wind\&quot;:\&quot;南风微风\&quot;,\&quot;week\&quot;:\&quot;星期六\&quot;,\&quot;date\&quot;:\&quot;20160723\&quot;&#125;,&#123;\&quot;temperature\&quot;:\&quot;30℃~38℃\&quot;,\&quot;weather\&quot;:\&quot;晴\&quot;,\&quot;weather_id\&quot;:&#123;\&quot;fa\&quot;:\&quot;00\&quot;,\&quot;fb\&quot;:\&quot;00\&quot;&#125;,\&quot;wind\&quot;:\&quot;东南风微风\&quot;,\&quot;week\&quot;:\&quot;星期日\&quot;,\&quot;date\&quot;:\&quot;20160724\&quot;&#125;,&#123;\&quot;temperature\&quot;:\&quot;30℃~38℃\&quot;,\&quot;weather\&quot;:\&quot;晴\&quot;,\&quot;weather_id\&quot;:&#123;\&quot;fa\&quot;:\&quot;00\&quot;,\&quot;fb\&quot;:\&quot;00\&quot;&#125;,\&quot;wind\&quot;:\&quot;东南风微风\&quot;,\&quot;week\&quot;:\&quot;星期一\&quot;,\&quot;date\&quot;:\&quot;20160725\&quot;&#125;,&#123;\&quot;temperature\&quot;:\&quot;30℃~39℃\&quot;,\&quot;weather\&quot;:\&quot;晴\&quot;,\&quot;weather_id\&quot;:&#123;\&quot;fa\&quot;:\&quot;00\&quot;,\&quot;fb\&quot;:\&quot;00\&quot;&#125;,\&quot;wind\&quot;:\&quot;西南风微风\&quot;,\&quot;week\&quot;:\&quot;星期二\&quot;,\&quot;date\&quot;:\&quot;20160726\&quot;&#125;,&#123;\&quot;temperature\&quot;:\&quot;30℃~38℃\&quot;,\&quot;weather\&quot;:\&quot;晴\&quot;,\&quot;weather_id\&quot;:&#123;\&quot;fa\&quot;:\&quot;00\&quot;,\&quot;fb\&quot;:\&quot;00\&quot;&#125;,\&quot;wind\&quot;:\&quot;西风微风\&quot;,\&quot;week\&quot;:\&quot;星期三\&quot;,\&quot;date\&quot;:\&quot;20160727\&quot;&#125;,&#123;\&quot;temperature\&quot;:\&quot;30℃~39℃\&quot;,\&quot;weather\&quot;:\&quot;晴\&quot;,\&quot;weather_id\&quot;:&#123;\&quot;fa\&quot;:\&quot;00\&quot;,\&quot;fb\&quot;:\&quot;00\&quot;&#125;,\&quot;wind\&quot;:\&quot;西南风微风\&quot;,\&quot;week\&quot;:\&quot;星期四\&quot;,\&quot;date\&quot;:\&quot;20160728\&quot;&#125;,&#123;\&quot;temperature\&quot;:\&quot;30℃~38℃\&quot;,\&quot;weather\&quot;:\&quot;晴\&quot;,\&quot;weather_id\&quot;:&#123;\&quot;fa\&quot;:\&quot;00\&quot;,\&quot;fb\&quot;:\&quot;00\&quot;&#125;,\&quot;wind\&quot;:\&quot;东南风微风\&quot;,\&quot;week\&quot;:\&quot;星期五\&quot;,\&quot;date\&quot;:\&quot;20160729\&quot;&#125;]&#125;,\&quot;error_code\&quot;:0&#125;&quot;</span>;</span><br><span class="line">        System.out.println(jsonString);</span><br><span class="line">        <span class="type">JsonData</span> <span class="variable">data</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Gson</span>().fromJson(jsonString, JsonData.class);</span><br><span class="line"></span><br><span class="line">        <span class="type">Today</span> <span class="variable">today</span> <span class="operator">=</span> data.getResult().getToday();</span><br><span class="line">        Method[] methods = today.getClass().getDeclaredMethods();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; methods.length; i++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (methods[i].getName().equals(<span class="string">&quot;getWeather_id&quot;</span>)) &#123;</span><br><span class="line">                    System.out.println(methods[i].getName().substring(<span class="number">3</span>).toLowerCase() + <span class="string">&quot;=&quot;</span>);</span><br><span class="line">                    <span class="type">Weather_id</span> <span class="variable">weathre_id</span> <span class="operator">=</span> (Weather_id) methods[i].invoke(today);</span><br><span class="line">                    Method[] methods2 = weathre_id.getClass().getDeclaredMethods();</span><br><span class="line">                    <span class="keyword">for</span> (Method m : methods2) &#123;</span><br><span class="line">                        <span class="keyword">if</span> (m.getName().startsWith(<span class="string">&quot;get&quot;</span>)) &#123;</span><br><span class="line">                            System.out.println(</span><br><span class="line">                                    <span class="string">&quot;\t&quot;</span> + m.getName().substring(<span class="number">3</span>).toLowerCase() + <span class="string">&quot;=&quot;</span> + m.invoke(weathre_id));</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (methods[i].getName().startsWith(<span class="string">&quot;get&quot;</span>)) &#123;</span><br><span class="line">                    System.out</span><br><span class="line">                            .println(methods[i].getName().substring(<span class="number">3</span>).toLowerCase() + <span class="string">&quot;=&quot;</span> + methods[i].invoke(today));</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IllegalAccessException e) &#123;</span><br><span class="line">            <span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IllegalArgumentException e) &#123;</span><br><span class="line">            <span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InvocationTargetException e) &#123;</span><br><span class="line">            <span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.share.eg03_Json数据解析;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Result</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> SK sk;</span><br><span class="line">    <span class="keyword">private</span> Today today;</span><br><span class="line">    <span class="keyword">private</span> List&lt;Future&gt; future;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Result</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>();</span><br><span class="line">        <span class="comment">// TODO Auto-generated constructor stub</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Result</span><span class="params">(SK sk, Today today, List&lt;Future&gt; future)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>();</span><br><span class="line">        <span class="built_in">this</span>.sk = sk;</span><br><span class="line">        <span class="built_in">this</span>.today = today;</span><br><span class="line">        <span class="built_in">this</span>.future = future;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> SK <span class="title function_">getSk</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> sk;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setSk</span><span class="params">(SK sk)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.sk = sk;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> Today <span class="title function_">getToday</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> today;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setToday</span><span class="params">(Today today)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.today = today;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> List&lt;Future&gt; <span class="title function_">getFuture</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> future;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setFuture</span><span class="params">(List&lt;Future&gt; future)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.future = future;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.share.eg03_Json数据解析;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SK</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String temp;</span><br><span class="line">    <span class="keyword">private</span> String wind_direction;</span><br><span class="line">    <span class="keyword">private</span> String wind_strength;</span><br><span class="line">    <span class="keyword">private</span> String humidity;</span><br><span class="line">    <span class="keyword">private</span> String time;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">SK</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>();</span><br><span class="line">        <span class="comment">// TODO Auto-generated constructor stub</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">SK</span><span class="params">(String temp, String wind_direction, String wind_strength, String humidity, String time)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>();</span><br><span class="line">        <span class="built_in">this</span>.temp = temp;</span><br><span class="line">        <span class="built_in">this</span>.wind_direction = wind_direction;</span><br><span class="line">        <span class="built_in">this</span>.wind_strength = wind_strength;</span><br><span class="line">        <span class="built_in">this</span>.humidity = humidity;</span><br><span class="line">        <span class="built_in">this</span>.time = time;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getTemp</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> temp;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setTemp</span><span class="params">(String temp)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.temp = temp;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getWind_direction</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> wind_direction;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setWind_direction</span><span class="params">(String wind_direction)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.wind_direction = wind_direction;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getWind_strength</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> wind_strength;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setWind_strength</span><span class="params">(String wind_strength)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.wind_strength = wind_strength;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getHumidity</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> humidity;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setHumidity</span><span class="params">(String humidity)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.humidity = humidity;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getTime</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> time;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setTime</span><span class="params">(String time)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.time = time;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.share.eg03_Json数据解析;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Today</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String temperature;</span><br><span class="line">    <span class="keyword">private</span> String weather;</span><br><span class="line">    <span class="keyword">private</span> Weather_id weather_id;</span><br><span class="line">    <span class="keyword">private</span> String wind;</span><br><span class="line">    <span class="keyword">private</span> String week;</span><br><span class="line">    <span class="keyword">private</span> String city;</span><br><span class="line">    <span class="keyword">private</span> String date_y;</span><br><span class="line">    <span class="keyword">private</span> String dressing_index;</span><br><span class="line">    <span class="keyword">private</span> String dressing_advice;</span><br><span class="line">    <span class="keyword">private</span> String uv_index;</span><br><span class="line">    <span class="keyword">private</span> String comfort_index;</span><br><span class="line">    <span class="keyword">private</span> String wash_index;</span><br><span class="line">    <span class="keyword">private</span> String travel_index;</span><br><span class="line">    <span class="keyword">private</span> String exercise_index;</span><br><span class="line">    <span class="keyword">private</span> String drying_index;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Today</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>();</span><br><span class="line">        <span class="comment">// TODO Auto-generated constructor stub</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Today</span><span class="params">(String temperature, String weather, Weather_id weather_id, String wind, String week, String city,</span></span><br><span class="line"><span class="params">            String date_y, String dressing_index, String dressing_advice, String uv_index, String comfort_index,</span></span><br><span class="line"><span class="params">            String wash_index, String travel_index, String exercise_index, String drying_index)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>();</span><br><span class="line">        <span class="built_in">this</span>.temperature = temperature;</span><br><span class="line">        <span class="built_in">this</span>.weather = weather;</span><br><span class="line">        <span class="built_in">this</span>.weather_id = weather_id;</span><br><span class="line">        <span class="built_in">this</span>.wind = wind;</span><br><span class="line">        <span class="built_in">this</span>.week = week;</span><br><span class="line">        <span class="built_in">this</span>.city = city;</span><br><span class="line">        <span class="built_in">this</span>.date_y = date_y;</span><br><span class="line">        <span class="built_in">this</span>.dressing_index = dressing_index;</span><br><span class="line">        <span class="built_in">this</span>.dressing_advice = dressing_advice;</span><br><span class="line">        <span class="built_in">this</span>.uv_index = uv_index;</span><br><span class="line">        <span class="built_in">this</span>.comfort_index = comfort_index;</span><br><span class="line">        <span class="built_in">this</span>.wash_index = wash_index;</span><br><span class="line">        <span class="built_in">this</span>.travel_index = travel_index;</span><br><span class="line">        <span class="built_in">this</span>.exercise_index = exercise_index;</span><br><span class="line">        <span class="built_in">this</span>.drying_index = drying_index;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getTemperature</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> temperature;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setTemperature</span><span class="params">(String temperature)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.temperature = temperature;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getWeather</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> weather;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setWeather</span><span class="params">(String weather)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.weather = weather;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> Weather_id <span class="title function_">getWeather_id</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> weather_id;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setWeather_id</span><span class="params">(Weather_id weather_id)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.weather_id = weather_id;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getWind</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> wind;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setWind</span><span class="params">(String wind)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.wind = wind;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getWeek</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> week;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setWeek</span><span class="params">(String week)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.week = week;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getCity</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> city;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setCity</span><span class="params">(String city)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.city = city;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getDate_y</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> date_y;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setDate_y</span><span class="params">(String date_y)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.date_y = date_y;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getDressing_index</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> dressing_index;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setDressing_index</span><span class="params">(String dressing_index)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.dressing_index = dressing_index;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getDressing_advice</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> dressing_advice;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setDressing_advice</span><span class="params">(String dressing_advice)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.dressing_advice = dressing_advice;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getUv_index</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> uv_index;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setUv_index</span><span class="params">(String uv_index)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.uv_index = uv_index;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getComfort_index</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> comfort_index;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setComfort_index</span><span class="params">(String comfort_index)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.comfort_index = comfort_index;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getWash_index</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> wash_index;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setWash_index</span><span class="params">(String wash_index)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.wash_index = wash_index;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getTravel_index</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> travel_index;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setTravel_index</span><span class="params">(String travel_index)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.travel_index = travel_index;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getExercise_index</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> exercise_index;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setExercise_index</span><span class="params">(String exercise_index)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.exercise_index = exercise_index;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getDrying_index</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> drying_index;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setDrying_index</span><span class="params">(String drying_index)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.drying_index = drying_index;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.share.eg03_Json数据解析;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Weather_id</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String fa;</span><br><span class="line">    <span class="keyword">private</span> String fb;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Weather_id</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>();</span><br><span class="line">        <span class="comment">// TODO Auto-generated constructor stub</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Weather_id</span><span class="params">(String fa, String fb)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>();</span><br><span class="line">        <span class="built_in">this</span>.fa = fa;</span><br><span class="line">        <span class="built_in">this</span>.fb = fb;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getFa</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> fa;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setFa</span><span class="params">(String fa)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.fa = fa;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getFb</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> fb;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setFb</span><span class="params">(String fb)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.fb = fb;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul class="copyright-info-content">
+        <li>本文标题：2017-04-11-反射-JSON解析</li>
+        <li>本文作者：Xplorist</li>
+        <li>创建时间：2017-04-11 14:23:01</li>
+        <li>
+            本文链接：https://xplorist.tech/2017/04/11/29e0b836a74d/
+        </li>
+        <li>
+            版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/ShareLearn/">#ShareLearn</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2017/04/12/b6261558d021/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">2017-04-12-读写excel</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2017/04/10/f3dbadf6d718/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">2017-04-10-设计模式</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments"></i>&nbsp;评论
+    </div>
+    
+
+        
+            
+
+
+    <div id="gitalk-container"></div>
+    <script 
+            src="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js"></script>
+    <script >
+
+      function loadGitalk() {
+        let __gitalk__pathname = decodeURI(location.pathname);
+        const __gitalk__pathnameLength = __gitalk__pathname.length;
+        const __gitalk__pathnameMaxLength = 50;
+        if (__gitalk__pathnameLength > __gitalk__pathnameMaxLength) {
+          __gitalk__pathname = __gitalk__pathname.substring(0, __gitalk__pathnameMaxLength - 3) + '...';
+        }
+
+        try {
+
+          Gitalk && new Gitalk({
+            clientID: '24c227c71f9bb758a554',
+            clientSecret: '724a45a68d355acb27c19a61d15fbb7dee34db4e',
+            repo: 'hexo-site-comments',
+            owner: 'Xplorist',
+            admin: 'Xplorist',
+            id: __gitalk__pathname,
+            language: 'zh-CN'
+          }).render('gitalk-container');
+
+        } catch (e) {
+          window.Gitalk = null;
+        }
+      }
+
+      if ('false') {
+        const loadGitalkTimeout = setTimeout(() => {
+          loadGitalk();
+          clearTimeout(loadGitalkTimeout);
+        }, 1000);
+      } else {
+        window.addEventListener('DOMContentLoaded', loadGitalk);
+      }
+    </script>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            
+<footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+                <span>2020</span> -
+            
+            2023
+            
+                &nbsp;<i class="fas fa-heart icon-animate"></i>
+                &nbsp;<a href="/">Xplorist</a>
+            
+        </div>
+        
+            <script async 
+                    src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    访问人数&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                
+                
+                    总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题
+            &nbsp;
+            <a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.8</a>
+        </div>
+        
+            <div class="icp-info info-item">
+                <a target="_blank" rel="nofollow"
+                   href="https://beian.miit.gov.cn"
+                >
+                    蜀ICP备20002343号
+                </a>
+            </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-up-right-and-down-left-from-center"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#2017-04-11-%E5%8F%8D%E5%B0%84-JSON%E8%A7%A3%E6%9E%90"><span class="nav-number">1.</span> <span class="nav-text">2017-04-11-反射-JSON解析</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-block-tools.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>

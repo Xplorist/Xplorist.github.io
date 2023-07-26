@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Xplorist">
+    
+    <title>
+        
+            Docker安装Nginx |
+        
+        Xplorist
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.svg">
+    
+<link rel="stylesheet" href="/fontawesome/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/brands.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"zh-CN","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","logo":"/images/logo.svg","favicon":"/images/logo.svg","avatar":"/images/Water.jpg","left_side_width":"300px","content_max_width":"1080px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"header_transparent":true,"background_img":"/images/dawn-in-the-valley.jpg","description":"Exploration, a journey that never ends。","font_color":null,"hitokoto":{"enable":false}},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":false},"code_copy":{},"code_block_tools":{"enable":true,"style":"mac"},"side_tools":{},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.8"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"};
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="/images/logo.svg">
+                </a>
+            
+            <a class="logo-title" href="/">
+               Xplorist
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                分类
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                友链
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                关于
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">分类</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">标签</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links">友链</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">关于</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">Docker安装Nginx</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/Water.jpg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Xplorist</span>
+                        
+                            <span class="author-label">Lv6</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2021-11-08 09:46:00</span>
+        <span class="mobile">2021-11-08 09:46</span>
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/Docker/">Docker</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        &gt; <a href="/categories/Nginx/">Nginx</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/Nginx/">Nginx</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/Docker/">Docker</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="Docker安装Nginx"><a href="#Docker安装Nginx" class="headerlink" title="Docker安装Nginx"></a>Docker安装Nginx</h1><h2 id="reference-site-list"><a href="#reference-site-list" class="headerlink" title="reference-site-list"></a>reference-site-list</h2><blockquote>
+<ul>
+<li><a class="link"   target="_blank" rel="noopener" href="https://blog.51ai.vip/2020/06/24/%E7%94%B3%E8%AF%B7Let-s-Encrypt-HTTPS-%E8%AF%81%E4%B9%A6%E8%84%9A%E6%9C%AC/" >申请Let’s Encrypt HTTPS 证书脚本<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://blog.iyu.icu/posts/acmesh_docker/" >使用docker中的acme.sh为docker中的Nginx添加SSL证书<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://help.aliyun.com/document_detail/53045.html" >阿里云获取AccessKey<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://developer.aliyun.com/article/586175" >解决ssh登录后闲置时间过长而断开连接<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://blog.csdn.net/baozoumingren/article/details/75005437" >linux下删除.swp文件方法<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://www.cnblogs.com/Tom-Ren/p/10024299.html" >MobaXterm 设置保持SSH连接<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://www.moeelf.com/archives/281.html" >Docker使用acme.sh申请ssl证书<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1769236" >docker获取Let’s Encrypt永久免费SSL证书<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://github.com/acmesh-official/acme.sh/wiki/ZeroSSL.com-CA" >Using ZeroSSL.com CA<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://github.com/acmesh-official/acme.sh/wiki/Change-default-CA-to-ZeroSSL" >Change default CA to ZeroSSL<i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+</blockquote>
+<h2 id="steps"><a href="#steps" class="headerlink" title="steps"></a>steps</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /data</span><br><span class="line"><span class="built_in">mkdir</span> nginx</span><br><span class="line"></span><br><span class="line">docker pull nginx:latest</span><br><span class="line"></span><br><span class="line">docker run -d --name nginx nginx:latest</span><br><span class="line"></span><br><span class="line">docker <span class="built_in">cp</span> nginx:/usr/share/nginx/html /data/nginx</span><br><span class="line"></span><br><span class="line">docker <span class="built_in">cp</span> nginx:/etc/nginx /data/nginx</span><br><span class="line"></span><br><span class="line"><span class="built_in">mv</span> /data/nginx/nginx /data/nginx/config</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建证书文件夹</span></span><br><span class="line"><span class="built_in">cd</span> /data/nginx/config</span><br><span class="line"><span class="built_in">mkdir</span> certificate</span><br><span class="line"><span class="built_in">cd</span> certificate</span><br><span class="line"><span class="built_in">mkdir</span> xplorist.tech</span><br><span class="line"></span><br><span class="line">vi /data/nginx/config/nginx.conf</span><br><span class="line"><span class="comment">## 对nginx.conf进行编辑</span></span><br><span class="line"><span class="comment">#/data/nginx/config/nginx.conf</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#include /etc/nginx/conf.d/*.conf;</span></span><br><span class="line">include /etc/nginx/conf.d/xplorist.tech.conf</span><br><span class="line"></span><br><span class="line"><span class="comment">## nginx.conf编辑结束</span></span><br><span class="line"></span><br><span class="line">vi /data/nginx/config/conf.d/xplorist.tech.conf</span><br><span class="line"><span class="comment">## 新增xplorist.tech.conf</span></span><br><span class="line"><span class="comment">#/data/nginx/config/conf.d/xplorist.tech.conf</span></span><br><span class="line">server &#123;</span><br><span class="line">    listen       80;</span><br><span class="line">    server_name  xplorist.tech;</span><br><span class="line"></span><br><span class="line">    <span class="comment">#80跳转到443</span></span><br><span class="line">    rewrite ^(.*)$ https://<span class="variable">$&#123;server_name&#125;</span><span class="variable">$1</span> permanent;</span><br><span class="line"></span><br><span class="line">    error_page   500 502 503 504  /50x.html;</span><br><span class="line">    location = /50x.html &#123;</span><br><span class="line">        root   /usr/share/nginx/html;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">    listen 443 ssl http2;</span><br><span class="line">    server_name  xplorist.tech;</span><br><span class="line"></span><br><span class="line">    ssl_certificate          /etc/nginx/certificate/xplorist.tech/full.pem;</span><br><span class="line">    ssl_certificate_key      /etc/nginx/certificate/xplorist.tech/key.pem;</span><br><span class="line"></span><br><span class="line">    ssl_session_timeout  5m;</span><br><span class="line"></span><br><span class="line">    <span class="comment">#开启HSTS</span></span><br><span class="line">    add_header Strict-Transport-Security <span class="string">&quot;max-age=31536000; includeSubDomains&quot;</span> always;</span><br><span class="line"></span><br><span class="line">    ssl_ciphers ECDHE-RSA-AES256-GCM-SHA512:DHE-RSA-AES256-GCM-SHA512:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES256-GCM-SHA384;</span><br><span class="line">    <span class="comment">#适时移除TLSv1.2</span></span><br><span class="line">    ssl_protocols TLSv1.3 TLSv1.2;</span><br><span class="line">    ssl_prefer_server_ciphers on;</span><br><span class="line">    ssl_session_cache shared:SSL:10m;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        root   /usr/share/nginx/html;</span><br><span class="line">        index  index.html index.htm;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">## 对default.conf修改结束</span></span><br><span class="line"></span><br><span class="line">docker stop nginx</span><br><span class="line"></span><br><span class="line">docker <span class="built_in">rm</span> nginx</span><br><span class="line"></span><br><span class="line">docker run -d --name nginx --restart=always --label=sh.acme.autoload.domain=xplorist.tech -v /data/nginx/html:/usr/share/nginx/html  -v /data/nginx/config:/etc/nginx  -p 80:80 -p 443:443 nginx:latest</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="使用acme-sh申请证书"><a href="#使用acme-sh申请证书" class="headerlink" title="使用acme.sh申请证书"></a>使用acme.sh申请证书</h3><ol>
+<li>向阿里云获取AccessKey</li>
+</ol>
+<p><a class="link"   target="_blank" rel="noopener" href="https://help.aliyun.com/document_detail/53045.html" >阿里云获取AccessKey<i class="fas fa-external-link-alt"></i></a></p>
+<ol start="2">
+<li>首先创建acme.sh容器</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment"># 使用守护进程的方式启动容器</span></span><br><span class="line">docker run --<span class="built_in">rm</span>  -itd \</span><br><span class="line">    -v <span class="string">&quot;<span class="subst">$(pwd)</span>/out&quot;</span>:/acme.sh \</span><br><span class="line">    --net=host \</span><br><span class="line">    --name=acme.sh   \</span><br><span class="line">    -v /var/run/docker.sock:/var/run/docker.sock \</span><br><span class="line">    -e Ali_Key=<span class="string">&quot;erqwetqrewer&quot;</span> \</span><br><span class="line">    -e Ali_Secret=<span class="string">&quot;tyretuetuert&quot;</span> \</span><br><span class="line">    neilpang/acme.sh daemon</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>使用acme.sh申请证书</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 颁发证书</span></span><br><span class="line">docker <span class="built_in">exec</span> -it \</span><br><span class="line">    acme.sh --issue --dns dns_ali -d xplorist.tech -d <span class="string">&quot;*.xplorist.tech&quot;</span> \</span><br><span class="line">    --server  letsencrypt</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li><p>使用acme.sh自动部署证书</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> \</span><br><span class="line">    -e DEPLOY_DOCKER_CONTAINER_LABEL=sh.acme.autoload.domain=xplorist.tech  \</span><br><span class="line">    -e DEPLOY_DOCKER_CONTAINER_KEY_FILE=/etc/nginx/certificate/xplorist.tech/key.pem   \</span><br><span class="line">    -e DEPLOY_DOCKER_CONTAINER_CERT_FILE=<span class="string">&quot;/etc/nginx/certificate/xplorist.tech/cert.pem&quot;</span>  \</span><br><span class="line">    -e DEPLOY_DOCKER_CONTAINER_CA_FILE=<span class="string">&quot;/etc/nginx/certificate/xplorist.tech/ca.pem&quot;</span>   \</span><br><span class="line">    -e DEPLOY_DOCKER_CONTAINER_FULLCHAIN_FILE=<span class="string">&quot;/etc/nginx/certificate/xplorist.tech/full.pem&quot;</span>  \</span><br><span class="line">    -e DEPLOY_DOCKER_CONTAINER_RELOAD_CMD=<span class="string">&quot;service nginx force-reload&quot;</span>   \</span><br><span class="line">    acme.sh --deploy -d xplorist.tech  --deploy-hook docker</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>检查网站证书是否有效</p>
+</li>
+</ol>
+<p>该证书有3个月的有效期，快到期时，acme.sh将自动重新申请并部署证书与重载Nginx。</p>
+<h3 id="更改宿主机上的配置文件后重载docker中nginx"><a href="#更改宿主机上的配置文件后重载docker中nginx" class="headerlink" title="更改宿主机上的配置文件后重载docker中nginx"></a>更改宿主机上的配置文件后重载docker中nginx</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">vi /data/nginx/config/nginx.conf</span><br><span class="line"><span class="comment">## 对nginx.conf进行编辑</span></span><br><span class="line"><span class="comment">#/data/nginx/config/nginx.conf</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#include /etc/nginx/conf.d/*.conf;</span></span><br><span class="line">include /etc/nginx/conf.d/xplorist.tech.conf</span><br><span class="line"></span><br><span class="line"><span class="comment">## nginx.conf编辑结束</span></span><br><span class="line"></span><br><span class="line">vi /data/nginx/config/conf.d/xplorist.tech.conf</span><br><span class="line"><span class="comment">## 对xplorist.tech.conf进行编辑</span></span><br><span class="line"><span class="comment">#/data/nginx/config/conf.d/xplorist.tech.conf</span></span><br><span class="line">server &#123;</span><br><span class="line">    listen       80;</span><br><span class="line">    server_name  xplorist.tech;</span><br><span class="line"></span><br><span class="line">    <span class="comment">#80跳转到443</span></span><br><span class="line">    rewrite ^(.*)$ https://<span class="variable">$&#123;server_name&#125;</span><span class="variable">$1</span> permanent;</span><br><span class="line"></span><br><span class="line">    error_page   500 502 503 504  /50x.html;</span><br><span class="line">    location = /50x.html &#123;</span><br><span class="line">        root   /usr/share/nginx/html;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">    listen 443 ssl http2;</span><br><span class="line">    server_name  xplorist.tech;</span><br><span class="line"></span><br><span class="line">    ssl_certificate          /etc/nginx/certificate/xplorist.tech/full.pem;</span><br><span class="line">    ssl_certificate_key      /etc/nginx/certificate/xplorist.tech/key.pem;</span><br><span class="line"></span><br><span class="line">    ssl_session_timeout  5m;</span><br><span class="line"></span><br><span class="line">    <span class="comment">#开启HSTS</span></span><br><span class="line">    add_header Strict-Transport-Security <span class="string">&quot;max-age=31536000; includeSubDomains&quot;</span> always;</span><br><span class="line"></span><br><span class="line">    ssl_ciphers ECDHE-RSA-AES256-GCM-SHA512:DHE-RSA-AES256-GCM-SHA512:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES256-GCM-SHA384;</span><br><span class="line">    <span class="comment">#适时移除TLSv1.2</span></span><br><span class="line">    ssl_protocols TLSv1.3 TLSv1.2;</span><br><span class="line">    ssl_prefer_server_ciphers on;</span><br><span class="line">    ssl_session_cache shared:SSL:10m;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        root   /usr/share/nginx/html;</span><br><span class="line">        index  index.html index.htm;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">## xplorist.tech.conf编辑结束</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">docker <span class="built_in">exec</span> -it nginx /bin/bash</span><br><span class="line"></span><br><span class="line">service nginx force-reload</span><br><span class="line"></span><br><span class="line"><span class="built_in">exit</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="反向代理的重要研究"><a href="#反向代理的重要研究" class="headerlink" title="反向代理的重要研究"></a>反向代理的重要研究</h3><ul>
+<li><p>只有反向代理是不够的，还要项目本身支持设置contextPath，如果项目本身不支持设置contextPath,前端路由到没有对应网关代理的路径然后就报404，想要实现Nginx通过一个contextPath实现整个项目由nginx的80&#x2F;443端口反向代理去访问，必须要该项目支持修改contextPath上下文，如果是这样的话，就需要将docker中的项目配置文件映射到宿主机上。</p>
+</li>
+<li><p>docker容器有网络，看到一个例子没有使用nginx的反向代理，只是用了docker容器的网络特性，最后仔细研究了一下，也是用到了反向代理，只不过代理是由容器内部的网络访问的，而不是我通常使用的宿主机带端口方式去访问。</p>
+</li>
+<li><p>Nginx中使用https后，作反向代理会出现一些前端访问被拒的问题，暂时还有点疑惑，又貌似是WordPress设置的问题。</p>
+</li>
+<li><p>Nginx的&#x2F;根进行反向代理,好像很容易出现问题，WordPress反向代理出问题估计就在这儿。</p>
+</li>
+<li><p>其实docker也有它的缺点，并不能够完全取代宿主机安装软件，比如说宿主机的Nginx上可以同时安装多个php项目，通过项目文件内的配置来灵活处理ContextPath上下文。</p>
+</li>
+<li><p>自己的Nginx反向代理的知识模型应该和Nginx的真实模型有点出入，该认真补一下Nginx官方的文档了，后面来认真学习一下Nginx。</p>
+</li>
+<li><p>之前以为的Nginx + Docker的超强组合，现在好像有点动摇了，没有想象中的那么强，还是应该认真了解Nginx和Docker，多看看资料和官方文档，自己从实践中总结的知识模型有大部分应该都是猜想，还是应该回归正统的理论。</p>
+</li>
+</ul>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul class="copyright-info-content">
+        <li>本文标题：Docker安装Nginx</li>
+        <li>本文作者：Xplorist</li>
+        <li>创建时间：2021-11-08 09:46:00</li>
+        <li>
+            本文链接：https://xplorist.tech/2021/11/08/257ff89c72fd/
+        </li>
+        <li>
+            版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/Nginx/">#Nginx</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/Docker/">#Docker</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2021/11/09/ad94293f7074/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Git错误Corrupt loose object解决</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/11/05/098d00c61dc2/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">修改MySQL密码</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments"></i>&nbsp;评论
+    </div>
+    
+
+        
+            
+
+
+    <div id="gitalk-container"></div>
+    <script 
+            src="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js"></script>
+    <script >
+
+      function loadGitalk() {
+        let __gitalk__pathname = decodeURI(location.pathname);
+        const __gitalk__pathnameLength = __gitalk__pathname.length;
+        const __gitalk__pathnameMaxLength = 50;
+        if (__gitalk__pathnameLength > __gitalk__pathnameMaxLength) {
+          __gitalk__pathname = __gitalk__pathname.substring(0, __gitalk__pathnameMaxLength - 3) + '...';
+        }
+
+        try {
+
+          Gitalk && new Gitalk({
+            clientID: '24c227c71f9bb758a554',
+            clientSecret: '724a45a68d355acb27c19a61d15fbb7dee34db4e',
+            repo: 'hexo-site-comments',
+            owner: 'Xplorist',
+            admin: 'Xplorist',
+            id: __gitalk__pathname,
+            language: 'zh-CN'
+          }).render('gitalk-container');
+
+        } catch (e) {
+          window.Gitalk = null;
+        }
+      }
+
+      if ('false') {
+        const loadGitalkTimeout = setTimeout(() => {
+          loadGitalk();
+          clearTimeout(loadGitalkTimeout);
+        }, 1000);
+      } else {
+        window.addEventListener('DOMContentLoaded', loadGitalk);
+      }
+    </script>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            
+<footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+                <span>2020</span> -
+            
+            2023
+            
+                &nbsp;<i class="fas fa-heart icon-animate"></i>
+                &nbsp;<a href="/">Xplorist</a>
+            
+        </div>
+        
+            <script async 
+                    src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    访问人数&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                
+                
+                    总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题
+            &nbsp;
+            <a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.8</a>
+        </div>
+        
+            <div class="icp-info info-item">
+                <a target="_blank" rel="nofollow"
+                   href="https://beian.miit.gov.cn"
+                >
+                    蜀ICP备20002343号
+                </a>
+            </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-up-right-and-down-left-from-center"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Docker%E5%AE%89%E8%A3%85Nginx"><span class="nav-number">1.</span> <span class="nav-text">Docker安装Nginx</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#reference-site-list"><span class="nav-number">1.1.</span> <span class="nav-text">reference-site-list</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#steps"><span class="nav-number">1.2.</span> <span class="nav-text">steps</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8acme-sh%E7%94%B3%E8%AF%B7%E8%AF%81%E4%B9%A6"><span class="nav-number">1.2.1.</span> <span class="nav-text">使用acme.sh申请证书</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B4%E6%94%B9%E5%AE%BF%E4%B8%BB%E6%9C%BA%E4%B8%8A%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%90%8E%E9%87%8D%E8%BD%BDdocker%E4%B8%ADnginx"><span class="nav-number">1.2.2.</span> <span class="nav-text">更改宿主机上的配置文件后重载docker中nginx</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E7%9A%84%E9%87%8D%E8%A6%81%E7%A0%94%E7%A9%B6"><span class="nav-number">1.2.3.</span> <span class="nav-text">反向代理的重要研究</span></a></li></ol></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-block-tools.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>

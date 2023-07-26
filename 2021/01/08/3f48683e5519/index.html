@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Xplorist">
+    
+    <title>
+        
+            SSO-OpenID-Connect配置与使用 |
+        
+        Xplorist
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.svg">
+    
+<link rel="stylesheet" href="/fontawesome/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/brands.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"zh-CN","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","logo":"/images/logo.svg","favicon":"/images/logo.svg","avatar":"/images/Water.jpg","left_side_width":"300px","content_max_width":"1080px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"header_transparent":true,"background_img":"/images/dawn-in-the-valley.jpg","description":"Exploration, a journey that never ends。","font_color":null,"hitokoto":{"enable":false}},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":false},"code_copy":{},"code_block_tools":{"enable":true,"style":"mac"},"side_tools":{},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.8"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"};
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="/images/logo.svg">
+                </a>
+            
+            <a class="logo-title" href="/">
+               Xplorist
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                分类
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                友链
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                关于
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">分类</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">标签</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links">友链</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">关于</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">SSO-OpenID-Connect配置与使用</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/Water.jpg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Xplorist</span>
+                        
+                            <span class="author-label">Lv6</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2021-01-08 10:21:00</span>
+        <span class="mobile">2021-01-08 10:21</span>
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/SSO/">SSO</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="SSO-OpenID-Connect配置与使用"><a href="#SSO-OpenID-Connect配置与使用" class="headerlink" title="SSO-OpenID-Connect配置与使用"></a>SSO-OpenID-Connect配置与使用</h1><h2 id="wiki信息"><a href="#wiki信息" class="headerlink" title="wiki信息"></a>wiki信息</h2><ul>
+<li>创建时间： 2021-01-08</li>
+<li>最近修改时间： 2021-01-09</li>
+<li>当前版本：v1.0.1</li>
+<li>wiki作者: 向波任(C3005579)</li>
+<li>联系电话: 5073+66948</li>
+<li>联系邮箱：<a class="link"   href="mailto:&#x6d;&#99;&#101;&#x62;&#x67;&#x2d;&#x6d;&#97;&#x63;&#x31;&#x2d;&#x6d;&#x69;&#115;&#99;&#100;&#115;&#121;&#x73;&#50;&#64;&#x6d;&#97;&#105;&#x6c;&#46;&#102;&#111;&#120;&#x63;&#x6f;&#110;&#110;&#46;&#99;&#x6f;&#x6d;" >&#x6d;&#99;&#101;&#x62;&#x67;&#x2d;&#x6d;&#97;&#x63;&#x31;&#x2d;&#x6d;&#x69;&#115;&#99;&#100;&#115;&#121;&#x73;&#50;&#64;&#x6d;&#97;&#105;&#x6c;&#46;&#102;&#111;&#120;&#x63;&#x6f;&#110;&#110;&#46;&#99;&#x6f;&#x6d;<i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
+<li><a href="#%E5%8F%82%E8%80%83%E7%BD%91%E5%9D%80">参考网址</a></li>
+<li><a href="#OpenID-Connect%E5%8D%8F%E8%AE%AE">OpenID-Connect协议</a></li>
+<li><a href="#%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A">名词解释</a></li>
+<li><a href="#OpenID-Connect%E6%8A%BD%E8%B1%A1%E6%B5%81%E7%A8%8B">OpenID-Connect抽象流程</a></li>
+<li><a href="#OpenID-Connect%E7%9A%84%E4%B8%89%E7%A7%8D%E8%AE%A4%E8%AF%81%E6%B5%81%E7%A8%8B">OpenID-Connect的三种认证流程</a></li>
+<li><a href="#%E5%8D%95%E9%A1%B5%E5%BA%94%E7%94%A8%E7%9A%84OpenID-Connect%E8%AE%BE%E7%BD%AE">单页应用的OpenID-Connect设置</a></li>
+<li><a href="#%E5%90%8E%E7%AB%AF%E9%80%9A%E8%BF%87access-token%E8%8E%B7%E5%8F%96%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF%E6%8E%A5%E5%8F%A3">后端通过access-token获取用户信息接口</a></li>
+</ul>
+<h2 id="参考网址"><a href="#参考网址" class="headerlink" title="参考网址"></a>参考网址</h2><blockquote>
+<ul>
+<li><a class="link"   target="_blank" rel="noopener" href="https://openid.net/connect/" >官网 OpenID Connect<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://github.com/mitreid-connect" >MITREid Connect(OpenID Connect协议的Java实现)的GitHub网址<i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+</blockquote>
+<h2 id="OpenID-Connect协议"><a href="#OpenID-Connect协议" class="headerlink" title="OpenID-Connect协议"></a>OpenID-Connect协议</h2><p>什么是OpenID Connect?</p>
+<p>OpenID Connect 1.0是一个简单的身份层，它基于OAuth 2.0协议。它允许客户端通过授权服务器执行认证过程去核实终端用户的身份，也同时通过交互式的REST-like风格去获取终端用户的基本简单的信息。</p>
+<p>OpenID Connect允许所有类型的客户端，包括web端、移动端、JavaScript端，去请求和接收已认证的Session和终端用户信息。<br>OpenID Connect的整套技术规范是可扩展的，它允许加入可选择的特性，比如身份加密、OpenID Provider的服务发现、Session管理等，有些时候这些额外的特性对你的项目非常有意义和必要。</p>
+<h2 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h2><ul>
+<li>RP：Relying Part，依赖部分，即客户端</li>
+<li>OP: OpenID Provider，OpenID提供者，即服务端</li>
+<li>UserInfo Endpoint: 用户信息端点，提供用户信息的服务，通常OP服务器中集成了UserInfo Endpoint的功能</li>
+</ul>
+<h2 id="OpenID-Connect抽象流程"><a href="#OpenID-Connect抽象流程" class="headerlink" title="OpenID-Connect抽象流程"></a>OpenID-Connect抽象流程</h2><ol>
+<li>RP客户端发送请求到OP服务器</li>
+<li>OP服务器认证用户并获取用户的授权</li>
+<li>OP服务器返回ID Token和Access Token</li>
+<li>RP客户端发送Access Token给OP服务器的UserInfo Endpoint服务</li>
+<li>OP服务器的UserInfo Endpoint服务返回用户的信息</li>
+</ol>
+<p>抽象流程图如下：</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">+--------+                                   +--------+</span><br><span class="line">|        |                                   |        |</span><br><span class="line">|        |---------(1) AuthN Request--------&gt;|        |</span><br><span class="line">|        |                                   |        |</span><br><span class="line">|        |  +--------+                       |        |</span><br><span class="line">|        |  |        |                       |        |</span><br><span class="line">|        |  |  End-  |&lt;--(2) AuthN &amp; AuthZ--&gt;|        |</span><br><span class="line">|        |  |  User  |                       |        |</span><br><span class="line">|   RP   |  |        |                       |   OP   |</span><br><span class="line">|        |  +--------+                       |        |</span><br><span class="line">|        |                                   |        |</span><br><span class="line">|        |&lt;--------(3) AuthN Response--------|        |</span><br><span class="line">|        |                                   |        |</span><br><span class="line">|        |---------(4) UserInfo Request-----&gt;|        |</span><br><span class="line">|        |                                   |        |</span><br><span class="line">|        |&lt;--------(5) UserInfo Response-----|        |</span><br><span class="line">|        |                                   |        |</span><br><span class="line">+--------+                                   +--------+</span><br></pre></td></tr></table></figure>
+
+<h2 id="OpenID-Connect的三种认证流程"><a href="#OpenID-Connect的三种认证流程" class="headerlink" title="OpenID-Connect的三种认证流程"></a>OpenID-Connect的三种认证流程</h2><p>OpenID Connect提供了三种认证流程，如下：</p>
+<ul>
+<li>授权码流程</li>
+<li>隐式流程</li>
+<li>混合流程<br>特定的流程决定了ID Token和Access Token返回给客户端的方式，根据自己的项目特点选择其中的一种流程。</li>
+</ul>
+<p>三种流程的特点</p>
+<table>
+<thead>
+<tr>
+<th>特点</th>
+<th>授权码流程</th>
+<th>隐式流程</th>
+<th>混合流程</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>所有的token都从Authorization Endpoint返回</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr>
+<td>所有token都从Token Endpoint返回</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td>token不透露User Agent</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td>客户端能被认证</td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>可用Refresh Token</td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>客户端和服务器只需要一轮通信</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr>
+<td>大多数的通信都是服务器对服务器通信</td>
+<td>yes</td>
+<td>no</td>
+<td>varies(变化)</td>
+</tr>
+</tbody></table>
+<hr>
+<p>三种流程的response_type</p>
+<table>
+<thead>
+<tr>
+<th>response_type值</th>
+<th>流程类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>code</td>
+<td>授权码流程</td>
+</tr>
+<tr>
+<td>id_token</td>
+<td>隐式流程</td>
+</tr>
+<tr>
+<td>id_token token</td>
+<td>隐式流程</td>
+</tr>
+<tr>
+<td>code id_token</td>
+<td>混合流程</td>
+</tr>
+<tr>
+<td>code token</td>
+<td>混合流程</td>
+</tr>
+<tr>
+<td>code id_token token</td>
+<td>混合流程</td>
+</tr>
+</tbody></table>
+<h3 id="授权码流程"><a href="#授权码流程" class="headerlink" title="授权码流程"></a>授权码流程</h3><ul>
+<li>当使用授权码流程时，所有的token都从Token Endpoint返回。</li>
+<li>授权码流程返回授权码给客户端，然后客户端用授权码直接从服务器获取ID Token和Access Token，这样做的好处是不会暴露任何token给User Agent和其他能够访问这些User Agent的可能的恶意应用。<br>授权服务器也能在通过授权码交换Access Token之前认证客户端。授权码流程适合需要在客户端和授权服务器之间确保客户端密码安全的客户端。</li>
+</ul>
+<p>授权码流程步骤：</p>
+<ol>
+<li>客户端准备包含了相应请求参数的认证请求</li>
+<li>客户端发送认证请求到授权服务器</li>
+<li>授权服务器认证用户</li>
+<li>授权服务器获取用户授权</li>
+<li>授权服务器将用户返回到客户端并带上授权码</li>
+<li>客户端后端使用授权码请求授权服务器的Token Endpoint服务</li>
+<li>授权服务器的Token Endpoint服务返回ID Token和Access Token给客户端</li>
+<li>客户端验证ID Token并获取用户信息</li>
+</ol>
+<h3 id="隐式流程"><a href="#隐式流程" class="headerlink" title="隐式流程"></a>隐式流程</h3><ul>
+<li>当使用隐式流程时，所有token都从Authorization Endpoint返回，Token Endpoint没有被使用。</li>
+<li>隐式流程主要用于使用脚本语言在浏览器里实现地客户端。Access Token和ID Token都直接返回到客户端，这样可能会将这两种token暴露给用户和那些能够访问用户User Agent的应用。<br>授权服务器没有执行客户端认证的过程。</li>
+</ul>
+<p>隐式流程步骤：</p>
+<ol>
+<li>客户端准备好包含有需求要请求的参数的认证请求</li>
+<li>客户端发送认证请求到授权服务器</li>
+<li>授权服务器认证用户</li>
+<li>授权服务器获取用户授权</li>
+<li>授权服务器返回ID Token和Access Token给客户端</li>
+<li>客户端验证ID Token并获取用户信息</li>
+</ol>
+<h3 id="混合流程"><a href="#混合流程" class="headerlink" title="混合流程"></a>混合流程</h3><ul>
+<li>当使用混合流程时，一些token是从Authorization Endpoint返回，另一些是从Token Endpoint返回。</li>
+</ul>
+<p>混合流程的步骤：</p>
+<ol>
+<li>客户端准备好包含需要请求的参数的认证请求</li>
+<li>客户端发送认证请求到授权服务器</li>
+<li>授权服务器认证用户</li>
+<li>授权服务器获取用户授权</li>
+<li>授权服务器将用户返回到客户端，并带上授权码，依据响应的类型，携带一个或多个额外的参数(这里的参数就是可以直接从授权服务器获取的token，<br>能从授权服务器中直接获取token，这就是和授权码流程的区别)</li>
+<li>客户端将授权码发送到Token Endpoint</li>
+<li>客户端获取Token Endpoint返回的ID Token和Access Token</li>
+<li>客户端验证ID Token并获取用户信息</li>
+</ol>
+<h2 id="单页应用的OpenID-Connect设置"><a href="#单页应用的OpenID-Connect设置" class="headerlink" title="单页应用的OpenID-Connect设置"></a>单页应用的OpenID-Connect设置</h2><p>根据前面隐式流程的特性看出，单页应用非常符合隐式流程，所以前端是单页应用的系统或项目可以直接使用隐式流程，优点是配置简单且使用方便，缺点是暴露了各种token，显得不那么安全。<br>如果系统对安全要求较高的话，还是老老实实用授权码方式，所有的token都是在后端流转，前端只能够看到重定向的授权码，且所有的权限都由后端的SpringSecurity来管理。</p>
+<p>Portal项目中的OpenID Connect客户端的实现思路如下，小伙伴们可以参考：</p>
+<ol>
+<li>OpenID Connect服务器中设置客户端使用隐式流程如下图，所有的跳转都交给前端<br><img src="/wikix/images/OpenID-Connect/OpenID-Connect%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%AD%E8%AE%BE%E7%BD%AE%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%BD%BF%E7%94%A8%E9%9A%90%E5%BC%8F%E6%B5%81%E7%A8%8B.png" alt="OpenID-Connect服务器中设置客户端使用隐式流程.png"></li>
+<li>后端只负责通过HttpClient用token获取用户信息(因为大多数情况下前端没办法在当前项目中直接用token向授权服务器取用户信息，会涉及到跨域)</li>
+<li>前端做好路由的前置守卫，所有前端发起的请求都要经过该守卫，功能类似后端的过滤器或拦截器。</li>
+<li>登录成功后将用户信息和token都存放到前端的sessionStorage中，登出后清除sessionStorage中的这些数据。<br>(我知道你要吐槽这不安全，但是我们的内网项目，其实真的不用太在意这些细节，用户登录状态都交给前端，后端小伙伴们安静地做个增删改查接口仔，不香么，前端都用单页应用了，已经是前后分离了，把MVC都交给前端吧)</li>
+<li>其实重点在路由前置守卫，感觉讲不清楚，直接贴代码吧</li>
+</ol>
+<p>大致实现思路如下：<br>a. 根据sessionStorage中的用户信息和access_token的有无判断用户是否登录，<br>b. 没有登录就跳转到OpenID Connect的授权地址, 如果未在OpenID Connect中登录，就会跳转到登录页面,<br>c. 用户登录成功后会重定向回设置的地址，然后在该地址会携带access_token返回，从url中获取access_token的值，<br>d. 调用后端的接口获取用户信息，然后将用户信息和access_token保存到sessionStorage中。</p>
+<h3 id="React的实现"><a href="#React的实现" class="headerlink" title="React的实现"></a>React的实现</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">getUrlParam</span> (<span class="attr">param</span>:any) &#123;</span><br><span class="line">  <span class="keyword">var</span> reg = <span class="keyword">new</span> <span class="title class_">RegExp</span>(<span class="string">&quot;(^|&amp;)&quot;</span> + param + <span class="string">&quot;=([^&amp;]*)(&amp;|$)&quot;</span>);</span><br><span class="line">  <span class="keyword">var</span> r = <span class="variable language_">window</span>.<span class="property">location</span>.<span class="property">hash</span>.<span class="title function_">substr</span>(<span class="number">1</span>).<span class="title function_">match</span>(reg);</span><br><span class="line">  <span class="keyword">if</span> (r != <span class="literal">null</span>) <span class="keyword">return</span> <span class="built_in">decodeURI</span>(r[<span class="number">2</span>]);</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="keyword">function</span>  <span class="title function_">render</span>(<span class="params">oldRender:any</span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> access_token = sessionStorage.<span class="title function_">getItem</span>(<span class="string">&#x27;access_token&#x27;</span>)</span><br><span class="line">  <span class="keyword">let</span> access_token_hash = <span class="title function_">getUrlParam</span>(<span class="string">&#x27;access_token&#x27;</span>);</span><br><span class="line">  <span class="keyword">if</span> (!access_token) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!access_token_hash) &#123;</span><br><span class="line">      <span class="keyword">const</span> url = <span class="variable language_">window</span>.<span class="property">location</span>.<span class="property">origin</span> + <span class="string">&quot;/portal&quot;</span>;</span><br><span class="line">      <span class="keyword">const</span> loginUrl = <span class="built_in">encodeURIComponent</span>(url)</span><br><span class="line">      <span class="variable language_">window</span>.<span class="property">location</span>.<span class="property">href</span> = <span class="string">&#x27;http://10.244.168.180/openid/authorize?response_type=token%20id_token&#x27;</span> +</span><br><span class="line">      <span class="string">&#x27;&amp;client_id=MacIPortal&#x27;</span> +</span><br><span class="line">      <span class="string">&#x27;&amp;redirect_uri=&#x27;</span> + loginUrl</span><br><span class="line">      <span class="string">&#x27;&amp;scope=openid%20profile&#x27;</span> + </span><br><span class="line">      <span class="string">&#x27;&amp;state=&#x27;</span> + <span class="title class_">Math</span>.<span class="title function_">round</span>(<span class="title class_">Math</span>.<span class="title function_">random</span>()*<span class="number">1e14</span> + <span class="number">1e15</span>).<span class="title function_">toString</span>(<span class="number">16</span>) +</span><br><span class="line">      <span class="string">&#x27;&amp;nonce=&#x27;</span> + <span class="title class_">Math</span>.<span class="title function_">round</span>(<span class="title class_">Math</span>.<span class="title function_">random</span>()*<span class="number">1e14</span> + <span class="number">1e15</span>).<span class="title function_">toString</span>(<span class="number">16</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">if</span>(!sessionStorage.<span class="title function_">getItem</span>(<span class="string">&quot;user&quot;</span>))&#123;</span><br><span class="line">        sessionStorage.<span class="title function_">setItem</span>(<span class="string">&quot;access_token&quot;</span>,<span class="title function_">getUrlParam</span>(<span class="string">&#x27;access_token&#x27;</span>)||<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">        sessionStorage.<span class="title function_">setItem</span>(<span class="string">&quot;token_type&quot;</span>,<span class="title function_">getUrlParam</span>(<span class="string">&#x27;token_type&#x27;</span>)||<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">        sessionStorage.<span class="title function_">setItem</span>(<span class="string">&quot;id_token&quot;</span>,<span class="title function_">getUrlParam</span>(<span class="string">&#x27;id_token&#x27;</span>)||<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">        sessionStorage.<span class="title function_">setItem</span>(<span class="string">&quot;expires_in&quot;</span>,<span class="title function_">getUrlParam</span>(<span class="string">&#x27;expires_in&#x27;</span>)||<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">        sessionStorage.<span class="title function_">setItem</span>(<span class="string">&quot;state&quot;</span>,<span class="title function_">getUrlParam</span>(<span class="string">&#x27;state&#x27;</span>)||<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">        <span class="keyword">let</span> user = <span class="keyword">await</span> <span class="title function_">getUserInfo</span>();</span><br><span class="line">        sessionStorage.<span class="title function_">setItem</span>(<span class="string">&quot;user&quot;</span>,<span class="title class_">JSON</span>.<span class="title function_">stringify</span>(user))</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="title function_">oldRender</span>()</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="title function_">oldRender</span>()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Vue的实现"><a href="#Vue的实现" class="headerlink" title="Vue的实现"></a>Vue的实现</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// router/index.js</span></span><br><span class="line"><span class="comment">// router中的前置守卫</span></span><br><span class="line">  <span class="keyword">const</span> routes = [</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">path</span>: <span class="string">&#x27;/&#x27;</span>,</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;Home&#x27;</span>,</span><br><span class="line">    <span class="attr">component</span>: <span class="title class_">Home</span></span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">path</span>: <span class="string">&#x27;/openid_connect_login&#x27;</span>,</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;OpenIdConnectLogin&#x27;</span>,</span><br><span class="line">    <span class="attr">component</span>: <span class="function">() =&gt;</span> <span class="title function_">import</span>(<span class="string">&#x27;../views/OpenIdConnectLogin.vue&#x27;</span>)</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">path</span>: <span class="string">&#x27;/about&#x27;</span>,</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;About&#x27;</span>,</span><br><span class="line">    <span class="attr">component</span>: <span class="function">() =&gt;</span> <span class="title function_">import</span>(<span class="string">&#x27;../views/About.vue&#x27;</span>)</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">path</span>: <span class="string">&#x27;/authorize&#x27;</span>,</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;authorize&#x27;</span>,</span><br><span class="line">    <span class="attr">component</span>: <span class="function">() =&gt;</span> <span class="title function_">import</span>(<span class="string">&#x27;../views/About.vue&#x27;</span>)</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">path</span>: <span class="string">&#x27;*&#x27;</span>,</span><br><span class="line">    <span class="attr">redirect</span>: <span class="string">&#x27;/&#x27;</span>,<span class="comment">// 重定向规则放在路由表的最底部，当前面所有的路由都没有匹配到时，会进入此重定向规则，重定向到首页</span></span><br><span class="line">  &#125;,</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> <span class="title class_">VueRouter</span>(&#123;</span><br><span class="line">  <span class="attr">mode</span>: <span class="string">&#x27;history&#x27;</span>,</span><br><span class="line">  <span class="attr">base</span>: process.<span class="property">env</span>.<span class="property">BASE_URL</span>,</span><br><span class="line">  routes</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">router.<span class="title function_">beforeEach</span>(<span class="function">(<span class="params">to, <span class="keyword">from</span>, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> userInfo = sessionStorage.<span class="title function_">getItem</span>(<span class="string">&#x27;userInfo&#x27;</span>);</span><br><span class="line">  <span class="keyword">let</span> access_token = sessionStorage.<span class="title function_">getItem</span>(<span class="string">&#x27;access_token&#x27;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (to.<span class="property">path</span> === <span class="string">&#x27;/authorize&#x27;</span> || to.<span class="property">path</span> === <span class="string">&#x27;/openid_connect_login&#x27;</span>) &#123;</span><br><span class="line">    <span class="title function_">next</span>();</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (userInfo === <span class="literal">null</span> || access_token === <span class="literal">null</span> || access_token === <span class="string">&#x27;&#x27;</span>) &#123;</span><br><span class="line">      <span class="title function_">next</span>(<span class="string">&#x27;/authorize&#x27;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="title function_">next</span>();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// /authorize路由中的跳转方法</span></span><br><span class="line">authorize () &#123;</span><br><span class="line">  <span class="variable language_">window</span>.<span class="property">location</span>.<span class="property">href</span> = <span class="string">&#x27;http://10.244.168.180/openid/authorize?response_type=token%20id_token&#x27;</span> +</span><br><span class="line"><span class="string">&#x27;&amp;client_id=MacIPortal&#x27;</span> +</span><br><span class="line"><span class="string">&#x27;&amp;redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fportal%2Fopenid_connect_login&#x27;</span> +</span><br><span class="line"><span class="string">&#x27;&amp;scope=openid%20profile&#x27;</span> + </span><br><span class="line"><span class="string">&#x27;&amp;state=&#x27;</span> + <span class="title class_">Math</span>.<span class="title function_">round</span>(<span class="title class_">Math</span>.<span class="title function_">random</span>() * (<span class="number">1e16</span> - <span class="number">1e15</span>) + <span class="number">1e15</span>).<span class="title function_">toString</span>(<span class="number">16</span>) +</span><br><span class="line"><span class="string">&#x27;&amp;nonce=&#x27;</span> + <span class="title class_">Math</span>.<span class="title function_">round</span>(<span class="title class_">Math</span>.<span class="title function_">random</span>() * (<span class="number">1e16</span> - <span class="number">1e15</span>) + <span class="number">1e15</span>).<span class="title function_">toString</span>(<span class="number">16</span>);</span><br><span class="line">&#125;,</span><br><span class="line"></span><br><span class="line"><span class="comment">// /openid_connect_login路由获取登录用户</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;OpenIdConnectLogin&#x27;</span>,</span><br><span class="line">  <span class="attr">props</span>: &#123;</span><br><span class="line">    <span class="attr">msg</span>: <span class="title class_">String</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">data</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="attr">userInfo</span>: <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">      <span class="attr">access_token</span>: <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">      <span class="attr">token_type</span>: <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">      <span class="attr">id_token</span>: <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">      <span class="attr">expires_in</span>: <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">      <span class="attr">state</span>: <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">computed</span>: &#123;</span><br><span class="line">    </span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">methods</span>: &#123;</span><br><span class="line">    getUrlParam (param) &#123;</span><br><span class="line">      <span class="keyword">var</span> reg = <span class="keyword">new</span> <span class="title class_">RegExp</span>(<span class="string">&quot;(^|&amp;)&quot;</span> + param + <span class="string">&quot;=([^&amp;]*)(&amp;|$)&quot;</span>);</span><br><span class="line">      <span class="keyword">var</span> r = <span class="variable language_">window</span>.<span class="property">location</span>.<span class="property">hash</span>.<span class="title function_">substr</span>(<span class="number">1</span>).<span class="title function_">match</span>(reg);</span><br><span class="line">      <span class="keyword">if</span> (r != <span class="literal">null</span>) <span class="keyword">return</span> <span class="built_in">decodeURI</span>(r[<span class="number">2</span>]);</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;,</span><br><span class="line">    getUserInfo () &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="title function_">axios</span>(&#123;</span><br><span class="line">          <span class="attr">method</span>: <span class="string">&#x27;GET&#x27;</span>,</span><br><span class="line">          <span class="attr">url</span>: <span class="string">&#x27;/portal/userInfo/loginUser&#x27;</span>,</span><br><span class="line">          <span class="attr">headers</span>: &#123;<span class="string">&#x27;Authorization&#x27;</span>: <span class="string">&#x27;Bearer &#x27;</span> + <span class="variable language_">this</span>.<span class="property">access_token</span>&#125;,</span><br><span class="line">          <span class="attr">withCredentials</span>: <span class="literal">true</span></span><br><span class="line">        &#125;).<span class="title function_">then</span>(<span class="function"><span class="params">response</span> =&gt;</span> &#123;</span><br><span class="line">          <span class="variable language_">window</span>.<span class="property">console</span>.<span class="title function_">log</span>(response.<span class="property">data</span>);</span><br><span class="line">          <span class="keyword">let</span> result = response.<span class="property">data</span>;</span><br><span class="line">          <span class="keyword">if</span> (result.<span class="property">code</span> != <span class="string">&#x27;1&#x27;</span>) &#123;</span><br><span class="line">            <span class="title function_">alert</span>(<span class="string">&#x27;未登录或登录失效，请登录&#x27;</span>);</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">$router</span>.<span class="title function_">push</span>(<span class="string">&#x27;authorize&#x27;</span>);</span><br><span class="line">          &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="variable language_">window</span>.<span class="property">console</span>.<span class="title function_">log</span>(result.<span class="property">msg</span>);</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">userInfo</span> = result.<span class="property">data</span>;</span><br><span class="line"></span><br><span class="line">            sessionStorage.<span class="title function_">setItem</span>(<span class="string">&#x27;userInfo&#x27;</span>, <span class="variable language_">this</span>.<span class="property">userInfo</span>);</span><br><span class="line">            sessionStorage.<span class="title function_">setItem</span>(<span class="string">&#x27;access_token&#x27;</span>, <span class="variable language_">this</span>.<span class="property">access_token</span>);</span><br><span class="line">            sessionStorage.<span class="title function_">setItem</span>(<span class="string">&#x27;token_type&#x27;</span>, <span class="variable language_">this</span>.<span class="property">token_type</span>);</span><br><span class="line">            sessionStorage.<span class="title function_">setItem</span>(<span class="string">&#x27;id_token&#x27;</span>, <span class="variable language_">this</span>.<span class="property">id_token</span>);</span><br><span class="line">            sessionStorage.<span class="title function_">setItem</span>(<span class="string">&#x27;expires_in&#x27;</span>, <span class="variable language_">this</span>.<span class="property">expires_in</span>);</span><br><span class="line">            sessionStorage.<span class="title function_">setItem</span>(<span class="string">&#x27;state&#x27;</span>, <span class="variable language_">this</span>.<span class="property">state</span>);</span><br><span class="line"></span><br><span class="line">            <span class="title function_">alert</span>(<span class="string">&#x27;登录成功&#x27;</span>);</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">$router</span>.<span class="title function_">push</span>(<span class="string">&#x27;/&#x27;</span>);</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">created</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">access_token</span> = <span class="variable language_">this</span>.<span class="title function_">getUrlParam</span>(<span class="string">&#x27;access_token&#x27;</span>);</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">token_type</span> = <span class="variable language_">this</span>.<span class="title function_">getUrlParam</span>(<span class="string">&#x27;token_type&#x27;</span>);</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">id_token</span> = <span class="variable language_">this</span>.<span class="title function_">getUrlParam</span>(<span class="string">&#x27;id_token&#x27;</span>);</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">expires_in</span> = <span class="variable language_">this</span>.<span class="title function_">getUrlParam</span>(<span class="string">&#x27;expires_in&#x27;</span>);</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">state</span> = <span class="variable language_">this</span>.<span class="title function_">getUrlParam</span>(<span class="string">&#x27;state&#x27;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">access_token</span> === <span class="literal">null</span> || <span class="variable language_">this</span>.<span class="property">access_token</span> === <span class="string">&#x27;&#x27;</span>) &#123;</span><br><span class="line">      <span class="title function_">alert</span>(<span class="string">&#x27;没有access_token&#x27;</span>);</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">$router</span>.<span class="title function_">push</span>(<span class="string">&#x27;authorize&#x27;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="title function_">getUserInfo</span>();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="后端通过access-token获取用户信息接口"><a href="#后端通过access-token获取用户信息接口" class="headerlink" title="后端通过access-token获取用户信息接口"></a>后端通过access-token获取用户信息接口</h2><p>大致实现思路：</p>
+<ol>
+<li>通过拦截器去拦截有特定注解的请求(携带token的请求都需要使用特定的注解)</li>
+<li>从请求头中获取token</li>
+<li>使用HttpClient工具类去请求OpenID Connect的userinfo服务，从而获取用户信息</li>
+</ol>
+<p>这里贴出拦截器和HttpClient工具类的核心代码</p>
+<h3 id="拦截器"><a href="#拦截器" class="headerlink" title="拦截器"></a>拦截器</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// AuthInterceptor.java 拦截器</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> com.foxconn.mcebg.portal.interceptor;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.foxconn.mcebg.portal.oidc.model.UserInfo;</span><br><span class="line"><span class="keyword">import</span> com.foxconn.mcebg.portal.util.HttpClientUtil;</span><br><span class="line"><span class="keyword">import</span> com.foxconn.mcebg.portal.util.VerifyToken;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.method.HandlerMethod;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.servlet.HandlerInterceptor;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpSession;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AuthInterceptor</span> <span class="keyword">implements</span> <span class="title class_">HandlerInterceptor</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">preHandle</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="comment">// 获取access_token</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">authorization</span> <span class="operator">=</span> request.getHeader(<span class="string">&quot;Authorization&quot;</span>);</span><br><span class="line">        <span class="comment">// 如果不是映射到Controller方法直接放行</span></span><br><span class="line">        <span class="keyword">if</span>(!(handler <span class="keyword">instanceof</span> HandlerMethod)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">HandlerMethod</span> <span class="variable">handlerMethod</span> <span class="operator">=</span> (HandlerMethod) handler;</span><br><span class="line">        <span class="type">Method</span> <span class="variable">method</span> <span class="operator">=</span> handlerMethod.getMethod();</span><br><span class="line">        <span class="comment">// 檢查需不需要access_token</span></span><br><span class="line">        <span class="keyword">if</span>(method.isAnnotationPresent(VerifyToken.class)) &#123;</span><br><span class="line">            <span class="type">VerifyToken</span> <span class="variable">verifyToken</span> <span class="operator">=</span> method.getAnnotation(VerifyToken.class);</span><br><span class="line">            <span class="keyword">if</span>(verifyToken.required()) &#123;</span><br><span class="line">                <span class="keyword">if</span>(authorization == <span class="literal">null</span> || <span class="string">&quot;&quot;</span>.equals(authorization)) &#123;</span><br><span class="line">                    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(<span class="string">&quot;请求头中必须包含Authorization，axios请求参考 headers: &#123;&#x27;Authorization&#x27;: &#x27;Bearer &#x27; + this.access_token&#125;&quot;</span>);</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="type">int</span> <span class="variable">indexBearer</span>  <span class="operator">=</span> authorization.indexOf(<span class="string">&quot;Bearer &quot;</span>);</span><br><span class="line">                <span class="keyword">if</span> (indexBearer != <span class="number">0</span>) &#123;</span><br><span class="line">                    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(<span class="string">&quot;请求头中Authorization的值的格式必须为&#x27;Bearer &#x27; + this.access_token&quot;</span>);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="type">String</span> <span class="variable">header_access_token</span> <span class="operator">=</span> authorization.substring(<span class="string">&quot;Bearer &quot;</span>.length());</span><br><span class="line">                <span class="keyword">if</span> (header_access_token == <span class="literal">null</span> || <span class="string">&quot;&quot;</span>.equals(header_access_token)) &#123;</span><br><span class="line">                    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(<span class="string">&quot;请求头的Authorization中必须包含access_token，axios请求参考 headers: &#123;&#x27;Authorization&#x27;: &#x27;Bearer &#x27; + this.access_token&#125;&quot;</span>);</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="type">HttpSession</span> <span class="variable">session</span> <span class="operator">=</span> request.getSession();</span><br><span class="line">                <span class="type">String</span> <span class="variable">session_access_token</span> <span class="operator">=</span> (String) session.getAttribute(<span class="string">&quot;access_token&quot;</span>);</span><br><span class="line">                <span class="keyword">if</span> (session_access_token != <span class="literal">null</span> &amp;&amp; !<span class="string">&quot;&quot;</span>.equals(session_access_token) &amp;&amp; header_access_token.equals(session_access_token)) &#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="type">UserInfo</span> <span class="variable">userInfo</span> <span class="operator">=</span> HttpClientUtil.getUserInfo(header_access_token);</span><br><span class="line">                    <span class="keyword">if</span> (userInfo == <span class="literal">null</span>) &#123;</span><br><span class="line">                        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(<span class="string">&quot;未登录或登录失效，请登录&quot;</span>);</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    session.setAttribute(<span class="string">&quot;access_token&quot;</span>, header_access_token);</span><br><span class="line">                    session.setAttribute(<span class="string">&quot;userInfo&quot;</span>, userInfo);</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="HttpClient工具类"><a href="#HttpClient工具类" class="headerlink" title="HttpClient工具类"></a>HttpClient工具类</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// HttpClientUtil.java HttpClient工具类</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> com.foxconn.mcebg.portal.util;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.foxconn.mcebg.portal.oidc.model.DefaultUserInfo;</span><br><span class="line"><span class="keyword">import</span> com.foxconn.mcebg.portal.oidc.model.UserInfo;</span><br><span class="line"><span class="keyword">import</span> com.google.common.base.Strings;</span><br><span class="line"><span class="keyword">import</span> com.google.gson.JsonObject;</span><br><span class="line"><span class="keyword">import</span> com.google.gson.JsonParser;</span><br><span class="line"><span class="keyword">import</span> lombok.extern.slf4j.Slf4j;</span><br><span class="line"><span class="keyword">import</span> org.apache.http.client.HttpClient;</span><br><span class="line"><span class="keyword">import</span> org.apache.http.impl.client.HttpClientBuilder;</span><br><span class="line"><span class="keyword">import</span> org.springframework.http.HttpMethod;</span><br><span class="line"><span class="keyword">import</span> org.springframework.http.client.ClientHttpRequest;</span><br><span class="line"><span class="keyword">import</span> org.springframework.http.client.HttpComponentsClientHttpRequestFactory;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.client.RestTemplate;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.net.URI;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">HttpClientUtil</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> HttpClient httpClient;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> HttpComponentsClientHttpRequestFactory factory;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        httpClient = HttpClientBuilder.create().useSystemProperties().build();</span><br><span class="line">        factory = <span class="keyword">new</span> <span class="title class_">HttpComponentsClientHttpRequestFactory</span>(httpClient);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取UserInfo</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> UserInfo <span class="title function_">getUserInfo</span><span class="params">(String access_token)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">userInfoString</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">        <span class="type">RestTemplate</span> <span class="variable">restTemplate</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">RestTemplate</span>(factory) &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">protected</span> ClientHttpRequest <span class="title function_">createRequest</span><span class="params">(URI url, HttpMethod method)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">                <span class="type">ClientHttpRequest</span> <span class="variable">httpRequest</span> <span class="operator">=</span> <span class="built_in">super</span>.createRequest(url, method);</span><br><span class="line">                httpRequest.getHeaders().add(<span class="string">&quot;Authorization&quot;</span>, String.format(<span class="string">&quot;Bearer %s&quot;</span>, access_token));</span><br><span class="line">                <span class="keyword">return</span> httpRequest;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">        userInfoString = restTemplate.getForObject(<span class="string">&quot;http://10.244.168.180/openid/userinfo&quot;</span>, String.class);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (!Strings.isNullOrEmpty(userInfoString)) &#123;</span><br><span class="line">            <span class="type">JsonObject</span> <span class="variable">userInfoJson</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">JsonParser</span>().parse(userInfoString).getAsJsonObject();</span><br><span class="line">            <span class="type">UserInfo</span> <span class="variable">userInfo</span> <span class="operator">=</span> fromJson(userInfoJson);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> userInfo;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// didn&#x27;t get anything throw exception</span></span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">IllegalArgumentException</span>(<span class="string">&quot;Unable to load user info&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">static</span> UserInfo <span class="title function_">fromJson</span><span class="params">(JsonObject userInfoJson)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> DefaultUserInfo.fromJson(userInfoJson);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul class="copyright-info-content">
+        <li>本文标题：SSO-OpenID-Connect配置与使用</li>
+        <li>本文作者：Xplorist</li>
+        <li>创建时间：2021-01-08 10:21:00</li>
+        <li>
+            本文链接：https://xplorist.tech/2021/01/08/3f48683e5519/
+        </li>
+        <li>
+            版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2021/01/08/3faf167c051e/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">OpenID-Connect配置与使用</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2020/12/18/146133b54d96/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">门户系统中系统统计Matomo配置</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments"></i>&nbsp;评论
+    </div>
+    
+
+        
+            
+
+
+    <div id="gitalk-container"></div>
+    <script 
+            src="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js"></script>
+    <script >
+
+      function loadGitalk() {
+        let __gitalk__pathname = decodeURI(location.pathname);
+        const __gitalk__pathnameLength = __gitalk__pathname.length;
+        const __gitalk__pathnameMaxLength = 50;
+        if (__gitalk__pathnameLength > __gitalk__pathnameMaxLength) {
+          __gitalk__pathname = __gitalk__pathname.substring(0, __gitalk__pathnameMaxLength - 3) + '...';
+        }
+
+        try {
+
+          Gitalk && new Gitalk({
+            clientID: '24c227c71f9bb758a554',
+            clientSecret: '724a45a68d355acb27c19a61d15fbb7dee34db4e',
+            repo: 'hexo-site-comments',
+            owner: 'Xplorist',
+            admin: 'Xplorist',
+            id: __gitalk__pathname,
+            language: 'zh-CN'
+          }).render('gitalk-container');
+
+        } catch (e) {
+          window.Gitalk = null;
+        }
+      }
+
+      if ('false') {
+        const loadGitalkTimeout = setTimeout(() => {
+          loadGitalk();
+          clearTimeout(loadGitalkTimeout);
+        }, 1000);
+      } else {
+        window.addEventListener('DOMContentLoaded', loadGitalk);
+      }
+    </script>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            
+<footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+                <span>2020</span> -
+            
+            2023
+            
+                &nbsp;<i class="fas fa-heart icon-animate"></i>
+                &nbsp;<a href="/">Xplorist</a>
+            
+        </div>
+        
+            <script async 
+                    src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    访问人数&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                
+                
+                    总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题
+            &nbsp;
+            <a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.8</a>
+        </div>
+        
+            <div class="icp-info info-item">
+                <a target="_blank" rel="nofollow"
+                   href="https://beian.miit.gov.cn"
+                >
+                    蜀ICP备20002343号
+                </a>
+            </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-up-right-and-down-left-from-center"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SSO-OpenID-Connect%E9%85%8D%E7%BD%AE%E4%B8%8E%E4%BD%BF%E7%94%A8"><span class="nav-number">1.</span> <span class="nav-text">SSO-OpenID-Connect配置与使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#wiki%E4%BF%A1%E6%81%AF"><span class="nav-number">1.1.</span> <span class="nav-text">wiki信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%AE%E5%BD%95"><span class="nav-number">1.2.</span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E7%BD%91%E5%9D%80"><span class="nav-number">1.3.</span> <span class="nav-text">参考网址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OpenID-Connect%E5%8D%8F%E8%AE%AE"><span class="nav-number">1.4.</span> <span class="nav-text">OpenID-Connect协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A"><span class="nav-number">1.5.</span> <span class="nav-text">名词解释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OpenID-Connect%E6%8A%BD%E8%B1%A1%E6%B5%81%E7%A8%8B"><span class="nav-number">1.6.</span> <span class="nav-text">OpenID-Connect抽象流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OpenID-Connect%E7%9A%84%E4%B8%89%E7%A7%8D%E8%AE%A4%E8%AF%81%E6%B5%81%E7%A8%8B"><span class="nav-number">1.7.</span> <span class="nav-text">OpenID-Connect的三种认证流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%88%E6%9D%83%E7%A0%81%E6%B5%81%E7%A8%8B"><span class="nav-number">1.7.1.</span> <span class="nav-text">授权码流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9A%90%E5%BC%8F%E6%B5%81%E7%A8%8B"><span class="nav-number">1.7.2.</span> <span class="nav-text">隐式流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%B7%E5%90%88%E6%B5%81%E7%A8%8B"><span class="nav-number">1.7.3.</span> <span class="nav-text">混合流程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E9%A1%B5%E5%BA%94%E7%94%A8%E7%9A%84OpenID-Connect%E8%AE%BE%E7%BD%AE"><span class="nav-number">1.8.</span> <span class="nav-text">单页应用的OpenID-Connect设置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#React%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.8.1.</span> <span class="nav-text">React的实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Vue%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.8.2.</span> <span class="nav-text">Vue的实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8E%E7%AB%AF%E9%80%9A%E8%BF%87access-token%E8%8E%B7%E5%8F%96%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF%E6%8E%A5%E5%8F%A3"><span class="nav-number">1.9.</span> <span class="nav-text">后端通过access-token获取用户信息接口</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%A6%E6%88%AA%E5%99%A8"><span class="nav-number">1.9.1.</span> <span class="nav-text">拦截器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HttpClient%E5%B7%A5%E5%85%B7%E7%B1%BB"><span class="nav-number">1.9.2.</span> <span class="nav-text">HttpClient工具类</span></a></li></ol></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-block-tools.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>

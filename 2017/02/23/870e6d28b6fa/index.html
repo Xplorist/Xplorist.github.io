@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Xplorist">
+    
+    <title>
+        
+            2017-02-23-面向对象 |
+        
+        Xplorist
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.svg">
+    
+<link rel="stylesheet" href="/fontawesome/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/brands.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"zh-CN","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","logo":"/images/logo.svg","favicon":"/images/logo.svg","avatar":"/images/Water.jpg","left_side_width":"300px","content_max_width":"1080px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"header_transparent":true,"background_img":"/images/dawn-in-the-valley.jpg","description":"Exploration, a journey that never ends。","font_color":null,"hitokoto":{"enable":false}},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":false},"code_copy":{},"code_block_tools":{"enable":true,"style":"mac"},"side_tools":{},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.8"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"};
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="/images/logo.svg">
+                </a>
+            
+            <a class="logo-title" href="/">
+               Xplorist
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                分类
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                友链
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                关于
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">分类</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">标签</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links">友链</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">关于</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">2017-02-23-面向对象</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/Water.jpg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Xplorist</span>
+                        
+                            <span class="author-label">Lv6</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2017-02-23 14:23:01</span>
+        <span class="mobile">2017-02-23 14:23</span>
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/ShareLearn/">ShareLearn</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/ShareLearn/">ShareLearn</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="2017-02-23-面向对象"><a href="#2017-02-23-面向对象" class="headerlink" title="2017-02-23-面向对象"></a>2017-02-23-面向对象</h1><p>实例1：</p>
+<p>创建方法，让人能够同时和猫狗玩，让人能够跟很多个猫玩，人能够和很多个狗玩</p>
+<p>思路：方法重载</p>
+<p>核心代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">play</span><span class="params">(Cat cat, <span class="type">int</span> n)</span> &#123;</span><br><span class="line">        System.out.println(name+<span class="string">&quot;和&quot;</span>+n+<span class="string">&quot;只猫玩&quot;</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">            <span class="keyword">switch</span> (i) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">                cat.name=<span class="string">&quot;小灰&quot;</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">                </span><br><span class="line">            <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">                cat.name=<span class="string">&quot;小白&quot;</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">                cat.name=<span class="string">&quot;小黑&quot;</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">                cat.name=<span class="string">&quot;小红&quot;</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">4</span>:</span><br><span class="line">                cat.name=<span class="string">&quot;小黄&quot;</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">5</span>:</span><br><span class="line">                cat.name=<span class="string">&quot;小蓝&quot;</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                cat.name=<span class="string">&quot;流浪猫&quot;</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println(name+<span class="string">&quot;和&quot;</span>+cat.name+<span class="string">&quot;玩&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">play</span><span class="params">( <span class="type">int</span> n)</span> &#123;</span><br><span class="line">        System.out.println(name+<span class="string">&quot;和&quot;</span>+n+<span class="string">&quot;只猫玩&quot;</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">            Cat cat=<span class="keyword">new</span> <span class="title class_">Cat</span>();</span><br><span class="line">            <span class="keyword">switch</span> (i) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">                cat.name=<span class="string">&quot;小灰&quot;</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">                </span><br><span class="line">            <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">                cat.name=<span class="string">&quot;小白&quot;</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">                cat.name=<span class="string">&quot;小黑&quot;</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">                cat.name=<span class="string">&quot;小红&quot;</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">4</span>:</span><br><span class="line">                cat.name=<span class="string">&quot;小黄&quot;</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">5</span>:</span><br><span class="line">                cat.name=<span class="string">&quot;小蓝&quot;</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                cat.name=<span class="string">&quot;流浪猫&quot;</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println(name+<span class="string">&quot;和&quot;</span>+cat.name+<span class="string">&quot;玩&quot;</span>);</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>实例2：</p>
+<p>用户要拿什么茶叶，我们通过对象就给用户什么茶叶，杯子也一样</p>
+<p>思路：构造方法</p>
+<p>核心代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Cup</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> String name;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Cup</span><span class="params">()</span>&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Cup</span><span class="params">(String n)</span>&#123;</span><br><span class="line">        name=n;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">makeTea</span><span class="params">(Tea t)</span>&#123;</span><br><span class="line">        System.out.print(name+<span class="string">&quot;泡了一杯&quot;</span>+t.taste+<span class="string">&quot;味道的&quot;</span>+t.name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Tea</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> String name;</span><br><span class="line">    <span class="keyword">public</span> String taste;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Tea</span><span class="params">()</span>&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Tea</span><span class="params">(String n,String t)</span>&#123;</span><br><span class="line">        name=n;</span><br><span class="line">        taste=t;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Human</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> String name;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Human</span><span class="params">()</span>&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Human</span><span class="params">(String n)</span>&#123;</span><br><span class="line">        name=n;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">drink</span><span class="params">(Cup c,Tea t)</span>&#123;</span><br><span class="line">        System.out.print(name+<span class="string">&quot;拿起了&quot;</span>);</span><br><span class="line">        c.makeTea(t);</span><br><span class="line">        System.out.println(<span class="string">&quot;然后喝了&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MainGate</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        Human h=<span class="keyword">new</span> <span class="title class_">Human</span>(<span class="string">&quot;【张三】&quot;</span>);</span><br><span class="line">        Cup c=<span class="keyword">new</span> <span class="title class_">Cup</span>(<span class="string">&quot;【玻璃杯】&quot;</span>);</span><br><span class="line">        Tea t=<span class="keyword">new</span> <span class="title class_">Tea</span>(<span class="string">&quot;【茉莉花茶】&quot;</span>,<span class="string">&quot;【清香扑鼻的】&quot;</span>);</span><br><span class="line">        h.drink(c, t);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>实例3：</p>
+<p>开枪 需求： <br> * 1、用户可以选择枪4.ak47 mp4 ，火箭筒,如果用户乱来就给他一把玩具枪<br> * 2、选完枪以后，用户可以上子弹，但是上子弹之前用户可以选择上什么子弹 10mm（AK47），11，火箭弹，只有子弹选择正确才能上弹成功<br> * 3、如果上弹失败，用户可以继续选择上子弹或者退出 <br> * 4、上弹成功以后，如果是全自动的枪则直接打完所有子弹，<br> * 5、如果是半自动，上完子弹后，我们输入任意一个字符就可以打出一发子弹 <br> * 6、子弹打完以后，询问是否上子弹，还是退出， 选择上子弹则可以继续3-6的过程。</p>
+<p>分析：主要是控制流程</p>
+<p>核心代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">GunFire</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;请输入您要使用的枪：1.AK47;2.MP4;3.RPG火箭筒;&quot;</span>);</span><br><span class="line">        Scanner scanner=<span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line">        <span class="type">int</span> inputGun=scanner.nextInt();</span><br><span class="line">        Gun gun=<span class="keyword">new</span> <span class="title class_">Gun</span>(inputGun);</span><br><span class="line">        </span><br><span class="line">        gun.reload();</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Gun</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> String name;</span><br><span class="line">    <span class="keyword">public</span> Ammo ammo;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> auto;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Gun</span><span class="params">(<span class="type">int</span> n)</span> &#123;</span><br><span class="line">        ammo = <span class="keyword">new</span> <span class="title class_">Ammo</span>();</span><br><span class="line">        <span class="keyword">switch</span> (n) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">            name = <span class="string">&quot;AK47&quot;</span>;</span><br><span class="line">            ammo.name = <span class="string">&quot;10mm(AK47)&quot;</span>;</span><br><span class="line">            auto = <span class="literal">false</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">            name = <span class="string">&quot;MP4&quot;</span>;</span><br><span class="line">            ammo.name = <span class="string">&quot;11mm(MP4)&quot;</span>;</span><br><span class="line">            auto = <span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">            name = <span class="string">&quot;RPG火箭筒&quot;</span>;</span><br><span class="line">            ammo.name = <span class="string">&quot;火箭弹(RPG)&quot;</span>;</span><br><span class="line">            auto = <span class="literal">false</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            name = <span class="string">&quot;3岁小孩的玩具枪&quot;</span>;</span><br><span class="line">            ammo.name = <span class="string">&quot;气球都打不爆的橡胶子弹&quot;</span>;</span><br><span class="line">            auto = <span class="literal">false</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">reload</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">Ammo</span> <span class="variable">a</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        <span class="type">boolean</span> <span class="variable">flag</span> <span class="operator">=</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="type">boolean</span> <span class="variable">flag1</span> <span class="operator">=</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="type">boolean</span> <span class="variable">flag2</span> <span class="operator">=</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="type">boolean</span> <span class="variable">flag3</span> <span class="operator">=</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="type">Scanner</span> <span class="variable">sc</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (flag) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;开始上弹···&quot;</span>);</span><br><span class="line">            flag1 = <span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">while</span> (flag1) &#123;</span><br><span class="line">                <span class="comment">//</span></span><br><span class="line"></span><br><span class="line">                System.out.println(<span class="string">&quot;恭喜您选择了【&quot;</span> + name + <span class="string">&quot;】，小提示：这种武器一般只使用【&quot;</span> + ammo.name + <span class="string">&quot;】这种弹药哦&quot;</span>);</span><br><span class="line">                System.out.println(<span class="string">&quot;请输入您要使用的弹药：1.10mm(AK47);2.11mm(MP4);3.火箭弹(RPG);&quot;</span>);</span><br><span class="line">                <span class="type">int</span> <span class="variable">inputAmmo</span> <span class="operator">=</span> sc.nextInt();</span><br><span class="line">                a = <span class="keyword">new</span> <span class="title class_">Ammo</span>(inputAmmo);</span><br><span class="line"></span><br><span class="line">                flag3 = <span class="literal">true</span>;</span><br><span class="line">                <span class="keyword">while</span> (flag3) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (ammo.name.equals(a.name)) &#123;</span><br><span class="line">                        System.out.println(<span class="string">&quot;上弹成功！&quot;</span>);</span><br><span class="line">                        <span class="keyword">if</span> (auto) &#123;</span><br><span class="line">                            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; a.number; i++) &#123;</span><br><span class="line">                                System.out.println(<span class="string">&quot;第&quot;</span> + (i + <span class="number">1</span>) + <span class="string">&quot;发子弹&quot;</span>);</span><br><span class="line">                                <span class="keyword">if</span> (i == (a.number - <span class="number">1</span>)) &#123;</span><br><span class="line">                                    System.out.println(<span class="string">&quot;子弹已经打完了&quot;</span>);</span><br><span class="line">                                    System.out.println(<span class="string">&quot;请问是否继续上弹，放弃上弹请输入quit，确认上弹请任意输入&quot;</span>);</span><br><span class="line">                                    <span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> sc.next();</span><br><span class="line">                                    <span class="keyword">if</span> (str.equals(<span class="string">&quot;quit&quot;</span>)) &#123;</span><br><span class="line">                                        flag = <span class="literal">false</span>;</span><br><span class="line">                                        flag3 = <span class="literal">false</span>;</span><br><span class="line">                                    &#125;</span><br><span class="line">                                &#125;</span><br><span class="line"></span><br><span class="line">                            &#125;</span><br><span class="line">                            System.out.println(<span class="string">&quot;在你试着扣动扳机后，一瞬间打完了所有的弹药。……你被惊呆了！！！&quot;</span>);</span><br><span class="line">                        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line"></span><br><span class="line">                            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; a.number; i++) &#123;</span><br><span class="line">                                System.out.println(<span class="string">&quot;你拿到的是一把半自动的武器【&quot;</span> + name + <span class="string">&quot;】，请输入一个1，发出子弹。&quot;</span>);</span><br><span class="line">                                flag2 = <span class="literal">true</span>;</span><br><span class="line">                                <span class="keyword">while</span> (flag2) &#123;</span><br><span class="line">                                    <span class="type">int</span> <span class="variable">input</span> <span class="operator">=</span> sc.nextInt();</span><br><span class="line">                                    <span class="keyword">if</span> (input == <span class="number">1</span>) &#123;</span><br><span class="line">                                        System.out.println(</span><br><span class="line">                                                <span class="string">&quot;biu，这把&quot;</span> + name + <span class="string">&quot;发出了弹匣里&quot;</span> + a.number + <span class="string">&quot;发子弹的第【&quot;</span> + (i + <span class="number">1</span>) + <span class="string">&quot;】发子弹。&quot;</span>);</span><br><span class="line">                                        <span class="keyword">if</span> (i == (a.number - <span class="number">1</span>)) &#123;</span><br><span class="line">                                            System.out.println(<span class="string">&quot;您已经打完了最后一发子弹&quot;</span>);</span><br><span class="line">                                            System.out.println(<span class="string">&quot;请问是否继续上弹，放弃上弹请输入quit，确认上弹请任意输入&quot;</span>);</span><br><span class="line">                                            <span class="type">String</span> <span class="variable">stri</span> <span class="operator">=</span> sc.next();</span><br><span class="line">                                            <span class="keyword">if</span> (stri.equals(<span class="string">&quot;quit&quot;</span>)) &#123;</span><br><span class="line">                                                System.out.println(<span class="string">&quot;您已经退出上弹。&quot;</span>);</span><br><span class="line">                                                System.out.println(<span class="string">&quot;您已经退出本次使用，欢迎再次光临。&quot;</span>);</span><br><span class="line">                                                flag = <span class="literal">false</span>;</span><br><span class="line">                                                flag3 = <span class="literal">false</span>;</span><br><span class="line">                                            &#125;</span><br><span class="line"></span><br><span class="line">                                        &#125;</span><br><span class="line">                                        flag2 = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">                                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                                        System.out.println(<span class="string">&quot;你并没有扣动扳机，所以什么都没有发生……请继续扣动扳机，按个1没那么难吧。&quot;</span>);</span><br><span class="line">                                    &#125;</span><br><span class="line">                                &#125;</span><br><span class="line">                            &#125;</span><br><span class="line">                            flag1 = <span class="literal">false</span>;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        System.out</span><br><span class="line">                                .println(<span class="string">&quot;上弹失败&quot;</span> + name + <span class="string">&quot;并不适合&quot;</span> + a.name + <span class="string">&quot;这种弹药，请问您是否还想继续上弹,退出请输入quit，继续上弹请输入其它任意命令：&quot;</span>);</span><br><span class="line">                        <span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> sc.next();</span><br><span class="line">                        <span class="keyword">if</span> (str.equals(<span class="string">&quot;quit&quot;</span>)) &#123;</span><br><span class="line">                            System.out.println(<span class="string">&quot;您已经退出上弹。&quot;</span>);</span><br><span class="line">                            System.out.println(<span class="string">&quot;您已经退出本次使用，欢迎再次光临。&quot;</span>);</span><br><span class="line">                            flag1 = <span class="literal">false</span>;</span><br><span class="line">                            flag = <span class="literal">false</span>;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Ammo</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> String name;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> number;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Ammo</span><span class="params">()</span>&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Ammo</span><span class="params">(<span class="type">int</span> n)</span>&#123;</span><br><span class="line">        <span class="keyword">switch</span> (n) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">            name=<span class="string">&quot;10mm(AK47)&quot;</span>;</span><br><span class="line">            number=<span class="number">3</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">            name=<span class="string">&quot;11mm(MP4)&quot;</span>;</span><br><span class="line">            number=<span class="number">4</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">            name=<span class="string">&quot;火箭弹(RPG)&quot;</span>;</span><br><span class="line">            number=<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            name=<span class="string">&quot;气球都打不爆的橡胶子弹&quot;</span>;</span><br><span class="line">            number=<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面的思路是将所有的流程封装在一个方法里面，在main方法里面调用的时候很方便，缺点是流程太过于复杂。</p>
+<p>更好的思路是将流程控制放在一个单独的流程控制类，然后在流程控制类中的主方法里面写具体的流程，但是这样的重用性较差。</p>
+<p>新思路核心代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Start</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Scanner</span> <span class="variable">sc</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line">        System.out.println(<span class="string">&quot;请选择你的枪：1.手枪，2.AK47，3.Mp4，4.火箭筒&quot;</span>);</span><br><span class="line">        <span class="comment">// 用户选择的枪</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">inputGun</span> <span class="operator">=</span> sc.next();</span><br><span class="line">        <span class="comment">// 自己去拿一把枪给用户</span></span><br><span class="line">        <span class="type">Gun</span> <span class="variable">gun</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Gun</span>(inputGun);</span><br><span class="line">        System.out.println(<span class="string">&quot;你是否需要上消声器y/n&quot;</span>);</span><br><span class="line">        <span class="type">String</span> <span class="variable">is</span> <span class="operator">=</span> sc.next();</span><br><span class="line">        <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span> (is.equalsIgnoreCase(<span class="string">&quot;y&quot;</span>)) &#123;</span><br><span class="line">            <span class="type">boolean</span> isMuffler=<span class="literal">false</span>;</span><br><span class="line">            <span class="keyword">while</span> (!isMuffler) &#123;</span><br><span class="line">                i++;</span><br><span class="line">                System.out.println(<span class="string">&quot;请选择你的消声器：1.1,2.2,3.3,4.4&quot;</span>);</span><br><span class="line">                <span class="type">String</span> <span class="variable">inputMuffler</span> <span class="operator">=</span> sc.next();</span><br><span class="line">                <span class="type">Muffler</span> <span class="variable">muffler</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Muffler</span>(inputMuffler);</span><br><span class="line">                <span class="comment">// 给枪上消声器</span></span><br><span class="line">                isMuffler = gun.updateMuffler(muffler);</span><br><span class="line">                <span class="keyword">if</span> (i == <span class="number">3</span>) &#123;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">            <span class="type">boolean</span> <span class="variable">isflag</span> <span class="operator">=</span> <span class="literal">true</span>;</span><br><span class="line">            <span class="type">boolean</span> <span class="variable">flag</span> <span class="operator">=</span> <span class="literal">false</span>;</span><br><span class="line">            <span class="keyword">while</span> (!flag) &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;请选择你要上的子弹：1.手枪子弹，2AK47子弹，3MP4子弹，4.火箭弹&quot;</span>);</span><br><span class="line">                <span class="comment">// 用户选择的子弹</span></span><br><span class="line">                <span class="type">String</span> <span class="variable">inputBullet</span> <span class="operator">=</span> sc.next();</span><br><span class="line">                <span class="comment">// 给用户拿子弹</span></span><br><span class="line">                <span class="type">Bullet</span> <span class="variable">bullet</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Bullet</span>(inputBullet);</span><br><span class="line">                <span class="comment">// 上子弹</span></span><br><span class="line">                flag = gun.update(bullet);</span><br><span class="line">                <span class="comment">// System.out.println(flag);</span></span><br><span class="line">                <span class="comment">// 判断是否继续上子弹</span></span><br><span class="line">                <span class="keyword">if</span> (!flag) &#123;</span><br><span class="line">                    System.out.println(<span class="string">&quot;继续上子弹输入任意字符，输入quit退出&quot;</span>);</span><br><span class="line">                    <span class="type">String</span> <span class="variable">isUpBullet</span> <span class="operator">=</span> sc.next();</span><br><span class="line">                    <span class="comment">// 判断是否在上弹阶段退出游戏；</span></span><br><span class="line">                    <span class="keyword">if</span> (isUpBullet.equals(<span class="string">&quot;quit&quot;</span>)) &#123;</span><br><span class="line">                        isflag = <span class="literal">false</span>;</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 根据用户意愿退出游戏</span></span><br><span class="line">            <span class="keyword">if</span> (!isflag) &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 根据子弹数量进行开火</span></span><br><span class="line">            <span class="keyword">while</span> (gun.i &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="comment">// 全自动开火</span></span><br><span class="line">                <span class="keyword">if</span> (gun.type.equals(<span class="string">&quot;全自动&quot;</span>)) &#123;</span><br><span class="line">                    gun.fire();</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="comment">// 半自动开火</span></span><br><span class="line">                    System.out.println(<span class="string">&quot;请输入一个任意字符开枪&quot;</span>);</span><br><span class="line">                    sc.next();</span><br><span class="line">                    gun.fire();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 开火完毕，询问是否退出</span></span><br><span class="line">            System.out.println(<span class="string">&quot;输入reading继续上子弹，输入quit退出&quot;</span>);</span><br><span class="line">            <span class="type">String</span> <span class="variable">isQuit</span> <span class="operator">=</span> sc.next();</span><br><span class="line">            <span class="keyword">if</span> (isQuit.equals(<span class="string">&quot;quit&quot;</span>)) &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>高亮显示的部分为死循环控制的精辟所在。</p>
+<p>实例4：</p>
+<p>我们提供1块石头，<br>，然后人可以将石头磨成对应的石刀，<br>不同的石头摸出来的刀是不一样的，<br>人可以拿着刀去看树，不同的树会变成不同的木材，<br>人可以将木材加工成不同的椅子。</p>
+<p>思路分析：关键在于面向对象和流程控制</p>
+<p>核心代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Start</span> &#123;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;请选择一种石头，【1】石英石，【2】大理石，【3】石灰石，【乱输】泥土：&quot;</span>);</span><br><span class="line">        Scanner sc=<span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line">        String inputStone=sc.next();</span><br><span class="line">        </span><br><span class="line">        Stone stone=<span class="keyword">new</span> <span class="title class_">Stone</span>(inputStone);</span><br><span class="line">        Human human=<span class="keyword">new</span> <span class="title class_">Human</span>();</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//人打磨石头得到石刀</span></span><br><span class="line">        StoneKnife stoneKnife=human.grind(stone);</span><br><span class="line">        System.out.println(human.name+<span class="string">&quot;通过打磨&quot;</span>+stone.solidity+<span class="string">&quot;的&quot;</span>+stone.name+<span class="string">&quot;得到了&quot;</span>+stoneKnife.tartness+<span class="string">&quot;的&quot;</span>+stoneKnife.name);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//</span></span><br><span class="line">        System.out.println(<span class="string">&quot;请选择您要砍的树，【1】松树，【2】桦树，【3】椿树，【乱输】枯树：&quot;</span>);</span><br><span class="line">        String inputTree=sc.next();</span><br><span class="line">        </span><br><span class="line">        Tree tree=<span class="keyword">new</span> <span class="title class_">Tree</span>(inputTree);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//人砍树得到木材</span></span><br><span class="line">        Timber timber=human.cutTree(tree, stoneKnife);</span><br><span class="line">        System.out.println(human.name+<span class="string">&quot;用&quot;</span>+stoneKnife.name+<span class="string">&quot;砍了一些&quot;</span>+tree.name+<span class="string">&quot;得到了一些&quot;</span>+timber.name);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//人用得到的木材做椅子</span></span><br><span class="line">        Chair chair=human.makeChair(timber);</span><br><span class="line">        System.out.println(human.name+<span class="string">&quot;用&quot;</span>+timber.name+<span class="string">&quot;做了一些&quot;</span>+chair.sturdy+<span class="string">&quot;的&quot;</span>+chair.name);</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Stone</span> &#123;</span><br><span class="line">    <span class="comment">/** 石头的名字 */</span></span><br><span class="line">    <span class="keyword">public</span> String name;</span><br><span class="line">    <span class="comment">/** 石头的坚固程度 */</span></span><br><span class="line">    <span class="keyword">public</span> String solidity;</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Stone</span><span class="params">(String n)</span> &#123;</span><br><span class="line">        <span class="keyword">switch</span> (n) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;1&quot;</span>:</span><br><span class="line">            name = <span class="string">&quot;石英石&quot;</span>;</span><br><span class="line">            solidity = <span class="string">&quot;最硬&quot;</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;2&quot;</span>:</span><br><span class="line">            name = <span class="string">&quot;大理石&quot;</span>;</span><br><span class="line">            solidity = <span class="string">&quot;坚固&quot;</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;3&quot;</span>:</span><br><span class="line">            name = <span class="string">&quot;石灰石&quot;</span>;</span><br><span class="line">            solidity = <span class="string">&quot;松软&quot;</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            name = <span class="string">&quot;泥土&quot;</span>;</span><br><span class="line">            solidity = <span class="string">&quot;松散&quot;</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">StoneKnife</span> &#123;</span><br><span class="line">    <span class="comment">/** 石刀的名字 */</span></span><br><span class="line">    <span class="keyword">public</span> String name;</span><br><span class="line">    <span class="comment">/** 石刀的锋利程度 */</span></span><br><span class="line">    <span class="keyword">public</span> String tartness;</span><br><span class="line">    <span class="comment">/** 石刀的材料 */</span></span><br><span class="line">    <span class="keyword">public</span> Stone material;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">StoneKnife</span><span class="params">()</span>&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Tree</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> String name;</span><br><span class="line">    <span class="keyword">public</span> String sturdy;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Tree</span><span class="params">(String n)</span>&#123;</span><br><span class="line">        <span class="keyword">switch</span> (n) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;1&quot;</span>:</span><br><span class="line">            name=<span class="string">&quot;松树&quot;</span>;</span><br><span class="line">            sturdy=<span class="string">&quot;坚固&quot;</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;2&quot;</span>:</span><br><span class="line">            name=<span class="string">&quot;桦树&quot;</span>;</span><br><span class="line">            sturdy=<span class="string">&quot;结实&quot;</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;3&quot;</span>:</span><br><span class="line">            name=<span class="string">&quot;椿树&quot;</span>;</span><br><span class="line">            sturdy=<span class="string">&quot;松动&quot;</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            name=<span class="string">&quot;枯树&quot;</span>;</span><br><span class="line">            sturdy=<span class="string">&quot;一碰就碎&quot;</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Timber</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> String name;</span><br><span class="line">    <span class="keyword">public</span> String sturdy;</span><br><span class="line">    <span class="keyword">public</span> Tree material;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Timber</span><span class="params">()</span>&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Chair</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> String name;</span><br><span class="line">    <span class="keyword">public</span> String sturdy;</span><br><span class="line">    <span class="keyword">public</span> Timber material;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Chair</span><span class="params">()</span>&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Human</span> &#123;</span><br><span class="line">    <span class="comment">/**人的名字*/</span></span><br><span class="line">    <span class="keyword">public</span> String name;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Human</span><span class="params">()</span>&#123;</span><br><span class="line">        name=<span class="string">&quot;张三&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**打磨石头得到石刀*/</span></span><br><span class="line">    <span class="keyword">public</span> StoneKnife <span class="title function_">grind</span><span class="params">(Stone stone)</span>&#123;</span><br><span class="line">        StoneKnife sk=<span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">switch</span> (stone.name) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;石英石&quot;</span>:</span><br><span class="line">            sk=<span class="keyword">new</span> <span class="title class_">StoneKnife</span>();</span><br><span class="line">            sk.name=stone.name+<span class="string">&quot;刀&quot;</span>;</span><br><span class="line">            sk.tartness=<span class="string">&quot;锐利&quot;</span>;</span><br><span class="line">            sk.material=stone;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;大理石&quot;</span>:</span><br><span class="line">            sk=<span class="keyword">new</span> <span class="title class_">StoneKnife</span>();</span><br><span class="line">            sk.name=stone.name+<span class="string">&quot;刀&quot;</span>;</span><br><span class="line">            sk.tartness=<span class="string">&quot;锋利&quot;</span>;</span><br><span class="line">            sk.material=stone;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;石灰石&quot;</span>:</span><br><span class="line">            sk=<span class="keyword">new</span> <span class="title class_">StoneKnife</span>();</span><br><span class="line">            sk.name=stone.name+<span class="string">&quot;刀&quot;</span>;</span><br><span class="line">            sk.tartness=<span class="string">&quot;很钝&quot;</span>;</span><br><span class="line">            sk.material=stone;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            sk=<span class="keyword">new</span> <span class="title class_">StoneKnife</span>();</span><br><span class="line">            sk.name=stone.name+<span class="string">&quot;刀&quot;</span>;</span><br><span class="line">            sk.tartness=<span class="string">&quot;什么都砍不动&quot;</span>;</span><br><span class="line">            sk.material=stone;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> sk;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**拿刀砍树*/</span></span><br><span class="line">    <span class="keyword">public</span> Timber <span class="title function_">cutTree</span><span class="params">(Tree tree,StoneKnife stoneKnife)</span>&#123;</span><br><span class="line">        Timber timber=<span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">switch</span> (tree.name) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;松树&quot;</span>:</span><br><span class="line">            timber=<span class="keyword">new</span> <span class="title class_">Timber</span>();</span><br><span class="line">            timber.name=tree.name+<span class="string">&quot;木材&quot;</span>;</span><br><span class="line">            timber.sturdy=tree.sturdy;</span><br><span class="line">            timber.material=tree;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;桦树&quot;</span>:</span><br><span class="line">            timber=<span class="keyword">new</span> <span class="title class_">Timber</span>();</span><br><span class="line">            timber.name=tree.name+<span class="string">&quot;木材&quot;</span>;</span><br><span class="line">            timber.sturdy=tree.sturdy;</span><br><span class="line">            timber.material=tree;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;椿树&quot;</span>:</span><br><span class="line">            timber=<span class="keyword">new</span> <span class="title class_">Timber</span>();</span><br><span class="line">            timber.name=tree.name+<span class="string">&quot;木材&quot;</span>;</span><br><span class="line">            timber.sturdy=tree.sturdy;</span><br><span class="line">            timber.material=tree;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            timber=<span class="keyword">new</span> <span class="title class_">Timber</span>();</span><br><span class="line">            timber.name=tree.name+<span class="string">&quot;木材&quot;</span>;</span><br><span class="line">            timber.sturdy=tree.sturdy;</span><br><span class="line">            timber.material=tree;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> timber;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**用木材做椅子*/</span></span><br><span class="line">    <span class="keyword">public</span> Chair <span class="title function_">makeChair</span><span class="params">(Timber timber)</span>&#123;</span><br><span class="line">        Chair chair=<span class="literal">null</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">switch</span> (timber.name) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;松树木材&quot;</span>:</span><br><span class="line">            chair=<span class="keyword">new</span> <span class="title class_">Chair</span>();</span><br><span class="line">            chair.name=<span class="string">&quot;椅子&quot;</span>;</span><br><span class="line">            chair.sturdy=timber.sturdy;</span><br><span class="line">            chair.material=timber;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;桦树木材&quot;</span>:</span><br><span class="line">            chair=<span class="keyword">new</span> <span class="title class_">Chair</span>();</span><br><span class="line">            chair.name=<span class="string">&quot;椅子&quot;</span>;</span><br><span class="line">            chair.sturdy=timber.sturdy;</span><br><span class="line">            chair.material=timber;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;椿树木材&quot;</span>:</span><br><span class="line">            chair=<span class="keyword">new</span> <span class="title class_">Chair</span>();</span><br><span class="line">            chair.name=<span class="string">&quot;椅子&quot;</span>;</span><br><span class="line">            chair.sturdy=timber.sturdy;</span><br><span class="line">            chair.material=timber;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            chair=<span class="keyword">new</span> <span class="title class_">Chair</span>();</span><br><span class="line">            chair.name=timber.name+<span class="string">&quot;椅子&quot;</span>;</span><br><span class="line">            chair.sturdy=timber.sturdy;</span><br><span class="line">            chair.material=timber;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> chair;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul class="copyright-info-content">
+        <li>本文标题：2017-02-23-面向对象</li>
+        <li>本文作者：Xplorist</li>
+        <li>创建时间：2017-02-23 14:23:01</li>
+        <li>
+            本文链接：https://xplorist.tech/2017/02/23/870e6d28b6fa/
+        </li>
+        <li>
+            版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/ShareLearn/">#ShareLearn</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2017/02/27/249a79f2cee6/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">2017-02-27-this关键字和权限修饰符</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2017/02/22/ade32788a98d/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">2017-02-22-递归</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments"></i>&nbsp;评论
+    </div>
+    
+
+        
+            
+
+
+    <div id="gitalk-container"></div>
+    <script 
+            src="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js"></script>
+    <script >
+
+      function loadGitalk() {
+        let __gitalk__pathname = decodeURI(location.pathname);
+        const __gitalk__pathnameLength = __gitalk__pathname.length;
+        const __gitalk__pathnameMaxLength = 50;
+        if (__gitalk__pathnameLength > __gitalk__pathnameMaxLength) {
+          __gitalk__pathname = __gitalk__pathname.substring(0, __gitalk__pathnameMaxLength - 3) + '...';
+        }
+
+        try {
+
+          Gitalk && new Gitalk({
+            clientID: '24c227c71f9bb758a554',
+            clientSecret: '724a45a68d355acb27c19a61d15fbb7dee34db4e',
+            repo: 'hexo-site-comments',
+            owner: 'Xplorist',
+            admin: 'Xplorist',
+            id: __gitalk__pathname,
+            language: 'zh-CN'
+          }).render('gitalk-container');
+
+        } catch (e) {
+          window.Gitalk = null;
+        }
+      }
+
+      if ('false') {
+        const loadGitalkTimeout = setTimeout(() => {
+          loadGitalk();
+          clearTimeout(loadGitalkTimeout);
+        }, 1000);
+      } else {
+        window.addEventListener('DOMContentLoaded', loadGitalk);
+      }
+    </script>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            
+<footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+                <span>2020</span> -
+            
+            2023
+            
+                &nbsp;<i class="fas fa-heart icon-animate"></i>
+                &nbsp;<a href="/">Xplorist</a>
+            
+        </div>
+        
+            <script async 
+                    src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    访问人数&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                
+                
+                    总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题
+            &nbsp;
+            <a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.8</a>
+        </div>
+        
+            <div class="icp-info info-item">
+                <a target="_blank" rel="nofollow"
+                   href="https://beian.miit.gov.cn"
+                >
+                    蜀ICP备20002343号
+                </a>
+            </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-up-right-and-down-left-from-center"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#2017-02-23-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.</span> <span class="nav-text">2017-02-23-面向对象</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-block-tools.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>

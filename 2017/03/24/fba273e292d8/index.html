@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Xplorist">
+    
+    <title>
+        
+            2017-03-24-Map-集合工具类Collections |
+        
+        Xplorist
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.svg">
+    
+<link rel="stylesheet" href="/fontawesome/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/brands.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"zh-CN","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","logo":"/images/logo.svg","favicon":"/images/logo.svg","avatar":"/images/Water.jpg","left_side_width":"300px","content_max_width":"1080px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"header_transparent":true,"background_img":"/images/dawn-in-the-valley.jpg","description":"Exploration, a journey that never ends。","font_color":null,"hitokoto":{"enable":false}},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":false},"code_copy":{},"code_block_tools":{"enable":true,"style":"mac"},"side_tools":{},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.8"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"};
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="/images/logo.svg">
+                </a>
+            
+            <a class="logo-title" href="/">
+               Xplorist
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                分类
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                友链
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                关于
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">分类</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">标签</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links">友链</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">关于</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">2017-03-24-Map-集合工具类Collections</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/Water.jpg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Xplorist</span>
+                        
+                            <span class="author-label">Lv6</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2017-03-24 14:23:01</span>
+        <span class="mobile">2017-03-24 14:23</span>
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/ShareLearn/">ShareLearn</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/ShareLearn/">ShareLearn</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="2017-03-24-Map-集合工具类Collections"><a href="#2017-03-24-Map-集合工具类Collections" class="headerlink" title="2017-03-24-Map-集合工具类Collections"></a>2017-03-24-Map-集合工具类Collections</h1><p>debug模式：</p>
+<p>*F5.单步运行， 遇到函数调用函数，进入函数</p>
+<ul>
+<li>F6.单步运行，一条一条运行代码，不进入函数</li>
+</ul>
+<p>*F7.退出调用的函数，回到调用点</p>
+<ul>
+<li>F8.一次完成全部代码  ctrl+shift+i可以在debug看一小段程序运行的结果或者获取到的值是多少</li>
+</ul>
+<p>知识点1：</p>
+<p>Map不是地图是映射</p>
+<p>Map：键值对key-Value</p>
+<p>TreeSet 有序set</p>
+<p>TreeMap 有序map</p>
+<p>知识点2：</p>
+<p>Collections是集合Collection的工具类</p>
+<p>Comparable接口</p>
+<p>重写compareTo()方法</p>
+<p>Comparator接口</p>
+<p>重写compare()方法</p>
+<p>知识点3：</p>
+<p>总结：</p>
+<p>判断两个对象是否相同，Object类中的equals方法，还要重写hashCode()方法。</p>
+<p>通过syso打印一个对象，会去调用Object类中的toString()方法，如果要改变一个对象的输出，那么就需要在这个对象的类中重写Object的toString()方法。</p>
+<p>list中的排序，Collections类中的静态方法，Collections.sort(list)和Collections.sort(list,c)方法，分别关系到Comparable接口的compareTo()方法和Comparator接口中的compare()方法。</p>
+<p>（Comparable接口是可比较的意思，在具体比较的类中实现，方法就是compareTo(),和谁比较，而comparator接口是比较器，需要两个对象来比较，所以方法是compare().）</p>
+<p>实例1：</p>
+<p>将JSON格式的数据存进Map</p>
+<p>&#x2F;<em>{<br> “persion_info”:<br> {<br>   “persion_head”: “<a class="link"   target="_blank" rel="noopener" href="http://xxx/XXX/head.jpg&quot;" >http://XXX/XXX/head.jpg&quot;<i class="fas fa-external-link-alt"></i></a>,<br>   “persion_name”: “Jason Jang”,<br>   “persion_email”: “<a class="link"   href="mailto:&#109;&#x6f;&#108;&#x5f;&#106;&#97;&#115;&#x6f;&#110;&#95;&#x6c;&#x61;&#x6e;&#103;&#x40;&#x67;&#109;&#97;&#105;&#x6c;&#46;&#99;&#111;&#x6d;" >&#109;&#x6f;&#108;&#x5f;&#106;&#97;&#115;&#x6f;&#110;&#95;&#x6c;&#x61;&#x6e;&#103;&#x40;&#x67;&#109;&#97;&#105;&#x6c;&#46;&#99;&#111;&#x6d;<i class="fas fa-external-link-alt"></i></a>“,<br>   “persion_last_time”: “5015-08-21 15:20:36”<br> },<br> “Wallet_info”:<br> {<br>   “MOL Account”: “Malaysia”,<br>   “Balance”: “6250 MOLPoints &#x2F; USD 62.50”,<br>   “MOL REWARDS”: 0<br> }<br>}</em>&#x2F;</p>
+<p>思路：</p>
+<p>直接将数据存进Map即可</p>
+<p>核心代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">packData</span><span class="params">()</span>&#123;</span><br><span class="line">        Map&lt;String,Map&lt;String,Object&gt;&gt; map=<span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String,Map&lt;String,Object&gt;&gt;();</span><br><span class="line">        </span><br><span class="line">        Map&lt;String,Object&gt; map1=<span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String,Object&gt;();</span><br><span class="line">        Map&lt;String,Object&gt; map2=<span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String,Object&gt;();</span><br><span class="line">        </span><br><span class="line">        map1.put(<span class="string">&quot;persion_head&quot;</span>, <span class="string">&quot;http://XXX/XXX/head.jpg&quot;</span>);</span><br><span class="line">        map1.put(<span class="string">&quot;persion_name&quot;</span>, <span class="string">&quot;Jason Jang&quot;</span>);</span><br><span class="line">        map1.put(<span class="string">&quot;persion_email&quot;</span>, <span class="string">&quot;mol_jason_lang@gmail.com&quot;</span>);</span><br><span class="line">        map1.put(<span class="string">&quot;persion_last_time&quot;</span>, <span class="string">&quot;5015-08-21 15:20:36&quot;</span>);</span><br><span class="line">        </span><br><span class="line">        map2.put(<span class="string">&quot;MOL Account&quot;</span>, <span class="string">&quot;Malaysia&quot;</span>);</span><br><span class="line">        map2.put(<span class="string">&quot;Balance&quot;</span>, <span class="string">&quot;6250 MOLPoints / USD 62.50&quot;</span>);</span><br><span class="line">        map2.put(<span class="string">&quot;MOL REWARDS&quot;</span>, <span class="number">0</span>);</span><br><span class="line">        </span><br><span class="line">        map.put(<span class="string">&quot;persion_info&quot;</span>, map1);</span><br><span class="line">        map.put(<span class="string">&quot;Wallet_info&quot;</span>, map2);</span><br><span class="line">        </span><br><span class="line">        System.out.println(map);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>实例2：</p>
+<p>将JSON格式的数据存储进入Map</p>
+<p>{<br> “persion_info”:<br> {<br>   “persion_head”: “<a class="link"   target="_blank" rel="noopener" href="http://xxx/XXX/head.jpg&quot;" >http://XXX/XXX/head.jpg&quot;<i class="fas fa-external-link-alt"></i></a>,<br>   “persion_name”: “Jason Jang”,<br>   “persion_email”: “<a class="link"   href="mailto:&#x6d;&#111;&#108;&#95;&#x6a;&#x61;&#x73;&#111;&#110;&#x5f;&#x6c;&#x61;&#x6e;&#103;&#64;&#103;&#x6d;&#x61;&#105;&#x6c;&#x2e;&#99;&#x6f;&#x6d;" >&#x6d;&#111;&#108;&#95;&#x6a;&#x61;&#x73;&#111;&#110;&#x5f;&#x6c;&#x61;&#x6e;&#103;&#64;&#103;&#x6d;&#x61;&#105;&#x6c;&#x2e;&#99;&#x6f;&#x6d;<i class="fas fa-external-link-alt"></i></a>“,<br>   “persion_last_time”: “5015-08-21 15:20:36”<br> },<br> “Wallet_info”:<br> {<br>   “MOL Account”: “Malaysia”,<br>   “Balance”: “6250 MOLPoints &#x2F; USD 62.50”,<br>   “MOL REWARDS”: 0<br> },<br> “region”: [ { “account”: “Malaysia”},{ “account”: “TaiWan”} ],<br> “languages”: [{“language”: “English”},{“language”: “Chinese”}]<br>}*&#x2F;</p>
+<p>思路：</p>
+<p>直接一层一层地存储进入Map</p>
+<p>核心代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">packData1</span><span class="params">()</span>&#123;</span><br><span class="line">        Map&lt;String,Object&gt; map=<span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String,Object&gt;();</span><br><span class="line">        </span><br><span class="line">        Map&lt;String,String&gt; map1=<span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String,String&gt;();</span><br><span class="line">        Map&lt;String,Object&gt; map2=<span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String,Object&gt;();</span><br><span class="line">        </span><br><span class="line">        List&lt;Map&lt;String,String&gt;&gt; list1=<span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;Map&lt;String,String&gt;&gt;();</span><br><span class="line">        List&lt;Map&lt;String,String&gt;&gt; list2=<span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;Map&lt;String,String&gt;&gt;();</span><br><span class="line">        </span><br><span class="line">        Map&lt;String,String&gt; map3=<span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String,String&gt;();</span><br><span class="line">        Map&lt;String,String&gt; map4=<span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String,String&gt;();</span><br><span class="line">        Map&lt;String,String&gt; map5=<span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String,String&gt;();</span><br><span class="line">        Map&lt;String,String&gt; map6=<span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String,String&gt;();</span><br><span class="line">        </span><br><span class="line">        map3.put(<span class="string">&quot;account&quot;</span>, <span class="string">&quot;Malaysia&quot;</span>);</span><br><span class="line">        map4.put(<span class="string">&quot;account&quot;</span>, <span class="string">&quot;TaiWan&quot;</span>);</span><br><span class="line">        </span><br><span class="line">        map5.put(<span class="string">&quot;language&quot;</span>, <span class="string">&quot;English&quot;</span>);</span><br><span class="line">        map6.put(<span class="string">&quot;language&quot;</span>, <span class="string">&quot;Chinese&quot;</span>);</span><br><span class="line">        </span><br><span class="line">        map1.put(<span class="string">&quot;persion_head&quot;</span>, <span class="string">&quot;http://XXX/XXX/head.jpg&quot;</span>);</span><br><span class="line">        map1.put(<span class="string">&quot;persion_name&quot;</span>, <span class="string">&quot;Jason Jang&quot;</span>);</span><br><span class="line">        map1.put(<span class="string">&quot;persion_email&quot;</span>, <span class="string">&quot;mol_jason_lang@gmail.com&quot;</span>);</span><br><span class="line">        map1.put(<span class="string">&quot;persion_last_time&quot;</span>, <span class="string">&quot;5015-08-21 15:20:36&quot;</span>);</span><br><span class="line">        </span><br><span class="line">        map2.put(<span class="string">&quot;MOL Account&quot;</span>, <span class="string">&quot;Malaysia&quot;</span>);</span><br><span class="line">        map2.put(<span class="string">&quot;Balance&quot;</span>, <span class="string">&quot;6250 MOLPoints / USD 62.50&quot;</span>);</span><br><span class="line">        map2.put(<span class="string">&quot;MOL REWARDS&quot;</span>, <span class="number">0</span>);</span><br><span class="line">        </span><br><span class="line">        list1.add(map3);</span><br><span class="line">        list1.add(map4);</span><br><span class="line">        list2.add(map5);</span><br><span class="line">        list2.add(map6);</span><br><span class="line">        </span><br><span class="line">        map.put(<span class="string">&quot;persion_info&quot;</span>, map1);</span><br><span class="line">        map.put(<span class="string">&quot;Wallet_info&quot;</span>, map2);</span><br><span class="line">        map.put(<span class="string">&quot;region&quot;</span>, list1);</span><br><span class="line">        map.put(<span class="string">&quot;languages&quot;</span>, list2);</span><br><span class="line">        </span><br><span class="line">        System.out.println(map);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>实例3：</p>
+<p>集合排序</p>
+<p>Student对象中有name，age，height（身高）几个属性</p>
+<p>创建4个Student对象，然后将这4个对象存储到list中，</p>
+<p>然后将list中的元素进行排序，如果name相同，就按照age进行排序，如果age相同，就按照height进行排序</p>
+<p>思路：</p>
+<p>1.student类中实现Comparable接口，然后实现compareTo()方法，使用Collections.sort(list);方法，</p>
+<p>2.Collections.sort(list,comparator接口的实现类对象);另外定义一个类，然后实现Comparator接口，在类中实现compare()方法</p>
+<p>思路1核心代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Student</span> <span class="keyword">implements</span> <span class="title class_">Comparable</span>&lt;Student&gt; &#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> age;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">double</span> high;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Student</span><span class="params">()</span> &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Student</span><span class="params">(String name, <span class="type">int</span> age, <span class="type">double</span> high)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>();</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">        <span class="built_in">this</span>.age = age;</span><br><span class="line">        <span class="built_in">this</span>.high = high;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getName</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setName</span><span class="params">(String name)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getAge</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setAge</span><span class="params">(<span class="type">int</span> age)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">getHigh</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> high;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setHigh</span><span class="params">(<span class="type">double</span> high)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.high = high;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">compareTo</span><span class="params">(Student o)</span> &#123;</span><br><span class="line">        <span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(!<span class="built_in">this</span>.name.equals(o.name))&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">this</span>.name.compareTo(o.name);</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(<span class="built_in">this</span>.age!=o.age)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">this</span>.age-o.age;</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(<span class="built_in">this</span>.high!=o.high)&#123;</span><br><span class="line">            <span class="keyword">return</span> (<span class="type">int</span>)((<span class="built_in">this</span>.high-o.high)*<span class="number">100</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;【name: &quot;</span>+name+<span class="string">&quot; age: &quot;</span>+age+<span class="string">&quot; high: &quot;</span>+high+<span class="string">&quot;】&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">sortTest</span><span class="params">()</span>&#123;</span><br><span class="line">        Student s1=<span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;s1&quot;</span>,<span class="number">11</span>,<span class="number">1.1</span>);</span><br><span class="line">        Student s2=<span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;s1&quot;</span>,<span class="number">12</span>,<span class="number">1.2</span>);</span><br><span class="line">        Student s3=<span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;s2&quot;</span>,<span class="number">13</span>,<span class="number">1.3</span>);</span><br><span class="line">        Student s4=<span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;s2&quot;</span>,<span class="number">13</span>,<span class="number">1.4</span>);</span><br><span class="line">        </span><br><span class="line">        List&lt;Student&gt; list=<span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;Student&gt;();</span><br><span class="line">        </span><br><span class="line">        list.add(s4);</span><br><span class="line">        list.add(s2);</span><br><span class="line">        list.add(s1);</span><br><span class="line">        list.add(s3);</span><br><span class="line">        </span><br><span class="line">        System.out.println(list);</span><br><span class="line">        </span><br><span class="line">        Collections.sort(list);</span><br><span class="line">        System.out.println(list);</span><br><span class="line">        </span><br><span class="line">        Collections.reverse(list);</span><br><span class="line">        System.out.println(list);</span><br><span class="line">        </span><br><span class="line">        Collections.sort(list);</span><br><span class="line">        System.out.println(list);</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>思路2核心代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CompratorTest</span> <span class="keyword">implements</span> <span class="title class_">Comparator</span>&lt;Student&gt;&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">compare</span><span class="params">(Student o1, Student o2)</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(!o1.getName().equals(o2.getName()))&#123;</span><br><span class="line">            <span class="keyword">return</span> o1.getName().compareTo(o2.getName());</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(o1.getAge()!=o2.getAge())&#123;</span><br><span class="line">            <span class="keyword">return</span> o1.getAge()-o2.getAge();</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(o1.getHigh()!=o2.getHigh())&#123;</span><br><span class="line">            <span class="keyword">return</span> (<span class="type">int</span>)((o1.getHigh()-o2.getHigh())*<span class="number">100</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">sortTest</span><span class="params">()</span>&#123;</span><br><span class="line">        Student s1=<span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;s1&quot;</span>,<span class="number">11</span>,<span class="number">1.1</span>);</span><br><span class="line">        Student s2=<span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;s1&quot;</span>,<span class="number">12</span>,<span class="number">1.2</span>);</span><br><span class="line">        Student s3=<span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;s2&quot;</span>,<span class="number">13</span>,<span class="number">1.3</span>);</span><br><span class="line">        Student s4=<span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;s2&quot;</span>,<span class="number">13</span>,<span class="number">1.4</span>);</span><br><span class="line">        </span><br><span class="line">        List&lt;Student&gt; list=<span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;Student&gt;();</span><br><span class="line">        </span><br><span class="line">        list.add(s4);</span><br><span class="line">        list.add(s2);</span><br><span class="line">        list.add(s1);</span><br><span class="line">        list.add(s3);</span><br><span class="line">        </span><br><span class="line">        System.out.println(list);</span><br><span class="line">        </span><br><span class="line">        Collections.sort(list);</span><br><span class="line">        System.out.println(list);</span><br><span class="line">        </span><br><span class="line">        Collections.reverse(list);</span><br><span class="line">        System.out.println(list);</span><br><span class="line">        </span><br><span class="line">        CompratorTest c=<span class="keyword">new</span> <span class="title class_">CompratorTest</span>();</span><br><span class="line">        Collections.sort(list,c);</span><br><span class="line">        System.out.println(list);</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul class="copyright-info-content">
+        <li>本文标题：2017-03-24-Map-集合工具类Collections</li>
+        <li>本文作者：Xplorist</li>
+        <li>创建时间：2017-03-24 14:23:01</li>
+        <li>
+            本文链接：https://xplorist.tech/2017/03/24/fba273e292d8/
+        </li>
+        <li>
+            版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/ShareLearn/">#ShareLearn</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2017/03/27/36409448f89c/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">2017-03-27-内部类，随机不重复原理</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2017/03/23/b69df61c69ec/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">2017-03-23-过滤器-集合</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments"></i>&nbsp;评论
+    </div>
+    
+
+        
+            
+
+
+    <div id="gitalk-container"></div>
+    <script 
+            src="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js"></script>
+    <script >
+
+      function loadGitalk() {
+        let __gitalk__pathname = decodeURI(location.pathname);
+        const __gitalk__pathnameLength = __gitalk__pathname.length;
+        const __gitalk__pathnameMaxLength = 50;
+        if (__gitalk__pathnameLength > __gitalk__pathnameMaxLength) {
+          __gitalk__pathname = __gitalk__pathname.substring(0, __gitalk__pathnameMaxLength - 3) + '...';
+        }
+
+        try {
+
+          Gitalk && new Gitalk({
+            clientID: '24c227c71f9bb758a554',
+            clientSecret: '724a45a68d355acb27c19a61d15fbb7dee34db4e',
+            repo: 'hexo-site-comments',
+            owner: 'Xplorist',
+            admin: 'Xplorist',
+            id: __gitalk__pathname,
+            language: 'zh-CN'
+          }).render('gitalk-container');
+
+        } catch (e) {
+          window.Gitalk = null;
+        }
+      }
+
+      if ('false') {
+        const loadGitalkTimeout = setTimeout(() => {
+          loadGitalk();
+          clearTimeout(loadGitalkTimeout);
+        }, 1000);
+      } else {
+        window.addEventListener('DOMContentLoaded', loadGitalk);
+      }
+    </script>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            
+<footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+                <span>2020</span> -
+            
+            2023
+            
+                &nbsp;<i class="fas fa-heart icon-animate"></i>
+                &nbsp;<a href="/">Xplorist</a>
+            
+        </div>
+        
+            <script async 
+                    src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    访问人数&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                
+                
+                    总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题
+            &nbsp;
+            <a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.8</a>
+        </div>
+        
+            <div class="icp-info info-item">
+                <a target="_blank" rel="nofollow"
+                   href="https://beian.miit.gov.cn"
+                >
+                    蜀ICP备20002343号
+                </a>
+            </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-up-right-and-down-left-from-center"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#2017-03-24-Map-%E9%9B%86%E5%90%88%E5%B7%A5%E5%85%B7%E7%B1%BBCollections"><span class="nav-number">1.</span> <span class="nav-text">2017-03-24-Map-集合工具类Collections</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-block-tools.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>

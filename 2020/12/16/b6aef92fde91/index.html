@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Xplorist">
+    
+    <title>
+        
+            GitLab之CI_CD配置 |
+        
+        Xplorist
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.svg">
+    
+<link rel="stylesheet" href="/fontawesome/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/brands.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"zh-CN","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","logo":"/images/logo.svg","favicon":"/images/logo.svg","avatar":"/images/Water.jpg","left_side_width":"300px","content_max_width":"1080px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"header_transparent":true,"background_img":"/images/dawn-in-the-valley.jpg","description":"Exploration, a journey that never ends。","font_color":null,"hitokoto":{"enable":false}},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":false},"code_copy":{},"code_block_tools":{"enable":true,"style":"mac"},"side_tools":{},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.8"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"};
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="/images/logo.svg">
+                </a>
+            
+            <a class="logo-title" href="/">
+               Xplorist
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                分类
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                友链
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                关于
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">分类</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">标签</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links">友链</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">关于</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">GitLab之CI_CD配置</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/Water.jpg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Xplorist</span>
+                        
+                            <span class="author-label">Lv6</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2020-12-16 09:04:00</span>
+        <span class="mobile">2020-12-16 09:04</span>
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/GitLab/">GitLab</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/GitLab/">GitLab</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="GitLab之CI-CD配置"><a href="#GitLab之CI-CD配置" class="headerlink" title="GitLab之CI_CD配置"></a>GitLab之CI_CD配置</h1><h2 id="wiki信息"><a href="#wiki信息" class="headerlink" title="wiki信息"></a>wiki信息</h2><ul>
+<li>创建时间： 2020-12-17</li>
+<li>最近修改时间： 2020-12-17</li>
+<li>当前版本：v1.0.1</li>
+<li>wiki作者: 向波任(C3005579)</li>
+<li>联系电话: 5073+66948</li>
+<li>联系邮箱：<a class="link"   href="mailto:&#109;&#99;&#x65;&#98;&#x67;&#45;&#109;&#x61;&#x63;&#x31;&#45;&#109;&#x69;&#x73;&#99;&#100;&#x73;&#x79;&#x73;&#x32;&#x40;&#x6d;&#97;&#105;&#x6c;&#x2e;&#102;&#111;&#x78;&#99;&#111;&#x6e;&#110;&#46;&#99;&#111;&#x6d;" >&#109;&#99;&#x65;&#98;&#x67;&#45;&#109;&#x61;&#x63;&#x31;&#45;&#109;&#x69;&#x73;&#99;&#100;&#x73;&#x79;&#x73;&#x32;&#x40;&#x6d;&#97;&#105;&#x6c;&#x2e;&#102;&#111;&#x78;&#99;&#111;&#x6e;&#110;&#46;&#99;&#111;&#x6d;<i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+<h2 id="本地测试成功的流程步骤（Win10开发机上架设虚拟机）"><a href="#本地测试成功的流程步骤（Win10开发机上架设虚拟机）" class="headerlink" title="本地测试成功的流程步骤（Win10开发机上架设虚拟机）"></a>本地测试成功的流程步骤（Win10开发机上架设虚拟机）</h2><ol>
+<li>安装VirtualBox虚拟机，并在虚拟机中安装CentOS 7操作系统</li>
+<li>设置VirtualBox虚拟机中的CentOS 7的网络为桥接模式，并配置CentOS7中的内网代理</li>
+<li>CentOS中安装GitLab,设置配置文件，并启动</li>
+<li>Win10中安装GitLab-Runner，并和GitLab进行交互式注册</li>
+<li>Tomcat配置只有manager-script角色的用户</li>
+<li>创建Maven项目并在项目根目录下创建.gtilab-ci.yml，并针对该项目进行配置PowerShell脚本</li>
+<li>GitLab中创建项目，开发者push项目源码到GitLab中，Windows服务器的GitLab-Runner自动部署项目到Tomcat</li>
+</ol>
+<h2 id="生产环境流程步骤（基于物理机环境，非Docker容器）"><a href="#生产环境流程步骤（基于物理机环境，非Docker容器）" class="headerlink" title="生产环境流程步骤（基于物理机环境，非Docker容器）"></a>生产环境流程步骤（基于物理机环境，非Docker容器）</h2><ol>
+<li>准备三台电脑：1台GitLab服务器(CentOS 7)，1台Tomcat服务器(Windows 10), 1台开发者电脑</li>
+<li>GitLab服务器环境配置<ol>
+<li>安装VirtualBox (如果服务器是Windows操作系统才安装)</li>
+<li>安装CentOS7, 设置静态IP, 配置内网代理（如果是在VirtualBox中，需要设置为桥接模式）</li>
+<li>安装GitLab, 配置IP,并启动</li>
+</ol>
+</li>
+<li>Tomcat服务器环境配置<ol>
+<li>安装JDK1.8,并配置环境变量</li>
+<li>安装Maven，并配置环境变量，配置内网代理</li>
+<li>安装Tomcat,并配置manager-script角色的用户，conf&#x2F;Catalina&#x2F;localhost&#x2F;中创建并配置manager.xml</li>
+<li>安装GitLab-Runner，并和GitLab进行交互式注册</li>
+</ol>
+</li>
+<li>开发者电脑环境配置<ol>
+<li>安装JDK1.8，并配置环境变量</li>
+<li>安装Maven，并配置环境变量，配置内网代理</li>
+<li>安装Git</li>
+<li>创建基于Maven结构的JavaWeb项目(例如：SpringBoot项目)，并在项目中创建.gitlab-ci.yml，将相应的Maven打包命令和PowerShell脚本写入其中</li>
+<li>使用Git将项目代码push到GitLab上去，Tomcat服务器上的GitLab-Runner就自动执行构建项目并部署到Tomcat中去了</li>
+</ol>
+</li>
+</ol>
+<h2 id="具体操作"><a href="#具体操作" class="headerlink" title="具体操作"></a>具体操作</h2><h3 id="安装VirtualBox"><a href="#安装VirtualBox" class="headerlink" title="安装VirtualBox"></a>安装VirtualBox</h3><ul>
+<li>下载VirtualBox,网址：<a class="link"   target="_blank" rel="noopener" href="https://www.virtualbox.org/wiki/Downloads" >Download VirtualBox<i class="fas fa-external-link-alt"></i></a></li>
+<li>将下载好的VirtualBox安装在指定文件夹下</li>
+</ul>
+<h3 id="安装CentOS7"><a href="#安装CentOS7" class="headerlink" title="安装CentOS7"></a>安装CentOS7</h3><ul>
+<li>下载CentOS7,网址：<a class="link"   target="_blank" rel="noopener" href="https://www.centos.org/download/" >CentOS Linux<i class="fas fa-external-link-alt"></i></a> 直接下载网址：<a class="link"   target="_blank" rel="noopener" href="http://mirrors.aliyun.com/centos/7.9.2009/isos/x86_64/CentOS-7-x86_64-Everything-2009.iso" >CentOS-7-x86_64-Everything-2009.iso<i class="fas fa-external-link-alt"></i></a></li>
+<li>VirtualBox下安装CentOS7<ul>
+<li><p>点击New</p>
+<p>  <img src="/images/GitLab%E4%B9%8BCI_CD%E9%85%8D%E7%BD%AE/1.%E7%82%B9%E5%87%BBNew.png" alt="1.点击New.png"></p>
+</li>
+<li><p>输入操作系统相关信息,并点击Next</p>
+<p>  <img src="/images/GitLab%E4%B9%8BCI_CD%E9%85%8D%E7%BD%AE/2.%E8%BE%93%E5%85%A5%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9B%B8%E5%85%B3%E4%BF%A1%E6%81%AF.png" alt="2.输入操作系统相关信息.png"></p>
+</li>
+<li><p>给虚拟机分配内存</p>
+<p>  <img src="/images/GitLab%E4%B9%8BCI_CD%E9%85%8D%E7%BD%AE/3.%E7%BB%99%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%88%86%E9%85%8D%E5%86%85%E5%AD%98.png" alt="3.给虚拟机分配内存.png"></p>
+</li>
+<li><p>给虚拟机分配硬盘空间</p>
+<p>  <img src="/images/GitLab%E4%B9%8BCI_CD%E9%85%8D%E7%BD%AE/4.%E7%BB%99%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%88%86%E9%85%8D%E7%A1%AC%E7%9B%98%E7%A9%BA%E9%97%B4.png" alt="4.给虚拟机分配硬盘空间.png"></p>
+</li>
+<li><p>选择硬盘文件类型</p>
+<p>  <img src="/images/GitLab%E4%B9%8BCI_CD%E9%85%8D%E7%BD%AE/5.%E9%80%89%E6%8B%A9%E7%A1%AC%E7%9B%98%E6%96%87%E4%BB%B6%E7%B1%BB%E5%9E%8B.png" alt="5.选择硬盘文件类型.png"></p>
+</li>
+<li><p>选择动态分配物理硬盘空间</p>
+<p>  <img src="/images/GitLab%E4%B9%8BCI_CD%E9%85%8D%E7%BD%AE/6.%E9%80%89%E6%8B%A9%E5%8A%A8%E6%80%81%E5%88%86%E9%85%8D%E7%89%A9%E7%90%86%E7%A1%AC%E7%9B%98%E7%A9%BA%E9%97%B4.png" alt="6.选择动态分配物理硬盘空间.png"></p>
+</li>
+<li><p>选择虚拟机硬盘文件存储位置以及大小</p>
+<p>  <img src="/images/GitLab%E4%B9%8BCI_CD%E9%85%8D%E7%BD%AE/7.%E9%80%89%E6%8B%A9%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%A1%AC%E7%9B%98%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8%E4%BD%8D%E7%BD%AE%E4%BB%A5%E5%8F%8A%E5%A4%A7%E5%B0%8F.png" alt="7.选择虚拟机硬盘文件存储位置以及大小.png"></p>
+</li>
+<li><p>选择创建好的虚拟机</p>
+<p>  <img src="/images/GitLab%E4%B9%8BCI_CD%E9%85%8D%E7%BD%AE/8.%E9%80%89%E6%8B%A9%E5%88%9B%E5%BB%BA%E5%A5%BD%E7%9A%84%E8%99%9A%E6%8B%9F%E6%9C%BA.png" alt="8.选择创建好的虚拟机.png"></p>
+</li>
+<li><p>设置虚拟机网络为桥接模式</p>
+<p>  <img src="/images/GitLab%E4%B9%8BCI_CD%E9%85%8D%E7%BD%AE/9.%E8%AE%BE%E7%BD%AE%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B8%BA%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F.png" alt="9.设置虚拟机网络为桥接模式.png"></p>
+</li>
+<li><p>设置系统启动盘用来安装操作系统的ISO文件<br>  <img src="/images/GitLab%E4%B9%8BCI_CD%E9%85%8D%E7%BD%AE/10.%E8%AE%BE%E7%BD%AE%E7%B3%BB%E7%BB%9F%E5%90%AF%E5%8A%A8%E7%9B%98%E7%94%A8%E6%9D%A5%E5%AE%89%E8%A3%85%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84ISO%E6%96%87%E4%BB%B6.png" alt="10.设置系统启动盘用来安装操作系统的ISO文件.png"></p>
+</li>
+<li><p>点击Start启动虚拟机</p>
+<p>  <img src="/images/GitLab%E4%B9%8BCI_CD%E9%85%8D%E7%BD%AE/11.%E7%82%B9%E5%87%BBStart%E5%90%AF%E5%8A%A8%E8%99%9A%E6%8B%9F%E6%9C%BA.png" alt="11.点击Start启动虚拟机.png"></p>
+</li>
+<li><p>点击Start</p>
+<p>  <img src="/images/GitLab%E4%B9%8BCI_CD%E9%85%8D%E7%BD%AE/12.%E7%82%B9%E5%87%BBStart.png" alt="12.点击Start.png"></p>
+</li>
+<li><p>选择安装CentOS7</p>
+<p>  <img src="/images/GitLab%E4%B9%8BCI_CD%E9%85%8D%E7%BD%AE/13.%E9%80%89%E6%8B%A9%E5%AE%89%E8%A3%85CentOS7.png" alt="13.选择安装CentOS7.png"></p>
+</li>
+<li><p>选择英语和美式键盘</p>
+<p>  <img src="/images/GitLab%E4%B9%8BCI_CD%E9%85%8D%E7%BD%AE/14.%E9%80%89%E6%8B%A9%E8%8B%B1%E8%AF%AD%E5%92%8C%E7%BE%8E%E5%BC%8F%E9%94%AE%E7%9B%98.png" alt="14.选择英语和美式键盘.png"></p>
+</li>
+<li><p>选择Capture捕捉鼠标</p>
+<p>  <img src="/images/GitLab%E4%B9%8BCI_CD%E9%85%8D%E7%BD%AE/15.%E9%80%89%E6%8B%A9Capture%E6%8D%95%E6%8D%89%E9%BC%A0%E6%A0%87.png" alt="15.选择Capture捕捉鼠标.png"></p>
+</li>
+<li><p>点击CentOS7的安装位置</p>
+<p>  <img src="/images/GitLab%E4%B9%8BCI_CD%E9%85%8D%E7%BD%AE/16.%E7%82%B9%E5%87%BBCentOS7%E7%9A%84%E5%AE%89%E8%A3%85%E4%BD%8D%E7%BD%AE.png" alt="16.点击CentOS7的安装位置.png"></p>
+</li>
+<li><p>点击Done完成分区设置</p>
+<p>  <img src="/images/GitLab%E4%B9%8BCI_CD%E9%85%8D%E7%BD%AE/17.%E7%82%B9%E5%87%BBDone%E5%AE%8C%E6%88%90%E5%88%86%E5%8C%BA%E8%AE%BE%E7%BD%AE.png" alt="17.点击Done完成分区设置.png"></p>
+</li>
+<li><p>点击BeginInstallation开始安装</p>
+<p>  <img src="/images/GitLab%E4%B9%8BCI_CD%E9%85%8D%E7%BD%AE/18.%E7%82%B9%E5%87%BBBeginInstallation%E5%BC%80%E5%A7%8B%E5%AE%89%E8%A3%85.png" alt="18.点击BeginInstallation开始安装.png"></p>
+</li>
+<li><p>设置root账号密码</p>
+<p>  <img src="/images/GitLab%E4%B9%8BCI_CD%E9%85%8D%E7%BD%AE/19.%E9%80%89%E6%8B%A9%E8%AE%BE%E7%BD%AEroot%E7%94%A8%E6%88%B7%E5%AF%86%E7%A0%81.png" alt="19.选择设置root用户密码.png"></p>
+<p>  <img src="/images/GitLab%E4%B9%8BCI_CD%E9%85%8D%E7%BD%AE/20.%E8%AE%BE%E7%BD%AEroot%E7%94%A8%E6%88%B7%E5%AF%86%E7%A0%81.png" alt="20.设置root用户密码.png"></p>
+</li>
+<li><p>点击Reboot重启虚拟机，完成CentOS7的安装</p>
+<p>  <img src="/images/GitLab%E4%B9%8BCI_CD%E9%85%8D%E7%BD%AE/21.%E7%82%B9%E5%87%BBReboot%E9%87%8D%E5%90%AF%E8%99%9A%E6%8B%9F%E6%9C%BA%EF%BC%8C%E5%AE%8C%E6%88%90CentOS7%E7%9A%84%E5%AE%89%E8%A3%85.png" alt="21.点击Reboot重启虚拟机，完成CentOS7的安装.png"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="设置CentOS7"><a href="#设置CentOS7" class="headerlink" title="设置CentOS7"></a>设置CentOS7</h3><h4 id="配置静态IP"><a href="#配置静态IP" class="headerlink" title="配置静态IP"></a>配置静态IP</h4><ul>
+<li><p>虚拟机重启后，用root账号登录</p>
+</li>
+<li><p>设置静态IP，bash命令如下</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> /etc/sysconfig/network-scripts</span><br><span class="line">$ <span class="built_in">ls</span></span><br><span class="line">$ vi ifcfg-enp0s3</span><br></pre></td></tr></table></figure>
+<p>  进入vi后，点击i键进入Insert模式，修改ifcfg-enp0s3中的内容如下：</p>
+  <figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">BOOTPROTO=static # 将默认的dhcp改为static</span><br><span class="line">ONBOOT=yes # 将默认的no改为yes</span><br><span class="line"></span><br><span class="line"># 以下是新增的内容</span><br><span class="line">IPADDR=10.244.186.85</span><br><span class="line">NETMASK=255.255.255.0</span><br><span class="line">GATEWAY=10.244.186.1</span><br></pre></td></tr></table></figure>
+<p>  修改完成后，点击Esc推出Insert模式,然后输入 :wq 用来退出vi</p>
+<p>  重置网络配置</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ service network restart</span><br></pre></td></tr></table></figure>
+
+<p>  查看网络配置</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ip addr</span><br></pre></td></tr></table></figure>
+<p>  CentOS7的静态IP配置完成</p>
+</li>
+</ul>
+<h4 id="安装远程连接工具"><a href="#安装远程连接工具" class="headerlink" title="安装远程连接工具"></a>安装远程连接工具</h4><ul>
+<li><p>安装PuTTY <a class="link"   target="_blank" rel="noopener" href="https://www.putty.org/" >PuTTY官网地址<i class="fas fa-external-link-alt"></i></a> ，<a class="link"   target="_blank" rel="noopener" href="https://the.earth.li/~sgtatham/putty/latest/w64/putty-64bit-0.74-installer.msi" >PuTTY下载地址<i class="fas fa-external-link-alt"></i></a></p>
+</li>
+<li><p>安装WinSCP <a class="link"   target="_blank" rel="noopener" href="https://winscp.net/eng/docs/lang:chs" >WinSCP官网地址<i class="fas fa-external-link-alt"></i></a> ，<a class="link"   target="_blank" rel="noopener" href="https://winscp.net/eng/download.php" >WinSCP下载地址<i class="fas fa-external-link-alt"></i></a></p>
+</li>
+<li><p>使用PuTTY通过SSH访问CentOS7</p>
+<p>  <img src="/images/GitLab%E4%B9%8BCI_CD%E9%85%8D%E7%BD%AE/22.%E4%BD%BF%E7%94%A8PuTTY%E8%BF%9E%E6%8E%A5CentOS7.png" alt="22.使用PuTTY连接CentOS7.png"></p>
+</li>
+<li><p>使用WinSCP通过SFTP访问CentOS7</p>
+<p> <img src="/images/GitLab%E4%B9%8BCI_CD%E9%85%8D%E7%BD%AE/23.%E4%BD%BF%E7%94%A8WinSCP%E8%BF%9E%E6%8E%A5CentOS7.png" alt="23.使用WinSCP连接CentOS7.png"></p>
+</li>
+</ul>
+<h4 id="设置网络代理"><a href="#设置网络代理" class="headerlink" title="设置网络代理"></a>设置网络代理</h4><ul>
+<li>profile设置代理</li>
+</ul>
+<p>编辑&#x2F;etc&#x2F;profile</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vi /etc/profile</span><br></pre></td></tr></table></figure>
+
+<p>profile中添加以下信息</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http_proxy=http://10.244.186.81:8088/</span><br><span class="line">export http_proxy</span><br></pre></td></tr></table></figure>
+
+<p>生效配置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">source</span> /etc/profile</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>yum设置代理</li>
+</ul>
+<p>编辑&#x2F;etc&#x2F;yum.conf</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vi /etc/yum.conf</span><br></pre></td></tr></table></figure>
+
+<p>yum.conf中添加以下信息</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxy=http://10.244.186.81:8088/</span><br></pre></td></tr></table></figure>
+
+<p>编辑&#x2F;root&#x2F;.bashrc</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vi /root/.bashrc</span><br></pre></td></tr></table></figure>
+
+<p>.bashrc中添加以下信息</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export http_proxy=&quot;http://10.244.186.81:8088/&quot;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>wget设置代理</li>
+</ul>
+<p>编辑&#x2F;etc&#x2F;wgetrc</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vi /etc/wgetrc</span><br></pre></td></tr></table></figure>
+
+<p>wgetrc中添加以下信息</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http_proxy=http://10.244.186.81:8088/</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>重启服务器</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ reboot</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装GitLab"><a href="#安装GitLab" class="headerlink" title="安装GitLab"></a>安装GitLab</h3><ul>
+<li>查看CentOS 版本信息</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cat</span> /etc/centos-release</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查看IP地址</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ip addr</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>安装依赖</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yum install curl policycoreutils-python openssh-server deltarpm -y</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查看防火墙放行列表</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ firewall-cmd --list-all</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>防火墙放行80，443端口</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ firewall-cmd --zone=public --add-port=80/tcp --permanent</span><br><span class="line">$ firewall-cmd --zone=public --add-port=443/tcp --permanent</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>重启防火墙</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ firewall-cmd --reload</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>新增GitLab的国内清华大学的yum源</p>
+<ul>
+<li>清华大学YUM源地址 <a class="link"   target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/gitlab-ce/yum/el7/" >https://mirrors.tuna.tsinghua.edu.cn/gitlab-ce/yum/el7/<i class="fas fa-external-link-alt"></i></a></li>
+<li>清华大学GitLab Community Edition 镜像使用帮助 <a class="link"   target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/help/gitlab-ce/" >https://mirrors.tuna.tsinghua.edu.cn/help/gitlab-ce/<i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+</li>
+<li><p>新建&#x2F;etc&#x2F;yum.repos.d&#x2F;gitlab-ce.repo, 内容如下</p>
+</li>
+</ul>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[gitlab-ce]</span><br><span class="line">name=Gitlab CE Repository</span><br><span class="line">baseurl=http://mirrors.tuna.tsinghua.edu.cn/gitlab-ce/yum/el$releasever/</span><br><span class="line">gpgcheck=0</span><br><span class="line">enabled=1</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>添加命令</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vi /etc/yum.repos.d/gitlab-ce.repo</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查找yum源中gitlab-ce的版本</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yum list gitlab-ce --showduplicates|<span class="built_in">tail</span> -n 30|<span class="built_in">head</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>选择安装版本(2020-12-17当前最新版本为13.3.7-ce.0.el7)</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yum install gitlab-ce-13.3.7 -y</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查看Gitlab版本</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cat</span> /opt/gitlab/embedded/service/gitlab-rails/VERSION</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>配置GitLab配置文件&#x2F;etc&#x2F;gitlab&#x2F;gitlab.rb</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vi /ect/gitlab/gitlab.rb</span><br></pre></td></tr></table></figure>
+<p>修改以下内容</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 将原来的 external_url &#x27;http://gitlab.example.com&#x27; 修改为以下内容</span><br><span class="line">external_url &#x27;http://10.244.186.85&#x27;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>加载Gitlab的配置</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ gitlab-ctl reconfigure</span><br></pre></td></tr></table></figure>
+<p>当最后出现 gitlab Reconfigured 表明配置成功</p>
+<ul>
+<li>启动Gitlab</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ systemctl start gitlab-runsvdir</span><br><span class="line">$ gitlab-ctl start</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>访问 <a class="link"   target="_blank" rel="noopener" href="http://10.244.186.85/" >http://10.244.186.85<i class="fas fa-external-link-alt"></i></a> 提示输入密码, 这里输入的是root账号的密码，切记不要乱输，不然就只有通过修改数据库的数据来修改root账号的密码了</p>
+</li>
+<li><p>注册一个非root账号登录，用来创建项目</p>
+</li>
+</ul>
+<h3 id="安装JDK1-8"><a href="#安装JDK1-8" class="headerlink" title="安装JDK1.8"></a>安装JDK1.8</h3><ul>
+<li>过程略</li>
+</ul>
+<h3 id="安装Maven"><a href="#安装Maven" class="headerlink" title="安装Maven"></a>安装Maven</h3><ul>
+<li>过程略</li>
+</ul>
+<h3 id="安装Tomcat"><a href="#安装Tomcat" class="headerlink" title="安装Tomcat"></a>安装Tomcat</h3><ul>
+<li><p>安装过程略</p>
+</li>
+<li><p>在conf&#x2F;Catalina&#x2F;localhost&#x2F;文件夹下创建manager.xml，内容如下</p>
+</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Context</span> <span class="attr">privileged</span>=<span class="string">&quot;true&quot;</span> <span class="attr">antiResourceLocking</span>=<span class="string">&quot;false&quot;</span></span></span><br><span class="line"><span class="tag">         <span class="attr">docBase</span>=<span class="string">&quot;$&#123;catalina.home&#125;/webapps/manager&quot;</span>&gt;</span></span><br><span class="line">             <span class="tag">&lt;<span class="name">Valve</span> <span class="attr">className</span>=<span class="string">&quot;org.apache.catalina.valves.RemoteAddrValve&quot;</span> <span class="attr">allow</span>=<span class="string">&quot;^.*$&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Context</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>配置manager-script角色的用户，在conf&#x2F;tomcat-users.xml中添加以下内容:</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">role</span> <span class="attr">rolename</span>=<span class="string">&quot;manager-script&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">user</span> <span class="attr">username</span>=<span class="string">&quot;scriptManager&quot;</span> <span class="attr">password</span>=<span class="string">&quot;scriptManager&quot;</span> <span class="attr">roles</span>=<span class="string">&quot;manager-script&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="安装GitLab-Runner"><a href="#安装GitLab-Runner" class="headerlink" title="安装GitLab-Runner"></a>安装GitLab-Runner</h3><ul>
+<li><p>Windows 10 操作系统下载GitLab-Runner, <a class="link"   target="_blank" rel="noopener" href="https://docs.gitlab.com/runner/install/windows.html" >windows下Gitlab Runner官网地址<i class="fas fa-external-link-alt"></i></a>, <a class="link"   target="_blank" rel="noopener" href="https://gitlab-runner-downloads.s3.amazonaws.com/latest/binaries/gitlab-runner-windows-amd64.exe" >直接下载地址<i class="fas fa-external-link-alt"></i></a></p>
+</li>
+<li><p>将下载好的gitlab-runner-windows-amd64.exe改为gitlab-runner.exe</p>
+</li>
+<li><p>在gitlab-runner.exe文件夹下打开cmd,输入以下命令，进入交互式注册</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ./gitlab-runner.exe register</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>交互式注册如下</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">1.Enter the GitLab instance URL (<span class="keyword">for</span> example, https://gitlab.com/):</span><br><span class="line"><span class="comment"># 输入gitlab的网址</span></span><br><span class="line">http://10.244.186.85/</span><br><span class="line"></span><br><span class="line">2. Enter the registration token:</span><br><span class="line"><span class="comment"># 登录root账号进入http://10.244.186.85/admin/runners，找到shared Runner的token并输入（这里以Shared Runner为例）</span></span><br><span class="line">VRBZQhtZwSr8EpfN1wge</span><br><span class="line"></span><br><span class="line">3.Enter a description <span class="keyword">for</span> the runner:</span><br><span class="line"><span class="comment"># 输入此runner的描述</span></span><br><span class="line">86_win10_shared</span><br><span class="line"></span><br><span class="line">4.Enter tags <span class="keyword">for</span> the runner (comma-separated):</span><br><span class="line"><span class="comment"># 输入此Runner的tags</span></span><br><span class="line">86_win10_shared</span><br><span class="line"></span><br><span class="line">5.Enter an executor: parallels, ssh, virtualbox, kubernetes, docker-windows, docker, docker-ssh, shell, docker+machine, docker-ssh+machine, custom:</span><br><span class="line"><span class="comment"># 输入executor的类型，选择shell, （Windows操作系统下的有效shell为PowerShell）</span></span><br><span class="line">shell</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>安装gitlab-runner</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ./gitlab-runner.exe install</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>启动gitlab-runner，到此gitlab-runner就安装启动成功了</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ./gitlab-runner.exe start</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>停止gitlab-runner(当需要停止时才使用)</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ./gitlab-runner.exe stop</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>卸载gitlab-runner（当需要卸载时才使用）</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ./gitlab-runner.exe uninstall</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装Git"><a href="#安装Git" class="headerlink" title="安装Git"></a>安装Git</h3><ul>
+<li>过程略</li>
+</ul>
+<h3 id="创建SpringBoot项目"><a href="#创建SpringBoot项目" class="headerlink" title="创建SpringBoot项目"></a>创建SpringBoot项目</h3><ul>
+<li><p>过程略</p>
+</li>
+<li><p>项目中添加.gitlab-ci.yml文件，内容如下：</p>
+</li>
+</ul>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">build1:</span></span><br><span class="line">  <span class="attr">stage:</span> <span class="string">build</span></span><br><span class="line">  <span class="attr">script:</span></span><br><span class="line">    <span class="comment"># maven打包</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">mvn</span> <span class="string">clean</span> <span class="string">package</span></span><br><span class="line">    <span class="comment"># 以下为PowerShell中的相关文件操作命令，主要是先删除tomcat中的war包和项目文件夹，然后把打包好的war包复制到tomcat的webapps文件夹下</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">new-item</span> <span class="string">-path</span> <span class="string">D:\_dev_env\apache-tomcat-8.5.59\webapps\portal.war</span> <span class="string">-itemtype</span> <span class="string">file</span> <span class="string">-force</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">remove-item</span> <span class="string">-path</span> <span class="string">D:\_dev_env\apache-tomcat-8.5.59\webapps\portal.war</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">new-item</span> <span class="string">-path</span> <span class="string">D:\_dev_env\apache-tomcat-8.5.59\webapps\portal</span> <span class="string">-itemtype</span> <span class="string">directory</span> <span class="string">-force</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">remove-item</span> <span class="string">-path</span> <span class="string">D:\_dev_env\apache-tomcat-8.5.59\webapps\portal</span> <span class="string">-recurse</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">copy-item</span> <span class="string">-path</span> <span class="string">./target/portal.war</span> <span class="string">-destination</span> <span class="string">D:\_dev_env\apache-tomcat-8.5.59\webapps</span> <span class="string">-force</span></span><br><span class="line">  <span class="attr">after_script:</span></span><br><span class="line">    <span class="comment"># http://localhost:8080/manager/text/reload?path=/portal 这个uri为该项目在tomcat中的reload地址，portal是项目名，注意修改为自己的项目名</span></span><br><span class="line">    <span class="comment"># scriptManager:scriptManager 为tomcat中配置的manager-script角色的用户scriptManager账号和密码</span></span><br><span class="line">    <span class="comment"># invoke-webrequest是PowerShell中的url请求命令，类似与Linux bash中curl命令，整行命令的作用：请求该项目重启的url从而使整个项目重启，作用类似与在html中点击该项目的重载按钮</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">invoke-webrequest</span> <span class="string">-Uri</span> <span class="string">&#x27;http://localhost:8080/manager/text/reload?path=/portal&#x27;</span> <span class="string">-Headers</span> <span class="string">@&#123;</span> <span class="string">Authorization</span> <span class="string">=</span> <span class="string">&quot;Basic &quot;</span> <span class="string">+</span> [<span class="string">System.Convert</span>]<span class="string">::ToBase64String([System.Text.Encoding]::ASCII.GetBytes(&quot;scriptManager:scriptManager&quot;))</span> <span class="string">&#125;</span></span><br><span class="line">  <span class="attr">tags:</span></span><br><span class="line">    <span class="comment"># 这里的tags是之前在gitlab-runner交互式注册时填写的tags</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">86_win10_shared</span></span><br><span class="line">  <span class="attr">only:</span></span><br><span class="line">    <span class="comment"># 这里的master指的是git代码仓库中的master分支的代码变动才触发gitlab-runner</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="使用Git将代码push到GitLab"><a href="#使用Git将代码push到GitLab" class="headerlink" title="使用Git将代码push到GitLab"></a>使用Git将代码push到GitLab</h3><ul>
+<li>过程略</li>
+</ul>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul class="copyright-info-content">
+        <li>本文标题：GitLab之CI_CD配置</li>
+        <li>本文作者：Xplorist</li>
+        <li>创建时间：2020-12-16 09:04:00</li>
+        <li>
+            本文链接：https://xplorist.tech/2020/12/16/b6aef92fde91/
+        </li>
+        <li>
+            版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/GitLab/">#GitLab</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2020/12/18/146133b54d96/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">门户系统中系统统计Matomo配置</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2020/12/11/895448253e83/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">VirtualBox上安装CentOS7</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments"></i>&nbsp;评论
+    </div>
+    
+
+        
+            
+
+
+    <div id="gitalk-container"></div>
+    <script 
+            src="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js"></script>
+    <script >
+
+      function loadGitalk() {
+        let __gitalk__pathname = decodeURI(location.pathname);
+        const __gitalk__pathnameLength = __gitalk__pathname.length;
+        const __gitalk__pathnameMaxLength = 50;
+        if (__gitalk__pathnameLength > __gitalk__pathnameMaxLength) {
+          __gitalk__pathname = __gitalk__pathname.substring(0, __gitalk__pathnameMaxLength - 3) + '...';
+        }
+
+        try {
+
+          Gitalk && new Gitalk({
+            clientID: '24c227c71f9bb758a554',
+            clientSecret: '724a45a68d355acb27c19a61d15fbb7dee34db4e',
+            repo: 'hexo-site-comments',
+            owner: 'Xplorist',
+            admin: 'Xplorist',
+            id: __gitalk__pathname,
+            language: 'zh-CN'
+          }).render('gitalk-container');
+
+        } catch (e) {
+          window.Gitalk = null;
+        }
+      }
+
+      if ('false') {
+        const loadGitalkTimeout = setTimeout(() => {
+          loadGitalk();
+          clearTimeout(loadGitalkTimeout);
+        }, 1000);
+      } else {
+        window.addEventListener('DOMContentLoaded', loadGitalk);
+      }
+    </script>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            
+<footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+                <span>2020</span> -
+            
+            2023
+            
+                &nbsp;<i class="fas fa-heart icon-animate"></i>
+                &nbsp;<a href="/">Xplorist</a>
+            
+        </div>
+        
+            <script async 
+                    src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    访问人数&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                
+                
+                    总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题
+            &nbsp;
+            <a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.8</a>
+        </div>
+        
+            <div class="icp-info info-item">
+                <a target="_blank" rel="nofollow"
+                   href="https://beian.miit.gov.cn"
+                >
+                    蜀ICP备20002343号
+                </a>
+            </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-up-right-and-down-left-from-center"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#GitLab%E4%B9%8BCI-CD%E9%85%8D%E7%BD%AE"><span class="nav-number">1.</span> <span class="nav-text">GitLab之CI_CD配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#wiki%E4%BF%A1%E6%81%AF"><span class="nav-number">1.1.</span> <span class="nav-text">wiki信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E6%B5%8B%E8%AF%95%E6%88%90%E5%8A%9F%E7%9A%84%E6%B5%81%E7%A8%8B%E6%AD%A5%E9%AA%A4%EF%BC%88Win10%E5%BC%80%E5%8F%91%E6%9C%BA%E4%B8%8A%E6%9E%B6%E8%AE%BE%E8%99%9A%E6%8B%9F%E6%9C%BA%EF%BC%89"><span class="nav-number">1.2.</span> <span class="nav-text">本地测试成功的流程步骤（Win10开发机上架设虚拟机）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E6%B5%81%E7%A8%8B%E6%AD%A5%E9%AA%A4%EF%BC%88%E5%9F%BA%E4%BA%8E%E7%89%A9%E7%90%86%E6%9C%BA%E7%8E%AF%E5%A2%83%EF%BC%8C%E9%9D%9EDocker%E5%AE%B9%E5%99%A8%EF%BC%89"><span class="nav-number">1.3.</span> <span class="nav-text">生产环境流程步骤（基于物理机环境，非Docker容器）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B7%E4%BD%93%E6%93%8D%E4%BD%9C"><span class="nav-number">1.4.</span> <span class="nav-text">具体操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85VirtualBox"><span class="nav-number">1.4.1.</span> <span class="nav-text">安装VirtualBox</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85CentOS7"><span class="nav-number">1.4.2.</span> <span class="nav-text">安装CentOS7</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AECentOS7"><span class="nav-number">1.4.3.</span> <span class="nav-text">设置CentOS7</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E9%9D%99%E6%80%81IP"><span class="nav-number">1.4.3.1.</span> <span class="nav-text">配置静态IP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5%E5%B7%A5%E5%85%B7"><span class="nav-number">1.4.3.2.</span> <span class="nav-text">安装远程连接工具</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E7%BD%91%E7%BB%9C%E4%BB%A3%E7%90%86"><span class="nav-number">1.4.3.3.</span> <span class="nav-text">设置网络代理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85GitLab"><span class="nav-number">1.4.4.</span> <span class="nav-text">安装GitLab</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85JDK1-8"><span class="nav-number">1.4.5.</span> <span class="nav-text">安装JDK1.8</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85Maven"><span class="nav-number">1.4.6.</span> <span class="nav-text">安装Maven</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85Tomcat"><span class="nav-number">1.4.7.</span> <span class="nav-text">安装Tomcat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85GitLab-Runner"><span class="nav-number">1.4.8.</span> <span class="nav-text">安装GitLab-Runner</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85Git"><span class="nav-number">1.4.9.</span> <span class="nav-text">安装Git</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BASpringBoot%E9%A1%B9%E7%9B%AE"><span class="nav-number">1.4.10.</span> <span class="nav-text">创建SpringBoot项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8Git%E5%B0%86%E4%BB%A3%E7%A0%81push%E5%88%B0GitLab"><span class="nav-number">1.4.11.</span> <span class="nav-text">使用Git将代码push到GitLab</span></a></li></ol></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-block-tools.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>

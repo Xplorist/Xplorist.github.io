@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Xplorist">
+    
+    <title>
+        
+            2017-03-20-String类的方法 |
+        
+        Xplorist
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.svg">
+    
+<link rel="stylesheet" href="/fontawesome/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/brands.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"zh-CN","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","logo":"/images/logo.svg","favicon":"/images/logo.svg","avatar":"/images/Water.jpg","left_side_width":"300px","content_max_width":"1080px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"header_transparent":true,"background_img":"/images/dawn-in-the-valley.jpg","description":"Exploration, a journey that never ends。","font_color":null,"hitokoto":{"enable":false}},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":false},"code_copy":{},"code_block_tools":{"enable":true,"style":"mac"},"side_tools":{},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.8"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"};
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="/images/logo.svg">
+                </a>
+            
+            <a class="logo-title" href="/">
+               Xplorist
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                分类
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                友链
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                关于
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">分类</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">标签</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links">友链</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">关于</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">2017-03-20-String类的方法</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/Water.jpg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Xplorist</span>
+                        
+                            <span class="author-label">Lv6</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2017-03-20 14:23:01</span>
+        <span class="mobile">2017-03-20 14:23</span>
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/ShareLearn/">ShareLearn</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/ShareLearn/">ShareLearn</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="2017-03-20-String类的方法"><a href="#2017-03-20-String类的方法" class="headerlink" title="2017-03-20-String类的方法"></a>2017-03-20-String类的方法</h1><p>思考</p>
+<p>实例2的思路4中的几种方法的内在逻辑的区别，不要只是会</p>
+<p>知识点1：</p>
+<p>final 修饰</p>
+<p>final String str&#x3D;null;&#x2F;&#x2F;有效初始化</p>
+<p>后面无法被修改</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">3</span>;i++)&#123;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>;j&lt;<span class="number">4</span>;j++)&#123;</span><br><span class="line"></span><br><span class="line">      str=i+j+<span class="string">&quot;&quot;</span>;<span class="comment">//将（i+j）的值先求出来再转化字符串</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>知识点2：</p>
+<p>foreach</p>
+<p>只能对数组和集合进行遍历，不能对其数组和集合进行操作。</p>
+<p>知识点3：</p>
+<p>i++和++i的内存执行过程的区别，</p>
+<p>++i的执行效率更高，i++的执行效率低的原因是i++在执行前先要在内存中创建一个临时变量将i的初始值存放起来再返回初始值，再执行i的值加1；</p>
+<p>int i&#x3D;1;</p>
+<p>i+&#x3D;i++;&#x2F;&#x2F;i&#x3D;i+i++;</p>
+<p>i+&#x3D;i++;在c中的结果（i&#x3D;3）和java中的结果(i&#x3D;2)不一样，原因在于java中在i++中先将i的副本取出来用了，还没更新i就已经执行赋值，c是等i更新完了再赋值。压栈和出栈，java压栈比c快一步。</p>
+<p>知识点4：</p>
+<p>String</p>
+<p>字符串常量池</p>
+<p>知识点5：</p>
+<p>基本数据类型传参</p>
+<p>引用数据类型传参</p>
+<p>知识点6：</p>
+<p>String类的一些方法</p>
+<p>charAt();</p>
+<p>indexof();</p>
+<p>substring();</p>
+<p>…..</p>
+<p>实例1：</p>
+<p>编写一个程序，输出一个字符串中的大写英文字母个数，小写英语字母个数，数字个数，和其他字符个数</p>
+<p>思路：</p>
+<p>1.将字符串中的每个字符遍历出来，然后直接判断ascii码表中的范围（或者直接写出字符的范围，原理其实就是ascii码表中的范围连续）</p>
+<p>2.indexof和charAt进行判断</p>
+<p>3.用char的包装类来进行判断操作</p>
+<p>思路1核心代码：</p>
+<p>ascii码表：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">test3</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> <span class="string">&quot;AsfsBdfsdf&amp;%^&amp;$954832  _fAFg&quot;</span>;</span><br><span class="line">        <span class="type">char</span>[] c = s.toCharArray();</span><br><span class="line">        <span class="type">int</span> <span class="variable">bigEnCount</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">littleEnCount</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">numCount</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">otherCount</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">char</span> ch : c) &#123;</span><br><span class="line">            <span class="keyword">if</span> (ch &gt;= <span class="number">65</span> &amp;&amp; ch &lt;= <span class="number">90</span>) &#123;</span><br><span class="line">                bigEnCount++;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (ch &gt;= <span class="number">97</span> &amp;&amp; ch &lt;= <span class="number">122</span>) &#123;</span><br><span class="line">                littleEnCount++;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (ch &gt;= <span class="number">48</span> &amp;&amp; ch &lt;= <span class="number">57</span>) &#123;</span><br><span class="line">                numCount++;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                otherCount++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">&quot;大写英文字母个数：&quot;</span> + bigEnCount);</span><br><span class="line">        System.out.println(<span class="string">&quot;小写英文字母个数：&quot;</span> + littleEnCount);</span><br><span class="line">        System.out.println(<span class="string">&quot;数字个数：&quot;</span> + numCount);</span><br><span class="line">        System.out.println(<span class="string">&quot;其他字符个数：&quot;</span> + otherCount);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>字符范围：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">test31</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> <span class="string">&quot;AsfsBdfsdf&amp;%^&amp;$954832  _fAFg&quot;</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">bigEnCount</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">littleEnCount</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">numCount</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">otherCount</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;s.length();i++)&#123;</span><br><span class="line">            <span class="type">char</span> c=s.charAt(i);</span><br><span class="line">            <span class="keyword">if</span>(c&gt;=<span class="string">&#x27;a&#x27;</span>&amp;&amp;c&lt;=<span class="string">&#x27;z&#x27;</span>)&#123;</span><br><span class="line">                littleEnCount++;</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(c&gt;=<span class="string">&#x27;A&#x27;</span>&amp;&amp;c&lt;=<span class="string">&#x27;Z&#x27;</span>)&#123;</span><br><span class="line">                bigEnCount++;</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(c&gt;=<span class="string">&#x27;0&#x27;</span>&amp;&amp;c&lt;=<span class="string">&#x27;9&#x27;</span>)&#123;</span><br><span class="line">                numCount++;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                otherCount++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">&quot;大写英文字母个数：&quot;</span> + bigEnCount);</span><br><span class="line">        System.out.println(<span class="string">&quot;小写英文字母个数：&quot;</span> + littleEnCount);</span><br><span class="line">        System.out.println(<span class="string">&quot;数字个数：&quot;</span> + numCount);</span><br><span class="line">        System.out.println(<span class="string">&quot;其他字符个数：&quot;</span> + otherCount);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>思路2核心代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">test32</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> <span class="string">&quot;AsfsBdfsdf&amp;%^&amp;$954832  _fAFg&quot;</span>;</span><br><span class="line">        </span><br><span class="line">        String lowerAlphabet=<span class="string">&quot;qwertyuiopasdfghjklzxcvbnm&quot;</span>;</span><br><span class="line">        String upperAlphabet=lowerAlphabet.toUpperCase();</span><br><span class="line">        String digital=<span class="string">&quot;0123456789&quot;</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="type">int</span> lowerCount=<span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> upperCount=<span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> digitCount=<span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> otherCount=<span class="number">0</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;s.length();i++)&#123;</span><br><span class="line">            <span class="type">char</span> c=s.charAt(i);</span><br><span class="line">            <span class="keyword">if</span>(lowerAlphabet.indexOf(c)!=-<span class="number">1</span>)&#123;</span><br><span class="line">                lowerCount++;</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(upperAlphabet.indexOf(c)!=-<span class="number">1</span>)&#123;</span><br><span class="line">                upperCount++;</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(digital.indexOf(c)!=-<span class="number">1</span>)&#123;</span><br><span class="line">                digitCount++;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                otherCount++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">&quot;大写英文字母个数：&quot;</span> + upperCount);</span><br><span class="line">        System.out.println(<span class="string">&quot;小写英文字母个数：&quot;</span> + lowerCount);</span><br><span class="line">        System.out.println(<span class="string">&quot;数字个数：&quot;</span> + digitCount);</span><br><span class="line">        System.out.println(<span class="string">&quot;其他字符个数：&quot;</span> + otherCount);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>思路3核心代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">test33</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> <span class="string">&quot;AsfsBdfsdf&amp;%^&amp;$954832  _fAFg&quot;</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="type">char</span>[] c=s.toCharArray();</span><br><span class="line">        </span><br><span class="line">        <span class="type">int</span> lowerCount=<span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> upperCount=<span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> digitCount=<span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> otherCount=<span class="number">0</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="type">char</span> ch:c)&#123;</span><br><span class="line">            <span class="keyword">if</span>(Character.isLowerCase(ch))&#123;</span><br><span class="line">                lowerCount++;</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(Character.isUpperCase(ch))&#123;</span><br><span class="line">                upperCount++;</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(Character.isDigit(ch))&#123;</span><br><span class="line">                digitCount++;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                otherCount++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        System.out.println(<span class="string">&quot;大写英文字母个数：&quot;</span> + upperCount);</span><br><span class="line">        System.out.println(<span class="string">&quot;小写英文字母个数：&quot;</span> + lowerCount);</span><br><span class="line">        System.out.println(<span class="string">&quot;数字个数：&quot;</span> + digitCount);</span><br><span class="line">        System.out.println(<span class="string">&quot;其他字符个数：&quot;</span> + otherCount);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+<p>实例2：</p>
+<p>判断String s &#x3D; “sunjavahpjavaokjavajjavahahajavajavagoodjava”;中存在多少个java</p>
+<p>思路：有5种思路</p>
+<p>1.将java替换成任意三个字符的字符串“XXX”，用两次的长度相减得到个数</p>
+<p>2.使用indexof(String str);和indexof(String str,int i);结合来做</p>
+<p>3.使用subString();和startsWith();来做</p>
+<p>4.使用split来做，不过要用很多的判断来判断特殊情况（特殊情况中用思路3来做）</p>
+<p>5.循环来做，将字符串中的一个，然后把其后面的三个字符都提取出来，判断是否为“java”，最朴实的方法</p>
+<p>思路1核心代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">test5</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> <span class="string">&quot;sunjavahpjavaokjavajjavahahajavajavagoodjava&quot;</span>;</span><br><span class="line">        <span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> s.replace(<span class="string">&quot;java&quot;</span>, <span class="string">&quot;xxx&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;字符串中有&quot;</span> + (s.length() - str.length()) + <span class="string">&quot;个java&quot;</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>思路2核心代码：</p>
+<p>使用indexof(String str)和indexof(String str,int i)的方式（自己第一感觉的做法，代码看起来也比较优雅）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">test4</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> <span class="string">&quot;sunjavahpjavaokjavajjavahahajavajavagoodjava&quot;</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">index</span> <span class="operator">=</span> s.indexOf(<span class="string">&quot;java&quot;</span>);</span><br><span class="line">        System.out.println(index);</span><br><span class="line">        <span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (index != -<span class="number">1</span>) &#123;</span><br><span class="line">            count++;</span><br><span class="line">            index = s.indexOf(<span class="string">&quot;java&quot;</span>, index + <span class="number">4</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">&quot;字符串中java的个数：&quot;</span> + count);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>只使用indexof(String str,int i)的方式（老师的思维方式，死循环，判断，思路不清晰代码比较繁杂）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">test41</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> <span class="string">&quot;sunjavahpjavaokjavajjavahahajavajavagoodjava&quot;</span>;</span><br><span class="line">        String s1=<span class="string">&quot;java&quot;</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="type">int</span> index=<span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> count=<span class="number">0</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">            index=s.indexOf(s1,index);</span><br><span class="line">            <span class="keyword">if</span>(index!=-<span class="number">1</span>)&#123;</span><br><span class="line">                count++;</span><br><span class="line">                index+=<span class="number">4</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line"></span><br><span class="line">               <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">          &#125;</span><br><span class="line"></span><br><span class="line">          <span class="comment">/*if(index&gt;=s.length())&#123;</span></span><br><span class="line"><span class="comment">                break;</span></span><br><span class="line"><span class="comment">            &#125;*/</span><span class="comment">//老师写的这个判断其实没有必要，本来indexof()方法的结果是不是-1就能够判断了，即使给定的下标位置大于了数组的实际长度，也是返回-1，所以这个判断不够简练而且也没有必要</span></span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">&quot;字符串中java的个数：&quot;</span> + count);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>思路3核心代码：</p>
+<p>substring()和startsWith()方法实现（自己思考出来的）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">test7</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> <span class="string">&quot;sunjavahpjavaokjavajjavahahajavajavagoodjava&quot;</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; s.length(); i++) &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> s.substring(i);</span><br><span class="line">            <span class="keyword">if</span> (str.startsWith(<span class="string">&quot;java&quot;</span>)) &#123;</span><br><span class="line">                count++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">&quot;字符串中有&quot;</span> + count + <span class="string">&quot;个java&quot;</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>indexof()和substring()方法实现（老师的思路）</p>
+<p>不用死循环实现：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>()实现：</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">test71</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> <span class="string">&quot;sunjavahpjavaokjavajjavahahajavajavagoodjava&quot;</span>;</span><br><span class="line">        <span class="type">int</span> count=<span class="number">0</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="type">int</span> index=<span class="number">0</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span>(index&lt;s.length()-<span class="number">4</span>)&#123;</span><br><span class="line">            index=s.indexOf(<span class="string">&quot;java&quot;</span>);</span><br><span class="line">            count++;</span><br><span class="line">            s=s.substring(index+<span class="number">4</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">&quot;字符串中有&quot;</span> + count + <span class="string">&quot;个java&quot;</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>do{}while();实现；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">test73</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> <span class="string">&quot;sunjavahpjavaokjavajjavahahajavajavagoodjava&quot;</span>;</span><br><span class="line">        <span class="type">int</span> count=<span class="number">0</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="type">int</span> index=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">do</span>&#123;</span><br><span class="line">            index=s.indexOf(<span class="string">&quot;java&quot;</span>);</span><br><span class="line">            count++;</span><br><span class="line">            s=s.substring(index+<span class="number">4</span>);</span><br><span class="line">        &#125;<span class="keyword">while</span>(index&lt;s.length());</span><br><span class="line">        System.out.println(<span class="string">&quot;字符串中有&quot;</span> + count + <span class="string">&quot;个java&quot;</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>死循环实现：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">test72</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> <span class="string">&quot;sunjavahpjavaokjavajjavahahajavajavagoodjava&quot;</span>;</span><br><span class="line">        String s1=<span class="string">&quot;java&quot;</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="type">int</span> index=<span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> count=<span class="number">0</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">            index=s.indexOf(s1);</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span>(index!=-<span class="number">1</span>)&#123;</span><br><span class="line">                count++;</span><br><span class="line">                s=s.substring(index+s1.length());</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">&quot;字符串中有&quot;</span> + count + <span class="string">&quot;个java&quot;</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>思路4核心代码：</p>
+<p>修改字符串以实现统一情况：（巧妙的方法，自己有过灵感，但是没有捕捉下来实现，真的挺可惜的，后来一位同学提出这种想法，脑子里真的感觉这个思路很熟悉）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">test11</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> <span class="string">&quot;sunjavahpjavaokjavajjavahahajavajavagoodjava&quot;</span>;</span><br><span class="line">        s=s+<span class="string">&quot; &quot;</span>;</span><br><span class="line">        String[] s1=s.split(<span class="string">&quot;java&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;字符串中有:&quot;</span>+(s1.length-<span class="number">1</span>)+<span class="string">&quot;个java&quot;</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>不修改原字符串进行判断（还有点问题）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">test1</span><span class="params">()</span>&#123;</span><br><span class="line">        String s=<span class="string">&quot;1javajavajavajava&quot;</span>;</span><br><span class="line">        String[] s1=s.split(<span class="string">&quot;java&quot;</span>);</span><br><span class="line">        <span class="type">int</span> length=s1.length-<span class="number">1</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(s.endsWith(<span class="string">&quot;java&quot;</span>))&#123;</span><br><span class="line">            <span class="keyword">if</span>(s.startsWith(<span class="string">&quot;java&quot;</span>))&#123;</span><br><span class="line">                <span class="keyword">if</span>(s.length()==<span class="number">4</span>)&#123;</span><br><span class="line">                    length=<span class="number">1</span>;</span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                    length+=<span class="number">3</span>;</span><br><span class="line">                    s=s.substring(<span class="number">4</span>);</span><br><span class="line">                    s=s.substring(<span class="number">0</span>,s.length()-<span class="number">4</span>);</span><br><span class="line">                    <span class="keyword">while</span>(s.startsWith(<span class="string">&quot;java&quot;</span>))&#123;</span><br><span class="line">                        length++;</span><br><span class="line">                        s=s.substring(<span class="number">4</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">do</span>&#123;</span><br><span class="line">                length++;</span><br><span class="line">                s=s.substring(<span class="number">0</span>,s.length()-<span class="number">4</span>);</span><br><span class="line">                &#125;<span class="keyword">while</span>(s.endsWith(<span class="string">&quot;java&quot;</span>));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        System.out.println(<span class="string">&quot;长度：&quot;</span>+length);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>思路5核心代码：</p>
+<p>从第一个开始遍历控制次数来避免下标越界：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">test8</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> <span class="string">&quot;sunjavahpjavaokjavajjavahahajavajavagoodjava&quot;</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; s.length() - <span class="number">3</span>; i++) &#123;</span><br><span class="line">            <span class="type">char</span> <span class="variable">c1</span> <span class="operator">=</span> s.charAt(i);</span><br><span class="line">            <span class="type">char</span> <span class="variable">c2</span> <span class="operator">=</span> s.charAt(i + <span class="number">1</span>);</span><br><span class="line">            <span class="type">char</span> <span class="variable">c3</span> <span class="operator">=</span> s.charAt(i + <span class="number">2</span>);</span><br><span class="line">            <span class="type">char</span> <span class="variable">c4</span> <span class="operator">=</span> s.charAt(i + <span class="number">3</span>);</span><br><span class="line">            <span class="keyword">if</span> (c1 == <span class="string">&#x27;j&#x27;</span> &amp;&amp; c2 == <span class="string">&#x27;a&#x27;</span> &amp;&amp; c3 == <span class="string">&#x27;v&#x27;</span> &amp;&amp; c4 == <span class="string">&#x27;a&#x27;</span>) &#123;</span><br><span class="line">                count++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">&quot;字符串中有&quot;</span> + count + <span class="string">&quot;个java&quot;</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>从第4个开始遍历，不用控制次数直接避免下标越界：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">test9</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> <span class="string">&quot;sunjavahpjavaokjavajjavahahajavajavagoodjava&quot;</span>;</span><br><span class="line">        <span class="type">char</span>[] c = s.toCharArray();</span><br><span class="line">        <span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">3</span>; i &lt; s.length(); i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (c[i - <span class="number">3</span>] == <span class="string">&#x27;j&#x27;</span> &amp;&amp; c[i - <span class="number">2</span>] == <span class="string">&#x27;a&#x27;</span> &amp;&amp; c[i - <span class="number">1</span>] == <span class="string">&#x27;v&#x27;</span> &amp;&amp; c[i] == <span class="string">&#x27;a&#x27;</span>) &#123;</span><br><span class="line">                count++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">&quot;字符串中有&quot;</span> + count + <span class="string">&quot;个java&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul class="copyright-info-content">
+        <li>本文标题：2017-03-20-String类的方法</li>
+        <li>本文作者：Xplorist</li>
+        <li>创建时间：2017-03-20 14:23:01</li>
+        <li>
+            本文链接：https://xplorist.tech/2017/03/20/ca3143d88693/
+        </li>
+        <li>
+            版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/ShareLearn/">#ShareLearn</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2017/03/21/d7f36c1054bc/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">2017-03-21-抽象类，接口，StringBuffer和基本数据类型包装类</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2017/03/17/dccf4a56a5ae/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">2017-03-17-多态性</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments"></i>&nbsp;评论
+    </div>
+    
+
+        
+            
+
+
+    <div id="gitalk-container"></div>
+    <script 
+            src="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js"></script>
+    <script >
+
+      function loadGitalk() {
+        let __gitalk__pathname = decodeURI(location.pathname);
+        const __gitalk__pathnameLength = __gitalk__pathname.length;
+        const __gitalk__pathnameMaxLength = 50;
+        if (__gitalk__pathnameLength > __gitalk__pathnameMaxLength) {
+          __gitalk__pathname = __gitalk__pathname.substring(0, __gitalk__pathnameMaxLength - 3) + '...';
+        }
+
+        try {
+
+          Gitalk && new Gitalk({
+            clientID: '24c227c71f9bb758a554',
+            clientSecret: '724a45a68d355acb27c19a61d15fbb7dee34db4e',
+            repo: 'hexo-site-comments',
+            owner: 'Xplorist',
+            admin: 'Xplorist',
+            id: __gitalk__pathname,
+            language: 'zh-CN'
+          }).render('gitalk-container');
+
+        } catch (e) {
+          window.Gitalk = null;
+        }
+      }
+
+      if ('false') {
+        const loadGitalkTimeout = setTimeout(() => {
+          loadGitalk();
+          clearTimeout(loadGitalkTimeout);
+        }, 1000);
+      } else {
+        window.addEventListener('DOMContentLoaded', loadGitalk);
+      }
+    </script>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            
+<footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+                <span>2020</span> -
+            
+            2023
+            
+                &nbsp;<i class="fas fa-heart icon-animate"></i>
+                &nbsp;<a href="/">Xplorist</a>
+            
+        </div>
+        
+            <script async 
+                    src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    访问人数&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                
+                
+                    总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题
+            &nbsp;
+            <a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.8</a>
+        </div>
+        
+            <div class="icp-info info-item">
+                <a target="_blank" rel="nofollow"
+                   href="https://beian.miit.gov.cn"
+                >
+                    蜀ICP备20002343号
+                </a>
+            </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-up-right-and-down-left-from-center"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#2017-03-20-String%E7%B1%BB%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">2017-03-20-String类的方法</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-block-tools.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>

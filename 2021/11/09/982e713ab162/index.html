@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Xplorist">
+    
+    <title>
+        
+            Debian11上安装Matomo |
+        
+        Xplorist
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.svg">
+    
+<link rel="stylesheet" href="/fontawesome/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/brands.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"zh-CN","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","logo":"/images/logo.svg","favicon":"/images/logo.svg","avatar":"/images/Water.jpg","left_side_width":"300px","content_max_width":"1080px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"header_transparent":true,"background_img":"/images/dawn-in-the-valley.jpg","description":"Exploration, a journey that never ends。","font_color":null,"hitokoto":{"enable":false}},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":false},"code_copy":{},"code_block_tools":{"enable":true,"style":"mac"},"side_tools":{},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.8"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"};
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="/images/logo.svg">
+                </a>
+            
+            <a class="logo-title" href="/">
+               Xplorist
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                分类
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                友链
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                关于
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">分类</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">标签</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links">友链</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">关于</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">Debian11上安装Matomo</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/Water.jpg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Xplorist</span>
+                        
+                            <span class="author-label">Lv6</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2021-11-09 13:30:00</span>
+        <span class="mobile">2021-11-09 13:30</span>
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/Matomo/">Matomo</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        &gt; <a href="/categories/Debian/">Debian</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/Matomo/">Matomo</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/Debian/">Debian</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="Debian11上安装Matomo"><a href="#Debian11上安装Matomo" class="headerlink" title="Debian11上安装Matomo"></a>Debian11上安装Matomo</h1><h2 id="reference-site-list"><a href="#reference-site-list" class="headerlink" title="reference-site-list"></a>reference-site-list</h2><blockquote>
+<ul>
+<li><a class="link"   target="_blank" rel="noopener" href="https://matomo.org/" >Matomo官网<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://matomo.org/docs/installation/" >Matomo官方安装说明<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://matomo.org/installing-matomo-for-wordpress/" >Matomo官网 How do I install Matomo for WordPress?<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://db-ip.com/" >DBIP官网：IP geolocation API and database<i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+</blockquote>
+<h2 id="steps"><a href="#steps" class="headerlink" title="steps"></a>steps</h2><h3 id="环境准备："><a href="#环境准备：" class="headerlink" title="环境准备："></a>环境准备：</h3><ul>
+<li><ol>
+<li>PHP 2. MySQL 3. Nginx</li>
+</ol>
+</li>
+</ul>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><ul>
+<li>将zip文件下载后上传到Nginx的&#x2F;usr&#x2F;share&#x2F;nginx&#x2F;html&#x2F;keep目录下， 解压</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/share/nginx/html</span><br><span class="line"></span><br><span class="line">unzip matomo.zip</span><br><span class="line"></span><br><span class="line"><span class="built_in">mv</span> /usr/share/nginx/html/matomo /usr/share/nginx/html/keep/matomo</span><br><span class="line"></span><br><span class="line"><span class="built_in">chmod</span> -R -f 777 /usr/share/nginx/html/keep/matomo</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>访问 <a class="link"   target="_blank" rel="noopener" href="https://xplorist.tech/matomo/" >https://xplorist.tech/matomo/<i class="fas fa-external-link-alt"></i></a> (将xplorist.tech替换成你的ip或者域名) 进行安装</p>
+</li>
+<li><p>参考 <a class="link"   target="_blank" rel="noopener" href="https://matomo.org/docs/installation/" >Matomo官方安装文档<i class="fas fa-external-link-alt"></i></a>，进行安装</p>
+</li>
+</ul>
+<ol>
+<li>Welcome!</li>
+</ol>
+<p>欢迎介绍界面，直接点击Next</p>
+<ol start="2">
+<li>System Check</li>
+</ol>
+<p>自动进行系统检查，如果有缺少的依赖，就要自己去安装相应的依赖</p>
+<ol start="3">
+<li>Database Setup</li>
+</ol>
+<p>MySQL数据库设置</p>
+<ol start="4">
+<li>Creating the Tables</li>
+</ol>
+<p>创建数据表</p>
+<ol start="5">
+<li>Super User</li>
+</ol>
+<p>超级用户设置</p>
+<ol start="6">
+<li>Setup a Website</li>
+</ol>
+<p>设置一个网站</p>
+<ol start="7">
+<li>JavaScript Tracking Code</li>
+</ol>
+<p>JavaScript追踪代码</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- Matomo --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">var</span> _paq = <span class="variable language_">window</span>.<span class="property">_paq</span> = <span class="variable language_">window</span>.<span class="property">_paq</span> || [];</span></span><br><span class="line"><span class="language-javascript">  <span class="comment">/* tracker methods like &quot;setCustomDimension&quot; should be called before &quot;trackPageView&quot; */</span></span></span><br><span class="line"><span class="language-javascript">  _paq.<span class="title function_">push</span>([<span class="string">&#x27;trackPageView&#x27;</span>]);</span></span><br><span class="line"><span class="language-javascript">  _paq.<span class="title function_">push</span>([<span class="string">&#x27;enableLinkTracking&#x27;</span>]);</span></span><br><span class="line"><span class="language-javascript">  (<span class="keyword">function</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">var</span> u=<span class="string">&quot;//xplorist.tech/matomo/&quot;</span>;</span></span><br><span class="line"><span class="language-javascript">    _paq.<span class="title function_">push</span>([<span class="string">&#x27;setTrackerUrl&#x27;</span>, u+<span class="string">&#x27;matomo.php&#x27;</span>]);</span></span><br><span class="line"><span class="language-javascript">    _paq.<span class="title function_">push</span>([<span class="string">&#x27;setSiteId&#x27;</span>, <span class="string">&#x27;1&#x27;</span>]);</span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">var</span> d=<span class="variable language_">document</span>, g=d.<span class="title function_">createElement</span>(<span class="string">&#x27;script&#x27;</span>), s=d.<span class="title function_">getElementsByTagName</span>(<span class="string">&#x27;script&#x27;</span>)[<span class="number">0</span>];</span></span><br><span class="line"><span class="language-javascript">    g.<span class="property">async</span>=<span class="literal">true</span>; g.<span class="property">src</span>=u+<span class="string">&#x27;matomo.js&#x27;</span>; s.<span class="property">parentNode</span>.<span class="title function_">insertBefore</span>(g,s);</span></span><br><span class="line"><span class="language-javascript">  &#125;)();</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- End Matomo Code --&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="8">
+<li>Congratulations</li>
+</ol>
+<p>恭喜结束界面, 后面两个选项的勾去掉，功能会更强</p>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><ul>
+<li>在hexo keep中使用Matomo,找到&#x2F;keep&#x2F;themes&#x2F;keep&#x2F;layout&#x2F;_partial&#x2F;head.ejs, 在head标签的最后添加如下代码</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- Matomo --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">var</span> _paq = <span class="variable language_">window</span>.<span class="property">_paq</span> || [];</span></span><br><span class="line"><span class="language-javascript">  <span class="comment">/* tracker methods like &quot;setCustomDimension&quot; should be called before &quot;trackPageView&quot; */</span></span></span><br><span class="line"><span class="language-javascript">   <span class="keyword">var</span> currentUrl = location.<span class="property">href</span>;</span></span><br><span class="line"><span class="language-javascript">  _paq.<span class="title function_">push</span>([<span class="string">&#x27;setCustomUrl&#x27;</span>, currentUrl]);</span></span><br><span class="line"><span class="language-javascript">  _paq.<span class="title function_">push</span>([<span class="string">&#x27;setCustomVariable&#x27;</span>, <span class="number">1</span>, <span class="string">&#x27;PageName&#x27;</span>, <span class="string">&#x27;&lt;%= title %&gt;&#x27;</span>, <span class="string">&#x27;page&#x27;</span>]);<span class="comment">// 【要修改】XXX页面名称为需要制定统计的页面名称或模块名称，不能乱写，不然统计数据会出问题</span></span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  _paq.<span class="title function_">push</span>([<span class="string">&#x27;trackPageView&#x27;</span>]);</span></span><br><span class="line"><span class="language-javascript">  _paq.<span class="title function_">push</span>([<span class="string">&#x27;enableLinkTracking&#x27;</span>]);</span></span><br><span class="line"><span class="language-javascript">  (<span class="keyword">function</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">var</span> u=<span class="string">&quot;//xplorist.tech/matomo/&quot;</span>;</span></span><br><span class="line"><span class="language-javascript">    _paq.<span class="title function_">push</span>([<span class="string">&#x27;setTrackerUrl&#x27;</span>, u+<span class="string">&#x27;matomo.php&#x27;</span>]);</span></span><br><span class="line"><span class="language-javascript">    _paq.<span class="title function_">push</span>([<span class="string">&#x27;setSiteId&#x27;</span>, <span class="string">&#x27;1&#x27;</span>]);<span class="comment">// 【要修改】&#x27;xxxTheSiteId&#x27;为matomo系统中注册的站点id，不能乱写</span></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">var</span> d=<span class="variable language_">document</span>, g=d.<span class="title function_">createElement</span>(<span class="string">&#x27;script&#x27;</span>), s=d.<span class="title function_">getElementsByTagName</span>(<span class="string">&#x27;script&#x27;</span>)[<span class="number">0</span>];</span></span><br><span class="line"><span class="language-javascript">    g.<span class="property">type</span>=<span class="string">&#x27;text/javascript&#x27;</span>; g.<span class="property">async</span>=<span class="literal">true</span>; g.<span class="property">defer</span>=<span class="literal">true</span>; g.<span class="property">src</span>=u+<span class="string">&#x27;matomo.js&#x27;</span>; s.<span class="property">parentNode</span>.<span class="title function_">insertBefore</span>(g,s);</span></span><br><span class="line"><span class="language-javascript">  &#125;)();</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- End Matomo Code --&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这是之前在foxconn里面自己修改的多功能版本，当然也可以使用第7步骤里的原生的代码，简洁清爽，数据库里杂乱的数据更少</p>
+<h3 id="访问自己的Matomo"><a href="#访问自己的Matomo" class="headerlink" title="访问自己的Matomo"></a>访问自己的Matomo</h3><ul>
+<li>访问 <a class="link"   target="_blank" rel="noopener" href="https://xplorist.tech/matomo/" >https://xplorist.tech/matomo/<i class="fas fa-external-link-alt"></i></a> ,使用root账号登陆</li>
+</ul>
+<h3 id="WordPress中使用Matomo"><a href="#WordPress中使用Matomo" class="headerlink" title="WordPress中使用Matomo"></a>WordPress中使用Matomo</h3><ul>
+<li>参考官方文档，直接在WordPress中添加Matomo插件即可，超级方便<br><a class="link"   target="_blank" rel="noopener" href="https://matomo.org/installing-matomo-for-wordpress/" >Matomo官网 How do I install Matomo for WordPress?<i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul class="copyright-info-content">
+        <li>本文标题：Debian11上安装Matomo</li>
+        <li>本文作者：Xplorist</li>
+        <li>创建时间：2021-11-09 13:30:00</li>
+        <li>
+            本文链接：https://xplorist.tech/2021/11/09/982e713ab162/
+        </li>
+        <li>
+            版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/Matomo/">#Matomo</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/Debian/">#Debian</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2021/11/09/402699997d32/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Debian11上安装PHP</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/11/09/3f9d359bd4dd/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Debian11上安装Nginx并配置HTTPS</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments"></i>&nbsp;评论
+    </div>
+    
+
+        
+            
+
+
+    <div id="gitalk-container"></div>
+    <script 
+            src="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js"></script>
+    <script >
+
+      function loadGitalk() {
+        let __gitalk__pathname = decodeURI(location.pathname);
+        const __gitalk__pathnameLength = __gitalk__pathname.length;
+        const __gitalk__pathnameMaxLength = 50;
+        if (__gitalk__pathnameLength > __gitalk__pathnameMaxLength) {
+          __gitalk__pathname = __gitalk__pathname.substring(0, __gitalk__pathnameMaxLength - 3) + '...';
+        }
+
+        try {
+
+          Gitalk && new Gitalk({
+            clientID: '24c227c71f9bb758a554',
+            clientSecret: '724a45a68d355acb27c19a61d15fbb7dee34db4e',
+            repo: 'hexo-site-comments',
+            owner: 'Xplorist',
+            admin: 'Xplorist',
+            id: __gitalk__pathname,
+            language: 'zh-CN'
+          }).render('gitalk-container');
+
+        } catch (e) {
+          window.Gitalk = null;
+        }
+      }
+
+      if ('false') {
+        const loadGitalkTimeout = setTimeout(() => {
+          loadGitalk();
+          clearTimeout(loadGitalkTimeout);
+        }, 1000);
+      } else {
+        window.addEventListener('DOMContentLoaded', loadGitalk);
+      }
+    </script>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            
+<footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+                <span>2020</span> -
+            
+            2023
+            
+                &nbsp;<i class="fas fa-heart icon-animate"></i>
+                &nbsp;<a href="/">Xplorist</a>
+            
+        </div>
+        
+            <script async 
+                    src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    访问人数&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                
+                
+                    总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题
+            &nbsp;
+            <a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.8</a>
+        </div>
+        
+            <div class="icp-info info-item">
+                <a target="_blank" rel="nofollow"
+                   href="https://beian.miit.gov.cn"
+                >
+                    蜀ICP备20002343号
+                </a>
+            </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-up-right-and-down-left-from-center"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Debian11%E4%B8%8A%E5%AE%89%E8%A3%85Matomo"><span class="nav-number">1.</span> <span class="nav-text">Debian11上安装Matomo</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#reference-site-list"><span class="nav-number">1.1.</span> <span class="nav-text">reference-site-list</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#steps"><span class="nav-number">1.2.</span> <span class="nav-text">steps</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87%EF%BC%9A"><span class="nav-number">1.2.1.</span> <span class="nav-text">环境准备：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">1.2.2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8"><span class="nav-number">1.2.3.</span> <span class="nav-text">使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BF%E9%97%AE%E8%87%AA%E5%B7%B1%E7%9A%84Matomo"><span class="nav-number">1.2.4.</span> <span class="nav-text">访问自己的Matomo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WordPress%E4%B8%AD%E4%BD%BF%E7%94%A8Matomo"><span class="nav-number">1.2.5.</span> <span class="nav-text">WordPress中使用Matomo</span></a></li></ol></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-block-tools.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>

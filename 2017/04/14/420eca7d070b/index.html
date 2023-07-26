@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Xplorist">
+    
+    <title>
+        
+            2017-04-14-html进阶-正则表达式 |
+        
+        Xplorist
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.svg">
+    
+<link rel="stylesheet" href="/fontawesome/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/brands.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"zh-CN","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","logo":"/images/logo.svg","favicon":"/images/logo.svg","avatar":"/images/Water.jpg","left_side_width":"300px","content_max_width":"1080px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"header_transparent":true,"background_img":"/images/dawn-in-the-valley.jpg","description":"Exploration, a journey that never ends。","font_color":null,"hitokoto":{"enable":false}},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":false},"code_copy":{},"code_block_tools":{"enable":true,"style":"mac"},"side_tools":{},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.8"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"};
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="/images/logo.svg">
+                </a>
+            
+            <a class="logo-title" href="/">
+               Xplorist
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                分类
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                友链
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                关于
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">分类</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">标签</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links">友链</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">关于</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">2017-04-14-html进阶-正则表达式</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/Water.jpg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Xplorist</span>
+                        
+                            <span class="author-label">Lv6</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2017-04-14 14:23:01</span>
+        <span class="mobile">2017-04-14 14:23</span>
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/ShareLearn/">ShareLearn</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/ShareLearn/">ShareLearn</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="2017-04-14-html进阶-正则表达式"><a href="#2017-04-14-html进阶-正则表达式" class="headerlink" title="2017-04-14-html进阶-正则表达式"></a>2017-04-14-html进阶-正则表达式</h1><p>知识点1：</p>
+<p>html表单</p>
+<p>1-<form></form></p>
+<p>2-<table></table></p>
+<p>html字符实体</p>
+<p>1-&amp;nbsp—-空格</p>
+<p>2-&amp;lt —–&lt;</p>
+<p>3-&amp;gt—– &gt;</p>
+<p>4-&amp;quot—– “</p>
+<p>知识点2：</p>
+<p>一、正则表达式的入门：</p>
+<p>学习目标：</p>
+<p>了解正则表达式</p>
+<p>学习过程：</p>
+<p>1.概念:“正则表达式”（Regular Expression）就是一个特殊的字符串，用来匹配字符串与查找字符串</p>
+<p>2.java基础架包中： java.util.regex 包主要由三个类所组成：Pattern、Matcher 和 PatternSyntaxException。</p>
+<p>        实例：判断字符串是否以ax开头by结尾，并且中间有仅只有一个字符</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test</span> &#123;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">m1</span><span class="params">(String str)</span> &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//  方式一：</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//  Pattern p = Pattern.compile(&quot;ax.by&quot;);</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//  Matcher m = p.matcher(str);</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//  boolean b = m.matches();</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 方式二</span></span><br><span class="line"></span><br><span class="line">   <span class="type">boolean</span> <span class="variable">b</span> <span class="operator">=</span> Pattern.matches(<span class="string">&quot;ax.by&quot;</span>, str);</span><br><span class="line"></span><br><span class="line">   <span class="keyword">return</span> b;</span><br><span class="line"></span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line"></span><br><span class="line">      <span class="type">Test</span> <span class="variable">t</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Test</span>();</span><br><span class="line"></span><br><span class="line">      System.out.println(t.m1(<span class="string">&quot;axmby&quot;</span>));</span><br><span class="line"></span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>说明：</p>
+<p>提示1：正则表达式还可以在字符串中查找匹配的子字符串; 在其它类中的使用…..。(后面章节会讲到)</p>
+<p>提示2：</p>
+<p>    - Pattern 对象表示一个已编译的正则表达式。Pattern 类没有提供公共的构造方法。 必须调用公共的静态 compile 方法，它将返回一个 Pattern 对象。 </p>
+<p>    - Matcher 是一个靠着输入的字符串来解析这个模式和完成匹配操作的对象。 Matcher 也没有定义公共的构造方法，需要通过调用 Pattern 对象的 matcher 方法来获得一个 Matcher 对象。</p>
+<p>    - PatternSyntaxException 对象是一个未检查异常，指示了正则表达式中的一个语法错误。</p>
+<p>二、正则表达式的组成规范</p>
+<p>学习目标：</p>
+<p>正则表达式通配符</p>
+<p>学习过程：</p>
+<p>一、匹配字符的通匹符</p>
+<p>1、”.” —&gt; 用于匹配一个任意的字符串</p>
+<p>    比如： “t.n”，它匹配“tan”、“ten”、“tin”和“ton”，还匹配“t#n”、“tpn”甚至“t n”</p>
+<p>2、”[]” —&gt;为了解决句点符号匹配范围过于广泛这一问题，你可以在方括号（“[]”）里面指定看来有意义的字符。</p>
+<p>    此时，只有方括号里面指定的字符才参与匹配。也就是说，正则表达式“t[aeio]n”只匹配“tan”、“Ten”、“tin”</p>
+<p>    和“ton”。但“Toon”不匹配，因为在方括号之内你只能匹配单个字符：</p>
+<p>3、”|”—&gt;如果除了上面匹配的所有单词之外，你还想要匹配“toon”，那么，你可以使用“|”操作符。</p>
+<p> “|”操作符的基本意义就是“或”运算。要匹配“toon”，使用“t(a|e|i|o|oo)n”正则表达式。这里不能使用方扩号，</p>
+<p>   因为方括号只允许匹配单个字符；这里必须使用圆括号“()”, 它的作用与算术表达式中的作用是一样的，表示一个整体。 </p>
+<p>4、“-”与表示数字或字母的范围,</p>
+<p>    [0-9]表示0到9中的其中一个字符,[3-8]表示3到8中的一个字符</p>
+<p>    [a-z]表示a到z中的其中一个字符,[b-m]表示b到m中的一个字符</p>
+<p>    [A-Z]表示A到Z中的其中一个字符</p>
+<p>    [b-d3-8]表示b到z或3到8中其中一个字符</p>
+<p>    示例：</p>
+<p>           [a-c][0-9]{3}可以匹配a234,b112,c223等.</p>
+<p>5、”^” —&gt; 即非,用来确定紧靠该符号右边的符号不能出现</p>
+<p>      5.1： [^0-9]表示不可以为0到9和[3-8]3到8中的一个字符</p>
+<p>      5.2： ^A表示不可以为A的字符</p>
+<p>6、快捷符号</p>
+<p>   <img src="/images/shareLearn/2017-04-14-01.jpg" alt="2017-04-14-01.jpg"></p>
+<p>    示例:</p>
+<p>          “\d{6}”,匹配6个数字组成的字符。，注意前面要用两个\表示转义</p>
+<p>7、”&quot;表示转义</p>
+<p>如果正则表达式中要使用的字符与通配符冲突，则在前加上”\“表示不是通配符使用</p>
+<p>比如”[0-9]{3}\<em>{2}[0-9]{2}a</em>“ 中<em>不是次数，而是字符</em>。它可以匹配0到9的三个数字开头，后面是两个*，再后是0到9的2个数字最后是0到多个a字符。</p>
+<p>    这个”234**23a”可以匹配上面的正则表达式。</p>
+<p>8、”$”表示结束，每个正则表达式后面都可以加上$,实质上加与不加作用相同</p>
+<p>9、特殊的匹配</p>
+<p>     [\u4e00-\u9fa5]匹配汉字</p>
+<p>     示例：”[\u4e00-\u9fa5]{3}”, 可以匹配三个汉字组成的字符串</p>
+<p>二、匹配次数的通匹符</p>
+<p>       这些符号用来确定紧靠该符号左边的符号出现的次数： </p>
+<p>   <img src="/images/shareLearn/2017-04-14-02.jpg" alt="2017-04-14-02.jpg"></p>
+<p>示例1：a*Hello可以匹配以Hello结尾，以0到多个a开头的字符串,如Hello,aHello,aaHello,aaaHello</p>
+<p>示例2：MyA*Hello可以匹配以My开头，以Hello结尾，中间可以有0到多个A，如MyAAAHello</p>
+<p>示例3：HelloE+World可以匹配以Hello开头，以World结尾，中间可以有1到多个E，如HelloEEWorld</p>
+<p>示例4：HelloE?World可以匹配以Hello开头，以World结尾，中间必须有0到1个E</p>
+<p>示例5：HelloE{3}World可以匹配以Hello开头，以World结尾，中间必须有3个E</p>
+<p>示例6：HelloE{2,4}World可以匹配以Hello开头，以World结尾，中间必须有2到4个E</p>
+<p>示例7：Hello[^abc]可以匹配以Hello开头，不能以a或b或c结尾</p>
+<p>三、正则表达式的使用</p>
+<p>学习目标：</p>
+<p>1、判断字符串的正确性</p>
+<p>2、查找子字符串</p>
+<p>3、在其它类特别是String中的使用</p>
+<p>学习过程：</p>
+<p>1、判断字符串的正确性</p>
+<p> &#x2F;&#x2F;判断电话号码是否是以136开头的11个数字的电话号码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">m1</span><span class="params">()</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 方式一：</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// boolean b = Pattern.matches(&quot;136\\d&#123;8&#125;&quot;, &quot;13698987654&quot;);</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 方式二：</span></span><br><span class="line"></span><br><span class="line">      <span class="type">Pattern</span> <span class="variable">p</span> <span class="operator">=</span> Pattern.compile(<span class="string">&quot;136\\d&#123;8&#125;&quot;</span>);</span><br><span class="line"></span><br><span class="line">      <span class="type">Matcher</span> <span class="variable">m</span> <span class="operator">=</span> p.matcher(<span class="string">&quot;13698987654&quot;</span>);</span><br><span class="line"></span><br><span class="line">      <span class="type">boolean</span> <span class="variable">b</span> <span class="operator">=</span> m.matches();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">      System.out.println(b);<span class="comment">//true</span></span><br><span class="line"></span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>2、查找子字符串</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">//查找字符串中是否有算术运算符</span></span><br><span class="line"></span><br><span class="line"> <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">m2</span><span class="params">()</span> &#123;</span><br><span class="line"></span><br><span class="line">  <span class="type">Pattern</span> <span class="variable">p</span> <span class="operator">=</span> Pattern.compile(<span class="string">&quot;\\+|\\-|\\*|/|%&quot;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="type">Matcher</span> <span class="variable">m</span> <span class="operator">=</span> p.matcher(<span class="string">&quot;23+234-123*234/1000&quot;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="type">boolean</span> <span class="variable">b</span> <span class="operator">=</span> m.find();</span><br><span class="line"></span><br><span class="line">  System.out.println(b);<span class="comment">//true</span></span><br><span class="line"></span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//查找字符串中是否有两个数字组成的子字符串</span></span><br><span class="line"></span><br><span class="line"> <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">m3</span><span class="params">()</span> &#123;</span><br><span class="line"></span><br><span class="line">  <span class="type">Pattern</span> <span class="variable">p</span> <span class="operator">=</span> Pattern.compile(<span class="string">&quot;\\d&#123;2&#125;&quot;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="type">Matcher</span> <span class="variable">m</span> <span class="operator">=</span> p.matcher(<span class="string">&quot;aabbcc23sdf23&quot;</span>);</span><br><span class="line"></span><br><span class="line">  System.out.println(m.find());<span class="comment">//true</span></span><br><span class="line"></span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>3、在其它类特别是String中的使用</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">//通过运算符把字符串拆开</span></span><br><span class="line"></span><br><span class="line"> <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">m1</span><span class="params">()</span> &#123;</span><br><span class="line"></span><br><span class="line">  <span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> <span class="string">&quot;23+234-123*234/1000&quot;</span>;</span><br><span class="line"></span><br><span class="line">  String[] a = s.split(<span class="string">&quot;\\+|\\-|\\*|/&quot;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (String string : a) &#123;</span><br><span class="line"></span><br><span class="line">   System.out.println(string);</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p>四、字符串(String)对象的matches函数，可直接使用正则表达式</p>
+<p>1、String对象的matches(String regex)方法讲解</p>
+<p>      boolean  matches(String regex)：这个方法主要是返回是否匹配指定的字符串，如果匹配则为true,否则为false</p>
+<p>实例一：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">regex</span> <span class="operator">=</span> <span class="string">&quot;Android&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> <span class="string">&quot;Android&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">boolean</span> <span class="variable">isMatches</span> <span class="operator">=</span> str.matches(regex);  <span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul class="copyright-info-content">
+        <li>本文标题：2017-04-14-html进阶-正则表达式</li>
+        <li>本文作者：Xplorist</li>
+        <li>创建时间：2017-04-14 14:23:01</li>
+        <li>
+            本文链接：https://xplorist.tech/2017/04/14/420eca7d070b/
+        </li>
+        <li>
+            版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/ShareLearn/">#ShareLearn</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2017/04/17/29a21bb04fa7/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">2017-04-17-css-javaScript</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2017/04/13/1e512924e0e7/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">2017-04-13-Tomcat部署-html初识</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments"></i>&nbsp;评论
+    </div>
+    
+
+        
+            
+
+
+    <div id="gitalk-container"></div>
+    <script 
+            src="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js"></script>
+    <script >
+
+      function loadGitalk() {
+        let __gitalk__pathname = decodeURI(location.pathname);
+        const __gitalk__pathnameLength = __gitalk__pathname.length;
+        const __gitalk__pathnameMaxLength = 50;
+        if (__gitalk__pathnameLength > __gitalk__pathnameMaxLength) {
+          __gitalk__pathname = __gitalk__pathname.substring(0, __gitalk__pathnameMaxLength - 3) + '...';
+        }
+
+        try {
+
+          Gitalk && new Gitalk({
+            clientID: '24c227c71f9bb758a554',
+            clientSecret: '724a45a68d355acb27c19a61d15fbb7dee34db4e',
+            repo: 'hexo-site-comments',
+            owner: 'Xplorist',
+            admin: 'Xplorist',
+            id: __gitalk__pathname,
+            language: 'zh-CN'
+          }).render('gitalk-container');
+
+        } catch (e) {
+          window.Gitalk = null;
+        }
+      }
+
+      if ('false') {
+        const loadGitalkTimeout = setTimeout(() => {
+          loadGitalk();
+          clearTimeout(loadGitalkTimeout);
+        }, 1000);
+      } else {
+        window.addEventListener('DOMContentLoaded', loadGitalk);
+      }
+    </script>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            
+<footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+                <span>2020</span> -
+            
+            2023
+            
+                &nbsp;<i class="fas fa-heart icon-animate"></i>
+                &nbsp;<a href="/">Xplorist</a>
+            
+        </div>
+        
+            <script async 
+                    src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    访问人数&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                
+                
+                    总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题
+            &nbsp;
+            <a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.8</a>
+        </div>
+        
+            <div class="icp-info info-item">
+                <a target="_blank" rel="nofollow"
+                   href="https://beian.miit.gov.cn"
+                >
+                    蜀ICP备20002343号
+                </a>
+            </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-up-right-and-down-left-from-center"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#2017-04-14-html%E8%BF%9B%E9%98%B6-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">2017-04-14-html进阶-正则表达式</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-block-tools.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>
